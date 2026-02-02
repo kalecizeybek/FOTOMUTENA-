@@ -1,24 +1,27 @@
 import { NextResponse } from "next/server";
-import fs from "fs/promises";
-import path from "path";
+import { kv } from "@vercel/kv";
 import { photos as initialPhotos } from "@/data/photos";
 
-const DATA_FILE_PATH = path.join(process.cwd(), "src", "data", "store.json");
+/**
+ * BU ROTA ARTIK DOSYA SİSTEMİYLE (store.json) ÇALIŞMAZ.
+ * TAMAMEN VERCEL KV (VERİTABANI) ÜZERİNDEN ÇALIŞIR.
+ */
 
-async function ensureDir(dirPath: string) {
-    try {
-        await fs.access(dirPath);
-    } catch {
-        await fs.mkdir(dirPath, { recursive: true });
-    }
-}
+const KV_PHOTOS_KEY = "fotomutena_photos";
 
 async function getPhotos() {
     try {
-        const data = await fs.readFile(DATA_FILE_PATH, "utf-8");
-        return JSON.parse(data);
+        // 1. Veritabanından (KV) fotoğrafları çek
+        const photos = await kv.get(KV_PHOTOS_KEY);
+        if (photos && Array.isArray(photos)) {
+            return photos;
+        }
+
+        // 2. Eğer veritabanı boşsa, örnek fotoğrafları veritabanına kaydet ve döndür
+        await kv.set(KV_PHOTOS_KEY, initialPhotos);
+        return initialPhotos;
     } catch (error) {
-        // Vercel'de readonly hatası almamak için sessizce initial datayı dön
+        console.error("KV Read Error:", error);
         return initialPhotos;
     }
 }
@@ -37,32 +40,27 @@ export async function POST(request: Request) {
         }
 
         const newPhoto = {
-            id: Date.now().toString(),
+            id: String(Date.now()),
             url: url,
             alt: title || "Mutena Arşiv",
             category: category || "Genel",
             specs: {
                 iso: "Bulut Yükleme",
                 shutter: "Doğrudan Aktarım",
-                aperture: "Yüksek Kalite"
+                aperture: "Kalıcı Arşiv"
             }
         };
 
         const currentPhotos = await getPhotos();
         const updatedPhotos = [newPhoto, ...currentPhotos];
 
-        // Yerel çalışırken store.json'a yaz, Vercel'de sessizce devam et
-        try {
-            await ensureDir(path.dirname(DATA_FILE_PATH));
-            await fs.writeFile(DATA_FILE_PATH, JSON.stringify(updatedPhotos, null, 2));
-        } catch (e) {
-            console.log("Not writing to file system in production environment");
-        }
+        // VERİTABANINA KAYDET (Bu asla readonly hatası vermez!)
+        await kv.set(KV_PHOTOS_KEY, updatedPhotos);
 
         return NextResponse.json({ success: true, photos: updatedPhotos });
     } catch (error: any) {
-        console.error("Save Error:", error);
-        return NextResponse.json({ success: false, error: "Kaydedilemedi" }, { status: 500 });
+        console.error("Database Save Error:", error);
+        return NextResponse.json({ success: false, error: "Veritabanına kaydedilemedi" }, { status: 500 });
     }
 }
 
@@ -75,24 +73,10 @@ export async function DELETE(request: Request) {
         const currentPhotos = await getPhotos();
         const updatedPhotos = currentPhotos.filter((p: any) => p.id !== id);
 
-        try {
-            await fs.writeFile(DATA_FILE_PATH, JSON.stringify(updatedPhotos, null, 2));
-        } catch (e) { }
+        await kv.set(KV_PHOTOS_KEY, updatedPhotos);
 
         return NextResponse.json({ success: true, photos: updatedPhotos });
     } catch (error) {
         return NextResponse.json({ success: false, error: "Silme başarısız" }, { status: 500 });
-    }
-}
-
-export async function PATCH(request: Request) {
-    try {
-        const { photos } = await request.json();
-        try {
-            await fs.writeFile(DATA_FILE_PATH, JSON.stringify(photos, null, 2));
-        } catch (e) { }
-        return NextResponse.json({ success: true, photos });
-    } catch (error) {
-        return NextResponse.json({ success: false, error: "Güncelleme başarısız" }, { status: 500 });
     }
 }
