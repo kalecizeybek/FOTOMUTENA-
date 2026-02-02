@@ -17,6 +17,11 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFile = (selectedFile: File) => {
+        // limit to 4MB for Base64 efficiency
+        if (selectedFile.size > 4 * 1024 * 1024) {
+            alert("Dosya çok büyük. Lütfen 4MB'den küçük bir görsel seçin.");
+            return;
+        }
         const objectUrl = URL.createObjectURL(selectedFile);
         setImageUrl(objectUrl);
         setFile(selectedFile);

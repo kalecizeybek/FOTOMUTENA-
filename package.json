@@ -19,5 +19,8 @@
     "templates"
   ],
   "author": "vudovn",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "cloudinary": "^2.9.0"
+  }
 }

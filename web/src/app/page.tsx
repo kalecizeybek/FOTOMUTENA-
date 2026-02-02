@@ -69,15 +69,23 @@ export default function Home() {
 
       if (res.ok) {
         const data = await res.json();
-        // Force refresh or update state directly
         if (data.photos) {
-          // Ensure IDs are unique and types match
           setPhotos(data.photos);
           setActiveFilter("Hepsi");
         }
+        return data;
+      } else {
+        const errData = await res.json();
+        const errMsg = errData.error || "Sunucu hatası oluştu.";
+        alert(`Yükleme hatası: ${errMsg}`);
+        throw new Error(errMsg);
       }
     } catch (error) {
       console.error("Failed to upload photo:", error);
+      if (!(error instanceof Error && error.message.includes("Yükleme hatası"))) {
+        alert("Bağlantı hatası: Fotoğraf yüklenemedi.");
+      }
+      throw error;
     }
   };
 

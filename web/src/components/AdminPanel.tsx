@@ -299,10 +299,20 @@ const AdminPanel = ({ isOpen, onClose, onUpload, refreshPhotos }: AdminPanelProp
                                     <h2 className="font-syne text-3xl font-black text-white uppercase tracking-tighter mb-2">Fragment Yükleyici</h2>
                                     <p className="text-zinc-500 text-xs uppercase tracking-widest font-light">Arşive yüksek çözünürlüklü yeni bir eser ekleyin.</p>
                                 </div>
-                                <SmartUpload onUpload={(data) => {
-                                    onUpload(data);
-                                    refreshPhotos();
-                                    setTimeout(fetchPhotos, 500);
+                                <SmartUpload onUpload={async (data) => {
+                                    try {
+                                        setIsLoading(true);
+                                        await onUpload(data);
+                                        // The onUpload in page.tsx already updates state, 
+                                        // but we trigger a re-fetch to be safe and update Admin list
+                                        await fetchPhotos();
+                                        refreshPhotos();
+                                    } catch (err) {
+                                        console.error("Upload failed in AdminPanel:", err);
+                                        alert("Yükleme başarısız oldu. Lütfen tekrar deneyin.");
+                                    } finally {
+                                        setIsLoading(false);
+                                    }
                                 }} />
                             </div>
                         )}
