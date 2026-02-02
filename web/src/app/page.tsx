@@ -80,7 +80,10 @@ export default function Home() {
         }
       );
 
-      if (!cloudRes.ok) throw new Error("Cloudinary yükleme hatası");
+      if (!cloudRes.ok) {
+        const errorData = await cloudRes.json();
+        throw new Error(`Cloudinary: ${errorData.error?.message || "Bilinmeyen Bulut Hatası"}`);
+      }
       const cloudJson = await cloudRes.json();
       const uploadedUrl = cloudJson.secure_url;
 
@@ -103,11 +106,12 @@ export default function Home() {
         }
         return data;
       } else {
-        alert("Metadata güncelleme hatası. Yerel kayıt yapılamadı.");
+        const errData = await res.json();
+        throw new Error(`Veritabanı: ${errData.error || "Sunucuya kaydedilemedi"}`);
       }
     } catch (error) {
       console.error("Direct Upload Failed:", error);
-      alert("Hata: " + (error as Error).message);
+      alert("Yükleme Başarısız: " + (error as Error).message);
       throw error;
     }
   };
