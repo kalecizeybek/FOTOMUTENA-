@@ -62,9 +62,37 @@ export default function Home() {
 
   const handleUpload = async (formData: FormData) => {
     try {
+      // 1. Direct Upload to Cloudinary (Tarayıcıdan doğrudan buluta - Limit yok!)
+      const file = formData.get("file") as File;
+      const title = formData.get("title") as string;
+      const category = formData.get("category") as string;
+
+      const cloudinaryData = new FormData();
+      cloudinaryData.append("file", file);
+      cloudinaryData.append("upload_preset", "mutena_preset"); // Sizin oluşturduğunuz preset
+      cloudinaryData.append("cloud_name", "duamuseuj");
+
+      const cloudRes = await fetch(
+        `https://api.cloudinary.com/v1_1/duamuseuj/image/upload`,
+        {
+          method: "POST",
+          body: cloudinaryData,
+        }
+      );
+
+      if (!cloudRes.ok) throw new Error("Cloudinary yükleme hatası");
+      const cloudJson = await cloudRes.json();
+      const uploadedUrl = cloudJson.secure_url;
+
+      // 2. Metadata Update (Sadece bilgileri gönderiyoruz, dosyayı değil!)
       const res = await fetch("/api/photos", {
         method: "POST",
-        body: formData,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          url: uploadedUrl,
+          title,
+          category,
+        }),
       });
 
       if (res.ok) {
@@ -75,16 +103,11 @@ export default function Home() {
         }
         return data;
       } else {
-        const errData = await res.json();
-        const errMsg = errData.error || "Sunucu hatası oluştu.";
-        alert(`Yükleme hatası: ${errMsg}`);
-        throw new Error(errMsg);
+        alert("Metadata güncelleme hatası. Yerel kayıt yapılamadı.");
       }
     } catch (error) {
-      console.error("Failed to upload photo:", error);
-      if (!(error instanceof Error && error.message.includes("Yükleme hatası"))) {
-        alert("Bağlantı hatası: Fotoğraf yüklenemedi.");
-      }
+      console.error("Direct Upload Failed:", error);
+      alert("Hata: " + (error as Error).message);
       throw error;
     }
   };
