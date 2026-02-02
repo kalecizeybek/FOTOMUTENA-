@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Photo } from "@/data/photos";
+import { AlertCircle } from "lucide-react";
 
 interface FrameProps {
     photo: Photo;
@@ -11,6 +12,7 @@ interface FrameProps {
 
 const Frame = ({ photo, onClick }: FrameProps) => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [hasError, setHasError] = useState(false);
 
     return (
         <motion.div
@@ -28,7 +30,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
         >
             {/* Skeleton Loading State */}
             <AnimatePresence>
-                {!isLoaded && (
+                {!isLoaded && !hasError && (
                     <motion.div
                         initial={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
@@ -39,6 +41,13 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                 )}
             </AnimatePresence>
 
+            {hasError && (
+                <div className="absolute inset-0 z-20 bg-zinc-900 flex flex-col items-center justify-center p-4">
+                    <AlertCircle className="w-6 h-6 text-zinc-600 mb-2" />
+                    <span className="text-[8px] text-zinc-500 uppercase tracking-widest text-center">Görsel Yüklenemedi</span>
+                </div>
+            )}
+
             <motion.img
                 initial={{ opacity: 0 }}
                 animate={{ opacity: isLoaded ? 1 : 0 }}
@@ -46,6 +55,10 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                 src={photo.url}
                 alt={photo.title}
                 onLoad={() => setIsLoaded(true)}
+                onError={() => {
+                    setHasError(true);
+                    setIsLoaded(true); // Stop loading pulse
+                }}
                 className="h-full w-full object-cover grayscale brightness-75 transition-all duration-1000 group-hover:grayscale-0 group-hover:brightness-100"
             />
 

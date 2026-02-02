@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         const newPhoto = {
             id: String(Date.now()),
             url: url,
-            alt: title || "Mutena Arşiv",
+            title: title || "Mutena Arşiv",
             category: category || "Genel",
             specs: {
                 iso: "Cloud",

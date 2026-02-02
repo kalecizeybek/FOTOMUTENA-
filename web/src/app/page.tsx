@@ -105,6 +105,7 @@ export default function Home() {
           setPhotos(data.photos);
           setActiveFilter("Hepsi");
         }
+        alert("Görsel başarıyla arşive eklendi!");
         return data;
       } else {
         const errData = await res.json();
