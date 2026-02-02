@@ -1,0 +1,310 @@
+[
+  {
+    "id": "1",
+    "title": "DİJİTAL-ARK 1",
+    "category": "Dijital Sanat",
+    "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/100",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "2",
+    "title": "DİJİTAL-ARK 2",
+    "category": "Mimari",
+    "url": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "200",
+      "shutter": "1/200",
+      "aperture": "f/1.8"
+    }
+  },
+  {
+    "id": "3",
+    "title": "DİJİTAL-ARK 3",
+    "category": "Soyut",
+    "url": "https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "300",
+      "shutter": "1/300",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "4",
+    "title": "DİJİTAL-ARK 4",
+    "category": "Sinematik",
+    "url": "https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "400",
+      "shutter": "1/400",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "5",
+    "title": "DİJİTAL-ARK 5",
+    "category": "Minimalist",
+    "url": "https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/500",
+      "aperture": "f/1.8"
+    }
+  },
+  {
+    "id": "6",
+    "title": "DİJİTAL-ARK 6",
+    "category": "Dijital Sanat",
+    "url": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "200",
+      "shutter": "1/100",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "7",
+    "title": "DİJİTAL-ARK 7",
+    "category": "Mimari",
+    "url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "300",
+      "shutter": "1/200",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "8",
+    "title": "DİJİTAL-ARK 8",
+    "category": "Soyut",
+    "url": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "400",
+      "shutter": "1/300",
+      "aperture": "f/1.8"
+    }
+  },
+  {
+    "id": "9",
+    "title": "DİJİTAL-ARK 9",
+    "category": "Sinematik",
+    "url": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/400",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "11",
+    "title": "DİJİTAL-ARK 11",
+    "category": "Dijital Sanat",
+    "url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "300",
+      "shutter": "1/100",
+      "aperture": "f/1.8"
+    }
+  },
+  {
+    "id": "12",
+    "title": "DİJİTAL-ARK 12",
+    "category": "Mimari",
+    "url": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "400",
+      "shutter": "1/200",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "13",
+    "title": "DİJİTAL-ARK 13",
+    "category": "Soyut",
+    "url": "https://images.unsplash.com/photo-1510915228340-29c85a43dcfe?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/300",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "15",
+    "title": "DİJİTAL-ARK 15",
+    "category": "Minimalist",
+    "url": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "300",
+      "shutter": "1/500",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "16",
+    "title": "DİJİTAL-ARK 16",
+    "category": "Dijital Sanat",
+    "url": "https://images.unsplash.com/photo-1504164996022-09080787b6b3?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "400",
+      "shutter": "1/100",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "17",
+    "title": "DİJİTAL-ARK 17",
+    "category": "Mimari",
+    "url": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/200",
+      "aperture": "f/1.8"
+    }
+  },
+  {
+    "id": "18",
+    "title": "DİJİTAL-ARK 18",
+    "category": "Soyut",
+    "url": "https://images.unsplash.com/photo-1535223289827-42f1e9919769?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "200",
+      "shutter": "1/300",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "19",
+    "title": "DİJİTAL-ARK 19",
+    "category": "Sinematik",
+    "url": "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "300",
+      "shutter": "1/400",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "20",
+    "title": "DİJİTAL-ARK 20",
+    "category": "Minimalist",
+    "url": "https://images.unsplash.com/photo-1523961131990-5ea7c61b2107?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "400",
+      "shutter": "1/500",
+      "aperture": "f/1.8"
+    }
+  },
+  {
+    "id": "21",
+    "title": "DİJİTAL-ARK 21",
+    "category": "Dijital Sanat",
+    "url": "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/100",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "22",
+    "title": "DİJİTAL-ARK 22",
+    "category": "Mimari",
+    "url": "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "200",
+      "shutter": "1/200",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "24",
+    "title": "DİJİTAL-ARK 24",
+    "category": "Sinematik",
+    "url": "https://images.unsplash.com/photo-1520085601670-ee14aa5fa3e8?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "400",
+      "shutter": "1/400",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "25",
+    "title": "DİJİTAL-ARK 25",
+    "category": "Minimalist",
+    "url": "https://images.unsplash.com/photo-1493723843671-1d655e66ac1c?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/500",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "27",
+    "title": "DİJİTAL-ARK 27",
+    "category": "Mimari",
+    "url": "https://images.unsplash.com/photo-1518432031352-d6fc5c10da5a?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "300",
+      "shutter": "1/200",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "29",
+    "title": "DİJİTAL-ARK 29",
+    "category": "Sinematik",
+    "url": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/400",
+      "aperture": "f/1.8"
+    }
+  },
+  {
+    "id": "30",
+    "title": "DİJİTAL-ARK 30",
+    "category": "Minimalist",
+    "url": "https://images.unsplash.com/photo-1472289065668-ce650ac443d2?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "200",
+      "shutter": "1/500",
+      "aperture": "f/2.2"
+    }
+  },
+  {
+    "id": "31",
+    "title": "DİJİTAL-ARK 31",
+    "category": "Dijital Sanat",
+    "url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "300",
+      "shutter": "1/100",
+      "aperture": "f/1.4"
+    }
+  },
+  {
+    "id": "32",
+    "title": "DİJİTAL-ARK 32",
+    "category": "Mimari",
+    "url": "https://images.unsplash.com/photo-1511649475669-e288648b2339?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "400",
+      "shutter": "1/200",
+      "aperture": "f/1.8"
+    }
+  },
+  {
+    "id": "33",
+    "title": "DİJİTAL-ARK 33",
+    "category": "Soyut",
+    "url": "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1200",
+    "specs": {
+      "iso": "100",
+      "shutter": "1/300",
+      "aperture": "f/2.2"
+    }
+  }
+]
