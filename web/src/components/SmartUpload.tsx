@@ -12,14 +12,15 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
     const [title, setTitle] = useState("");
     const [category, setCategory] = useState("");
     const [imageUrl, setImageUrl] = useState("");
+    const [isUploading, setIsUploading] = useState(false);
     const [file, setFile] = useState<File | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFile = (selectedFile: File) => {
-        // limit to 4MB for Base64 efficiency
-        if (selectedFile.size > 4 * 1024 * 1024) {
-            alert("Dosya çok büyük. Lütfen 4MB'den küçük bir görsel seçin.");
+        // limit to 20MB for high-res support
+        if (selectedFile.size > 20 * 1024 * 1024) {
+            alert("Dosya çok büyük. Lütfen 20MB'den küçük bir görsel seçin.");
             return;
         }
         const objectUrl = URL.createObjectURL(selectedFile);
@@ -28,20 +29,29 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
         if (!title) setTitle(selectedFile.name.replace(/\.[^/.]+$/, "").replace(/-/g, " "));
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (!file) return;
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("title", title);
-        formData.append("category", category || "Uncategorized");
-        onUpload(formData);
+        if (!file || isUploading) return;
 
-        // Reset
-        setTitle("");
-        setCategory("");
-        setImageUrl("");
-        setFile(null);
+        try {
+            setIsUploading(true);
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("title", title);
+            formData.append("category", category || "Uncategorized");
+
+            await onUpload(formData);
+
+            // Reset
+            setTitle("");
+            setCategory("");
+            setImageUrl("");
+            setFile(null);
+        } catch (error) {
+            console.error("Submit error:", error);
+        } finally {
+            setIsUploading(false);
+        }
     };
 
     return (
@@ -57,10 +67,11 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
                         onDragOver={(e) => { e.preventDefault(); setIsDragging(true); }}
                         onDragLeave={() => setIsDragging(false)}
                         onDrop={(e) => { e.preventDefault(); setIsDragging(false); if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]); }}
-                        onClick={() => fileInputRef.current?.click()}
+                        onClick={() => !isUploading && fileInputRef.current?.click()}
                         className={`
                             relative h-64 rounded-2xl border-2 border-dashed transition-all cursor-pointer flex flex-col items-center justify-center overflow-hidden group
                             ${isDragging ? "border-emerald-500 bg-emerald-500/10" : "border-white/5 bg-white/5 hover:border-white/20"}
+                            ${isUploading ? "cursor-wait opacity-50" : ""}
                         `}
                     >
                         <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={(e) => e.target.files && handleFile(e.target.files[0])} />
@@ -69,7 +80,14 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
                             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="absolute inset-0">
                                 <img src={imageUrl} alt="Preview" className="w-full h-full object-cover opacity-70" />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-center justify-center">
-                                    <div className="bg-emerald-500 p-2 rounded-full"><Check className="text-black" /></div>
+                                    {isUploading ? (
+                                        <div className="flex flex-col items-center gap-4">
+                                            <div className="w-8 h-8 border-2 border-white/20 border-t-white rounded-full animate-spin" />
+                                            <span className="text-[8px] font-bold tracking-[0.3em] text-white">BULUTA AKTARILIYOR...</span>
+                                        </div>
+                                    ) : (
+                                        <div className="bg-emerald-500 p-2 rounded-full"><Check className="text-black" /></div>
+                                    )}
                                 </div>
                             </motion.div>
                         ) : (
@@ -90,23 +108,25 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
                             type="text"
                             placeholder="ESER ADI"
                             value={title}
+                            disabled={isUploading}
                             onChange={(e) => setTitle(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl text-sm tracking-[0.2em] uppercase focus:border-emerald-500/50 outline-none transition-all"
+                            className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl text-sm tracking-[0.2em] uppercase focus:border-emerald-500/50 outline-none transition-all disabled:opacity-50"
                         />
                         <input
                             type="text"
                             placeholder="KATEGORİ"
                             value={category}
+                            disabled={isUploading}
                             onChange={(e) => setCategory(e.target.value)}
-                            className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl text-sm tracking-[0.2em] uppercase focus:border-emerald-500/50 outline-none transition-all"
+                            className="w-full bg-white/5 border border-white/10 px-6 py-4 rounded-xl text-sm tracking-[0.2em] uppercase focus:border-emerald-500/50 outline-none transition-all disabled:opacity-50"
                         />
                     </div>
 
                     <button
-                        disabled={!file || !title}
+                        disabled={!file || !title || isUploading}
                         className="w-full bg-white text-black font-black uppercase py-6 rounded-2xl text-[10px] tracking-[0.5em] hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-20"
                     >
-                        ARŞİVE YÜKLE
+                        {isUploading ? "İŞLENİYOR..." : "ARŞİVE YÜKLE"}
                     </button>
                 </form>
             </motion.div>
