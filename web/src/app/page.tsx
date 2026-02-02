@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { photos as initialPhotos, Photo } from "@/data/photos";
+import imageCompression from 'browser-image-compression';
 import Frame from "@/components/Frame";
 import CustomCursor from "@/components/CustomCursor";
 import DreamyBackground from "@/components/DreamyBackground";
@@ -62,14 +63,33 @@ export default function Home() {
 
   const handleUpload = async (formData: FormData) => {
     try {
-      // 1. Direct Upload to Cloudinary (Tarayıcıdan doğrudan buluta - Limit yok!)
-      const file = formData.get("file") as File;
+      // 1. Smart Compression (Görseli Kalite Kaybetmeden Küçültme)
+      const rawFile = formData.get("file") as File;
+      let fileToUpload = rawFile;
+
+      if (rawFile.size > 10 * 1024 * 1024) {
+        console.log("Sıkıştırma başlatılıyor...");
+        const options = {
+          maxSizeMB: 9.9, // Cloudinary limitinin hemen altında
+          maxWidthOrHeight: 5000, // 5K çözünürlüğü koru
+          useWebWorker: true,
+          initialQuality: 0.9, // 90% kaliteyi koru
+        };
+        try {
+          fileToUpload = await imageCompression(rawFile, options);
+          console.log("Sıkıştırma tamamlandı. Yeni boyut:", fileToUpload.size);
+        } catch (error) {
+          console.error("Compression Error:", error);
+          // Hata olsa bile ham dosyayı denemeye devam et
+        }
+      }
+
       const title = formData.get("title") as string;
       const category = formData.get("category") as string;
 
       const cloudinaryData = new FormData();
-      cloudinaryData.append("file", file);
-      cloudinaryData.append("upload_preset", "mutena_preset"); // Sizin oluşturduğunuz preset
+      cloudinaryData.append("file", fileToUpload);
+      cloudinaryData.append("upload_preset", "mutena_preset");
       cloudinaryData.append("cloud_name", "duamuseuj");
 
       const cloudRes = await fetch(
