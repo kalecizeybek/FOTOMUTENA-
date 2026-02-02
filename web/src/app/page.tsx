@@ -67,20 +67,20 @@ export default function Home() {
       const rawFile = formData.get("file") as File;
       let fileToUpload = rawFile;
 
-      if (rawFile.size > 10 * 1024 * 1024) {
-        console.log("Sıkıştırma başlatılıyor...");
+      if (rawFile.size > 9.9 * 1024 * 1024) {
+        console.log("Profesyonel sıkıştırma motoru aktif: " + (rawFile.size / 1024 / 1024).toFixed(2) + "MB");
         const options = {
-          maxSizeMB: 9.9, // Cloudinary limitinin hemen altında
-          maxWidthOrHeight: 5000, // 5K çözünürlüğü koru
+          maxSizeMB: 9.5, // 10MB sınırının biraz altında kalmak güvenlidir
+          maxWidthOrHeight: 4096, // 4K çözünürlük profesyonel sunum için yeterlidir
           useWebWorker: true,
-          initialQuality: 0.9, // 90% kaliteyi koru
+          initialQuality: 0.85,
+          maxIteration: 15, // Dosya hala büyükse denemeye devam et
         };
         try {
           fileToUpload = await imageCompression(rawFile, options);
-          console.log("Sıkıştırma tamamlandı. Yeni boyut:", fileToUpload.size);
+          console.log("Optimizasyon bitti: " + (fileToUpload.size / 1024 / 1024).toFixed(2) + "MB");
         } catch (error) {
-          console.error("Compression Error:", error);
-          // Hata olsa bile ham dosyayı denemeye devam et
+          console.error("Compression technical failure:", error);
         }
       }
 

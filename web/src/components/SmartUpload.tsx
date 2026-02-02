@@ -18,9 +18,9 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFile = (selectedFile: File) => {
-        // limit to 50MB for high-res professional archive
+        // Allow up to 50MB because the page-level handleUpload will compress it
         if (selectedFile.size > 50 * 1024 * 1024) {
-            alert("Dosya 50MB'dan büyük. Lütfen daha küçük bir görsel seçin.");
+            alert("Dosya 50MB'dan çok büyük. Lütfen profesyonel arşiv sınırlarına (max 50MB) uyun.");
             return;
         }
         const objectUrl = URL.createObjectURL(selectedFile);
