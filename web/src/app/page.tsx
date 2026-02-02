@@ -82,7 +82,8 @@ export default function Home() {
 
       if (!cloudRes.ok) {
         const errorData = await cloudRes.json();
-        throw new Error(`Cloudinary: ${errorData.error?.message || "Bilinmeyen Bulut Hatası"}`);
+        console.error("Cloudinary Error Data:", errorData);
+        throw new Error(`Cloudinary: ${errorData.error?.message || "Yükleme reddedildi"}`);
       }
       const cloudJson = await cloudRes.json();
       const uploadedUrl = cloudJson.secure_url;

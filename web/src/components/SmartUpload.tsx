@@ -18,9 +18,9 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFile = (selectedFile: File) => {
-        // limit to 20MB for high-res support
-        if (selectedFile.size > 20 * 1024 * 1024) {
-            alert("Dosya çok büyük. Lütfen 20MB'den küçük bir görsel seçin.");
+        // limit to 10MB due to Cloudinary Free Tier restrictions
+        if (selectedFile.size > 10 * 1024 * 1024) {
+            alert("Cloudinary ücretsiz planı 10MB üzerindeki fotoğraflara izin vermiyor. Lütfen 10MB'den küçük bir görsel seçin.");
             return;
         }
         const objectUrl = URL.createObjectURL(selectedFile);
