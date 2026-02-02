@@ -19,13 +19,13 @@ const ArchitecturalLetter = ({ letter, index }: { letter: string; index: number 
     const springConfig = { stiffness: 200, damping: 25, mass: 1 };
 
     return (
-        <div className="relative inline-block mx-[0.2em] px-4">
+        <div className="relative inline-block mx-[0.05em] px-1 sm:mx-[0.2em] sm:px-4">
             {/* The Main Letter (Revealed after snap) */}
             <motion.span
                 initial={{ opacity: 0, scale: 0.8, filter: "blur(20px)" }}
                 animate={assembled ? { opacity: 1, scale: 1, filter: "blur(0px)" } : {}}
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 font-syne text-[15vw] font-black leading-[0.8] tracking-normal sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900"
+                className="relative z-10 font-syne text-[12vw] sm:text-[14vw] md:text-[15vw] font-black leading-[0.8] tracking-tighter sm:tracking-normal uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900"
             >
                 {letter}
             </motion.span>
@@ -68,7 +68,7 @@ const ArchitecturalLetter = ({ letter, index }: { letter: string; index: number 
 
 const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
     return (
-        <div className="relative flex flex-col items-center justify-center py-40 bg-black select-none">
+        <div className="relative flex flex-col items-center justify-center py-24 sm:py-40 bg-black select-none">
             {/* Reconstruction Container */}
             <div className="relative flex items-center justify-center">
                 {text.split("").map((letter, i) => (
@@ -81,7 +81,7 @@ const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 0.6, y: 0 }}
                 transition={{ duration: 1.5, delay: 2.2 }}
-                className="mt-24 flex flex-col items-center gap-6"
+                className="mt-12 sm:mt-24 flex flex-col items-center gap-6"
             >
                 <div className="h-px w-40 bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
                 <div className="text-[10px] sm:text-[12px] text-zinc-500 font-mono font-light uppercase tracking-[1.5em] text-center">

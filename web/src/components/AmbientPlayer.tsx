@@ -37,7 +37,7 @@ const AmbientPlayer = () => {
     };
 
     return (
-        <div className="fixed bottom-10 right-10 z-[200] flex flex-col items-end gap-4">
+        <div className="fixed bottom-6 right-6 sm:bottom-10 sm:right-10 z-[200] flex flex-col items-end gap-4">
             <audio ref={audioRef} src={AUDIO_SRC} />
 
             <AnimatePresence>

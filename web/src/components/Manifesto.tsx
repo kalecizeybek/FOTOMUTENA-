@@ -55,20 +55,20 @@ const StudioSection = () => {
                 </motion.div>
                 <div className="relative font-syne font-black uppercase text-white leading-[0.85] tracking-tighter mix-blend-difference">
                     <motion.h2
-                        className="text-[12vw] sm:text-[10vw] relative z-10 group cursor-default"
+                        className="text-[10vw] sm:text-[10vw] relative z-10 group cursor-default"
                         whileHover={{ scale: 1.02, color: "#fff" }}
                         transition={{ duration: 0.5 }}
                     >
                         <span className="block text-zinc-700 transition-colors duration-500 group-hover:text-white">Yeni Nesil</span>
                     </motion.h2>
                     <motion.h2
-                        className="text-[12vw] sm:text-[10vw] relative z-10"
+                        className="text-[10vw] sm:text-[10vw] relative z-10"
                         style={{ x: useTransform(scrollYProgress, [0, 1], [-50, 50]) }}
                     >
                         <span className="bg-gradient-to-r from-white via-zinc-400 to-zinc-800 bg-clip-text text-transparent">% Tasarımlar</span>
                     </motion.h2>
                     <motion.h2
-                        className="text-[12vw] sm:text-[10vw] relative z-10 italic font-serif lowercase tracking-normal text-zinc-500"
+                        className="text-[10vw] sm:text-[10vw] relative z-10 italic font-serif lowercase tracking-normal text-zinc-500"
                         style={{ x: useTransform(scrollYProgress, [0, 1], [50, -50]) }}
                     >
                         & Tasarım
