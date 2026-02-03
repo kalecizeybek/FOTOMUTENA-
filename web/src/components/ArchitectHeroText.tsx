@@ -25,7 +25,7 @@ const ArchitecturalLetter = ({ letter, index }: { letter: string; index: number 
                 initial={{ opacity: 0, scale: 0.8, filter: "blur(20px)" }}
                 animate={assembled ? { opacity: 1, scale: 1, filter: "blur(0px)" } : {}}
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 font-syne text-[12vw] sm:text-[14vw] md:text-[15vw] font-black leading-[0.8] tracking-tighter sm:tracking-normal uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900"
+                className="relative z-10 font-syne text-[18vw] sm:text-[14vw] md:text-[15vw] font-black leading-[0.8] tracking-tighter sm:tracking-normal uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900"
             >
                 {letter}
             </motion.span>

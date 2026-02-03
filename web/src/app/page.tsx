@@ -143,7 +143,7 @@ export default function Home() {
   if (!mounted) return null; // Prevent hydration mismatch by holding render until mount
 
   return (
-    <div className="relative min-h-[500vh] text-[#F5F5F0] bg-[#000000] selection:bg-white selection:text-black cursor-none">
+    <div className="relative min-h-[500vh] text-[#F5F5F0] bg-[#000000] selection:bg-white selection:text-black cursor-none overflow-x-hidden">
       <DreamyBackground />
       <CustomCursor />
 
@@ -191,8 +191,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative flex h-screen items-center justify-center px-4 sm:px-10">
         <div className="absolute inset-0 z-0">
-          <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-zinc-800/20 rounded-full blur-[120px] mix-blend-screen animate-pulse" style={{ animationDuration: '6s' }} />
-          <div className="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-neutral-800/10 rounded-full blur-[100px] mix-blend-screen animate-pulse" style={{ animationDuration: '9s' }} />
+          <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-zinc-800/20 rounded-full blur-[120px] mix-blend-screen animate-pulse hidden sm:block" style={{ animationDuration: '6s' }} />
+          <div className="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-neutral-800/10 rounded-full blur-[100px] mix-blend-screen animate-pulse hidden sm:block" style={{ animationDuration: '9s' }} />
         </div>
 
         <motion.div
@@ -216,7 +216,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.5, duration: 1.5 }}
-            className="mt-12 text-sm text-zinc-500 max-w-md mx-auto font-light tracking-[0.2em] uppercase"
+            className="mt-12 text-sm text-zinc-500 max-w-md mx-auto font-light tracking-[0.2em] uppercase px-6"
           >
             Işığın ve gölgenin ötesinde bir arşiv.
           </motion.p>
@@ -231,13 +231,13 @@ export default function Home() {
       </section>
 
       {/* Gallery Section */}
-      <section id="archive" className="relative z-10 mx-auto w-full px-6 pb-48 sm:px-16">
+      <section id="archive" className="relative z-10 mx-auto w-full px-0 pb-48 sm:px-16">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mb-24 flex flex-col gap-10 border-b border-white/5 pb-10 sm:flex-row sm:items-end sm:justify-between"
+          className="mb-24 flex flex-col gap-10 border-b border-white/5 pb-10 sm:flex-row sm:items-end sm:justify-between px-6 sm:px-0"
         >
           <div className="flex flex-col gap-2">
             <h2 className="font-syne text-4xl font-black uppercase tracking-tighter italic bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent underline-offset-8 decoration-white/10">Koleksiyon.</h2>
@@ -270,7 +270,7 @@ export default function Home() {
           </motion.span>
         </motion.div>
 
-        <div className="columns-1 gap-4 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 space-y-4">
+        <div className="columns-1 gap-0 space-y-0 sm:columns-2 sm:gap-4 sm:space-y-4 md:columns-3 lg:columns-4 xl:columns-5">
           {filteredPhotos.map((photo) => (
             <div key={photo.id} className="break-inside-avoid">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />

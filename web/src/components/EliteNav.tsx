@@ -48,15 +48,15 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                 animate={{
                     y: 0,
                     opacity: 1,
-                    width: isScrolled ? "90%" : "100%",
-                    top: isScrolled ? "2rem" : "0rem",
-                    borderRadius: isScrolled ? "9999px" : "0px",
-                    background: isScrolled ? "rgba(0,0,0,0.4)" : "transparent",
+                    width: isScrolled ? (typeof window !== 'undefined' && window.innerWidth < 640 ? "100%" : "90%") : "100%",
+                    top: isScrolled ? (typeof window !== 'undefined' && window.innerWidth < 640 ? "0rem" : "2rem") : "0rem",
+                    borderRadius: isScrolled ? (typeof window !== 'undefined' && window.innerWidth < 640 ? "0px" : "9999px") : "0px",
+                    background: isScrolled ? "rgba(0,0,0,0.8)" : "transparent",
                     borderColor: isScrolled ? "rgba(255,255,255,0.1)" : "transparent",
-                    backdropFilter: isScrolled ? "blur(24px)" : "blur(0px)"
+                    backdropFilter: isScrolled ? "blur(32px)" : "blur(0px)"
                 }}
                 transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className={`fixed left-1/2 z-[150] -translate-x-1/2 w-full transition-all duration-500 ease-out border border-transparent ${isScrolled ? "max-w-[95%] px-6 py-4 sm:px-10 sm:py-5" : "max-w-[95%] px-6 py-6 sm:px-12 sm:py-8"}`}
+                className={`fixed left-1/2 z-[150] -translate-x-1/2 w-full transition-all duration-500 ease-out border border-transparent ${isScrolled ? "px-6 py-4 sm:px-10 sm:py-5" : "px-6 py-6 sm:px-12 sm:py-8"}`}
             >
                 <div className="flex items-center justify-between w-full">
                     {/* Brand */}

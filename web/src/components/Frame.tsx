@@ -26,7 +26,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             }}
             viewport={{ once: true }}
             onClick={() => onClick(photo)}
-            className="group relative w-full cursor-pointer overflow-hidden rounded-lg bg-zinc-950 transition-all duration-700 hover:rounded-xl mb-4"
+            className="group relative w-full cursor-pointer overflow-hidden rounded-none sm:rounded-lg bg-zinc-950 transition-all duration-700 sm:hover:rounded-xl sm:mb-4"
             style={{
                 aspectRatio: photo.aspectRatio ? `${photo.aspectRatio}` : 'auto',
                 minHeight: !photo.aspectRatio ? '300px' : 'auto'
@@ -63,7 +63,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-auto grayscale brightness-75 transition-all duration-1000 group-hover:grayscale-0 group-hover:brightness-100"
+                className="w-full h-auto grayscale-0 brightness-100 sm:grayscale sm:brightness-75 transition-all duration-1000 sm:group-hover:grayscale-0 sm:group-hover:brightness-100"
             />
 
             {/* Minimal Info on Hover - Hidden on Mobile */}
