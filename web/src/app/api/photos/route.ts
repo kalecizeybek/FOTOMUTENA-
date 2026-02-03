@@ -34,7 +34,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
     try {
-        const { url, title, category } = await request.json();
+        const { url, title, category, aspectRatio } = await request.json();
         if (!url) return NextResponse.json({ success: false, error: "URL eksik" }, { status: 400 });
 
         const newPhoto = {
@@ -42,6 +42,7 @@ export async function POST(request: Request) {
             url: url,
             title: title || "Mutena Arşiv",
             category: category || "Genel",
+            aspectRatio: aspectRatio || 1,
             specs: {
                 iso: "Cloud",
                 shutter: "Direct",

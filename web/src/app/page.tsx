@@ -86,6 +86,7 @@ export default function Home() {
 
       const title = formData.get("title") as string;
       const category = formData.get("category") as string;
+      const aspectRatio = parseFloat(formData.get("aspectRatio") as string || "1");
 
       const cloudinaryData = new FormData();
       cloudinaryData.append("file", fileToUpload);
@@ -116,6 +117,7 @@ export default function Home() {
           url: uploadedUrl,
           title,
           category,
+          aspectRatio,
         }),
       });
 
@@ -268,9 +270,9 @@ export default function Home() {
           </motion.span>
         </motion.div>
 
-        <div className="grid grid-cols-2 auto-rows-[250px] gap-2 sm:grid-cols-4 md:grid-cols-5">
+        <div className="columns-1 gap-4 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 space-y-4">
           {filteredPhotos.map((photo) => (
-            <div key={photo.id} className="relative aspect-square sm:aspect-auto">
+            <div key={photo.id} className="break-inside-avoid">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
             </div>
           ))}

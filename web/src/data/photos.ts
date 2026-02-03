@@ -4,6 +4,7 @@ export interface Photo {
     category: string;
     description?: string;
     url: string;
+    aspectRatio?: number;
     specs: {
         iso: string;
         shutter: string;

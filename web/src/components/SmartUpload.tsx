@@ -35,10 +35,22 @@ const SmartUpload = ({ onUpload }: SmartUploadProps) => {
 
         try {
             setIsUploading(true);
+
+            // Calculate Aspect Ratio
+            const aspectRatio = await new Promise<number>((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                    resolve(img.width / img.height);
+                };
+                img.onerror = () => resolve(1);
+                img.src = imageUrl;
+            });
+
             const formData = new FormData();
             formData.append("file", file);
             formData.append("title", title);
             formData.append("category", category || "Uncategorized");
+            formData.append("aspectRatio", aspectRatio.toString());
 
             await onUpload(formData);
 
