@@ -53,116 +53,53 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                     } flex items-center justify-center overflow-hidden`}
             >
                 {/* Internal container to manage layout shift smoothly */}
-                <div className={`flex items-center justify-between ${isScrolled ? "gap-14" : "w-full"} relative z-10`}>
+                <div className={`flex items-center justify-between w-full max-w-[1800px] ${isScrolled ? "md:gap-14" : ""} relative z-10`}>
 
-                    {/* Brand with its own slow transformation */}
+                    {/* Brand */}
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex flex-col items-center">
                         <motion.h1
                             layout
-                            animate={{
-                                scale: isScrolled ? 0.85 : 1,
-                                opacity: [0.7, 1, 0.7],
-                                letterSpacing: isScrolled ? "0.4em" : "0.2em",
-                                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
-                            }}
-                            transition={{
-                                scale: { duration: 3, ease: [0.16, 1, 0.3, 1] },
-                                opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" },
-                                letterSpacing: { duration: 3, ease: [0.16, 1, 0.3, 1] },
-                                backgroundPosition: { duration: 10, repeat: Infinity, ease: "linear" }
-                            }}
-                            className={`font-syne font-black tracking-tighter uppercase leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-white bg-[length:200%_auto] transition-all duration-[3s] ${isScrolled ? "text-sm" : "text-2xl"}`}
+                            className={`font-syne font-black tracking-tighter uppercase leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-white bg-[length:200%_auto] transition-all duration-300 ${isScrolled ? "text-sm" : "text-2xl"}`}
                         >
                             FOTOMUTENA
                         </motion.h1>
                     </Link>
 
-                    {/* Desktop Links with staggered convergence */}
-                    <motion.div
-                        layout
-                        className="hidden md:flex items-center gap-10"
-                    >
+                    {/* Desktop Links */}
+                    <div className="hidden md:flex items-center gap-10">
                         {[
                             { label: "Koleksiyon", href: "/#archive" },
                             { label: "Hakkımda", action: onAboutClick },
                             { label: "Tasarım", href: "/designs" },
                             { label: "İletişim", action: onContactClick }
-                        ].map((item, i) => (
-                            <motion.div
-                                key={item.label}
-                                animate={{
-                                    opacity: isScrolled ? 1 : 0.6,
-                                    scale: isScrolled ? 0.95 : 1,
-                                    x: isScrolled ? 0 : 0
-                                }}
-                                transition={{
-                                    delay: 0.1,
-                                    duration: 2.5,
-                                    ease: [0.16, 1, 0.3, 1]
-                                }}
-                                className={`text-[9px] font-bold tracking-[0.4em] uppercase transition-colors duration-[2s] ${isScrolled ? "text-white" : "text-zinc-500"
-                                    }`}
-                            >
+                        ].map((item) => (
+                            <div key={item.label} className="text-[9px] font-bold tracking-[0.4em] uppercase text-zinc-500 hover:text-white transition-colors">
                                 {item.href ? (
-                                    <Link href={item.href} className="hover:text-white transition-colors relative group">
-                                        {item.label}
-                                        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full opacity-30" />
-                                    </Link>
+                                    <Link href={item.href}>{item.label}</Link>
                                 ) : (
-                                    <button onClick={item.action} className="hover:text-white transition-colors relative group uppercase">
-                                        {item.label}
-                                        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full opacity-30" />
-                                    </button>
+                                    <button onClick={item.action}>{item.label}</button>
                                 )}
-                            </motion.div>
+                            </div>
                         ))}
 
-                        {/* Prominent Admin Panel Button */}
-                        <motion.button
-                            initial={false}
-                            animate={{
-                                scale: isScrolled ? 0.9 : 1,
-                                opacity: isScrolled ? 1 : 0.6,
-                                borderColor: isScrolled ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.1)"
-                            }}
-                            whileHover={{
-                                scale: 1.1,
-                                backgroundColor: "rgba(255,255,255,0.05)",
-                                borderColor: "rgba(255,255,255,0.4)"
-                            }}
-                            whileTap={{ scale: 0.95 }}
+                        {/* PC Admin Button */}
+                        <button
                             onClick={onAdminClick}
-                            className={`flex items-center gap-2 px-4 py-2 border rounded-full transition-all duration-300 ${isScrolled ? "ml-4" : "ml-8"}`}
+                            className="bg-white/5 border border-white/10 px-4 py-1.5 rounded-full hover:bg-white/10 transition-all ml-4"
                         >
-                            <ShieldCheck className="w-3.5 h-3.5 text-white/70" />
-                            <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/70">Admin</span>
-                        </motion.button>
-                    </motion.div>
+                            <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/50">Admin</span>
+                        </button>
+                    </div>
 
                     {/* Mobile Menu Icon */}
                     <button
                         onClick={toggleMobileMenu}
-                        className="md:hidden flex flex-col gap-1.5 p-2"
+                        className="md:hidden flex flex-col gap-1.5 p-2 bg-white/5 rounded-lg border border-white/10"
                     >
-                        <motion.span
-                            animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                            className="w-6 h-px bg-white block"
-                        />
-                        <motion.span
-                            animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                            className="w-6 h-px bg-white block"
-                        />
+                        <div className="w-6 h-px bg-white" />
+                        <div className="w-6 h-px bg-white" />
                     </button>
                 </div>
-
-                {/* Background Shimmer Effect during scroll */}
-                <motion.div
-                    animate={{
-                        opacity: isScrolled ? [0, 0.05, 0] : 0,
-                    }}
-                    transition={{ duration: 5, repeat: Infinity }}
-                    className="absolute inset-0 bg-white/10 pointer-events-none"
-                />
             </motion.nav>
 
             {/* Mobile Sidebar */}
@@ -172,20 +109,30 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         initial={{ opacity: 0, x: "100%" }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: "100%" }}
-                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="fixed inset-0 z-[140] bg-black/95 backdrop-blur-2xl flex flex-col justify-center px-12 md:hidden"
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        className="fixed inset-0 z-[200] bg-black/98 backdrop-blur-3xl flex flex-col justify-center px-12 md:hidden"
                     >
-                        <div className="flex flex-col gap-6">
-                            {["Koleksiyon", "Hakkımda", "Tasarım", "İletişim", "Yönetim"].map((item) => (
+                        <div className="flex flex-col gap-5">
+                            {/* Management Entry FIRST for Guaranteed Visibility */}
+                            <button
+                                onClick={() => {
+                                    onAdminClick();
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="text-left font-syne text-4xl font-black uppercase tracking-tighter text-red-500 hover:text-white transition-colors border-b border-white/10 pb-4 mb-2"
+                            >
+                                Yönetim
+                            </button>
+
+                            {["Koleksiyon", "Hakkımda", "Tasarım", "İletişim"].map((item) => (
                                 <button
                                     key={item}
                                     onClick={() => {
                                         if (item === "Hakkımda") onAboutClick();
                                         else if (item === "İletişim") onContactClick();
-                                        else if (item === "Yönetim") onAdminClick();
                                         setIsMobileMenuOpen(false);
                                     }}
-                                    className="text-left font-syne text-5xl font-black uppercase tracking-tighter text-white/20 hover:text-white transition-colors"
+                                    className="text-left font-syne text-4xl font-black uppercase tracking-tighter text-white/30 hover:text-white transition-colors"
                                 >
                                     {item}
                                 </button>
