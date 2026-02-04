@@ -222,14 +222,14 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Gallery Section - Balanced Grid */}
-      <section id="archive" className="relative z-10 w-full py-20 bg-black">
+      {/* Gallery Section - Truly Full Width Grid */}
+      <section id="archive" className="relative z-10 w-full py-20 bg-black -mx-[var(--page-margin)] w-[100vw]">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mb-16 flex flex-col gap-12 sm:flex-row sm:items-end sm:justify-between border-t border-white/5 pt-12"
+          className="mb-16 flex flex-col gap-12 sm:flex-row sm:items-end sm:justify-between border-t border-white/5 pt-12 px-[var(--page-margin)]"
         >
           <div className="flex flex-col gap-4">
             <h2 className="font-syne text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">
@@ -255,7 +255,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="max-w-[1400px] mx-auto columns-1 gap-1 space-y-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 px-1">
+        <div className="columns-1 gap-1 space-y-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
           {filteredPhotos.map((photo) => (
             <div key={photo.id} className="break-inside-avoid">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
