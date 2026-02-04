@@ -175,13 +175,14 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                         className="fixed inset-0 z-[140] bg-black/95 backdrop-blur-2xl flex flex-col justify-center px-12 md:hidden"
                     >
-                        <div className="flex flex-col gap-8">
-                            {["Koleksiyon", "Hakkımda", "Tasarım", "İletişim"].map((item) => (
+                        <div className="flex flex-col gap-6">
+                            {["Koleksiyon", "Hakkımda", "Tasarım", "İletişim", "Yönetim"].map((item) => (
                                 <button
                                     key={item}
                                     onClick={() => {
                                         if (item === "Hakkımda") onAboutClick();
                                         else if (item === "İletişim") onContactClick();
+                                        else if (item === "Yönetim") onAdminClick();
                                         setIsMobileMenuOpen(false);
                                     }}
                                     className="text-left font-syne text-5xl font-black uppercase tracking-tighter text-white/20 hover:text-white transition-colors"
@@ -189,32 +190,10 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                     {item}
                                 </button>
                             ))}
-                            <button
-                                onClick={() => {
-                                    onAdminClick();
-                                    setIsMobileMenuOpen(false);
-                                }}
-                                className="flex items-center gap-4 text-left font-syne text-3xl font-black uppercase tracking-tighter text-white hover:text-red-500 transition-colors pt-8 border-t border-white/20"
-                            >
-                                <ShieldCheck className="w-8 h-8 text-red-500" />
-                                Yönetim Paneli
-                            </button>
                         </div>
                     </motion.div>
                 )}
             </AnimatePresence>
-            {/* Fixed Mobile Admin Shortcut - Bulletproof Visibility */}
-            <div className="md:hidden fixed bottom-8 right-8 z-[200]">
-                <motion.button
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={onAdminClick}
-                    className="w-14 h-14 bg-white text-black rounded-full shadow-[0_10px_30px_rgba(255,255,255,0.3)] flex items-center justify-center border-4 border-black/10"
-                >
-                    <ShieldCheck className="w-7 h-7" />
-                </motion.button>
-            </div>
         </>
     );
 };
