@@ -89,19 +89,18 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                         letterSpacing: entryLetterSpacing,
                     }}
                     style={{
-                        // Only apply rotation on PC (md and up)
-                        rotateX: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : rotateX,
-                        rotateY: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : rotateY,
+                        rotateX: 0,
+                        rotateY: 0,
                     }}
                     transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
                     className="relative w-full flex flex-col items-center"
                 >
                     <div className="relative group w-full flex justify-center">
-                        {/* 3D Floating Shadow */}
+                        {/* Static Shadow */}
                         <motion.h2
                             style={{
-                                x: typeof window !== 'undefined' && window.innerWidth < 768 ? 5 : 15,
-                                y: typeof window !== 'undefined' && window.innerWidth < 768 ? 5 : 10,
+                                x: 10,
+                                y: 8,
                                 opacity: 0.15
                             }}
                             className="absolute inset-0 font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none text-center"
@@ -126,19 +125,17 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             {text}
                         </h2>
 
-                        {/* Specular Highlight */}
-                        <motion.div
+                        {/* Specular Highlight (Static Sharpness) */}
+                        <div
                             style={{
-                                opacity: typeof window !== 'undefined' && window.innerWidth < 768 ? 0.3 : proximity,
-                                x: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : useTransform(sx, [-1, 1], [-150, 150]),
-                                y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : useTransform(sy, [-1, 1], [-30, 30])
+                                opacity: 0.3
                             }}
                             className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light flex justify-center"
                         >
                             <h2 className="font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/20 to-transparent text-center">
                                 {text}
                             </h2>
-                        </motion.div>
+                        </div>
                     </div>
                 </motion.div>
             </motion.div>
