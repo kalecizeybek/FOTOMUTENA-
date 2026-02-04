@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { ShieldCheck, User } from "lucide-react";
 
 interface EliteNavProps {
     onAdminClick: () => void;
@@ -116,17 +117,26 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                             </motion.div>
                         ))}
 
-                        {/* Status Dot with slow pulse */}
+                        {/* Prominent Admin Panel Button */}
                         <motion.button
                             initial={false}
                             animate={{
-                                scale: isScrolled ? 0.8 : 1,
-                                borderColor: isScrolled ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.1)"
+                                scale: isScrolled ? 0.9 : 1,
+                                opacity: isScrolled ? 1 : 0.6,
+                                borderColor: isScrolled ? "rgba(255,255,255,0.2)" : "rgba(255,255,255,0.1)"
                             }}
-                            whileHover={{ scale: 1.4, backgroundColor: "#fff" }}
+                            whileHover={{
+                                scale: 1.1,
+                                backgroundColor: "rgba(255,255,255,0.05)",
+                                borderColor: "rgba(255,255,255,0.4)"
+                            }}
+                            whileTap={{ scale: 0.95 }}
                             onClick={onAdminClick}
-                            className={`w-2 h-2 rounded-full border transition-all duration-[2s] ${isScrolled ? "ml-4" : "ml-8"}`}
-                        />
+                            className={`flex items-center gap-2 px-4 py-2 border rounded-full transition-all duration-300 ${isScrolled ? "ml-4" : "ml-8"}`}
+                        >
+                            <ShieldCheck className="w-3.5 h-3.5 text-white/70" />
+                            <span className="text-[9px] font-bold tracking-[0.2em] uppercase text-white/70">Admin</span>
+                        </motion.button>
                     </motion.div>
 
                     {/* Mobile Menu Icon */}
@@ -165,7 +175,7 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                         className="fixed inset-0 z-[140] bg-black/95 backdrop-blur-2xl flex flex-col justify-center px-12 md:hidden"
                     >
-                        <nav className="flex flex-col gap-8">
+                        <div className="flex flex-col gap-8">
                             {["Koleksiyon", "Hakkımda", "Tasarım", "İletişim"].map((item) => (
                                 <button
                                     key={item}
@@ -179,7 +189,17 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                     {item}
                                 </button>
                             ))}
-                        </nav>
+                            <button
+                                onClick={() => {
+                                    onAdminClick();
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="flex items-center gap-4 text-left font-syne text-3xl font-black uppercase tracking-tighter text-zinc-800 hover:text-zinc-400 transition-colors pt-8 border-t border-white/5"
+                            >
+                                <ShieldCheck className="w-8 h-8" />
+                                Yönetim Paneli
+                            </button>
+                        </div>
                     </motion.div>
                 )}
             </AnimatePresence>

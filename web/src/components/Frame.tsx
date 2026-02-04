@@ -19,7 +19,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{
-                scale: 1.05,
+                scale: 1.15,
                 zIndex: 50,
             }}
             transition={{
@@ -29,15 +29,15 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             }}
             viewport={{ once: true }}
             onClick={() => onClick(photo)}
-            className="group relative w-full cursor-pointer overflow-hidden bg-transparent rounded-none sm:rounded-sm"
+            className="group relative w-full cursor-pointer overflow-hidden bg-transparent rounded-[12px] sm:rounded-sm"
         >
             {/* Minimal Skeleton */}
             {!isLoaded && !hasError && (
-                <div className="absolute inset-0 bg-white/[0.02] animate-pulse rounded-none sm:rounded-sm" />
+                <div className="absolute inset-0 bg-white/[0.02] animate-pulse rounded-[12px] sm:rounded-sm" />
             )}
 
             {hasError && (
-                <div className="flex items-center justify-center p-20 bg-zinc-900 border border-white/5 rounded-none sm:rounded-sm">
+                <div className="flex items-center justify-center p-20 bg-zinc-900 border border-white/5 rounded-[12px] sm:rounded-sm">
                     <span className="text-[8px] text-zinc-700 uppercase tracking-widest">Error // Image Load</span>
                 </div>
             )}
@@ -55,7 +55,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-auto block transition-transform duration-1000 ease-out group-hover:scale-110 rounded-none sm:rounded-sm"
+                className="w-full h-auto block transition-transform duration-1000 ease-out group-hover:scale-125 rounded-[12px] sm:rounded-sm"
             />
 
             {/* Museum Label */}
@@ -66,7 +66,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             </div>
 
             {/* Hover Reveal Border - Global */}
-            <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-all duration-500 pointer-events-none rounded-none sm:rounded-sm" />
+            <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-all duration-500 pointer-events-none rounded-[12px] sm:rounded-sm" />
 
             {/* Soft Shadow on Hover - Global */}
             <div className="absolute inset-x-0 -bottom-10 h-20 bg-black/40 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />

@@ -42,15 +42,10 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
         return () => clearTimeout(timer);
     }, []);
 
-    // 3D Tilt Effect
-    const rotateX = useTransform(sy, [-1, 1], [10, -10]);
-    const rotateY = useTransform(sx, [-1, 1], [-10, 10]);
-
-    // Proximity state for subtle reactive effects (WITHOUT constant blur)
-    const proximity = useTransform([sx, sy], ([x, y]) => {
-        const dist = Math.sqrt((x as number) ** 2 + (y as number) ** 2);
-        return Math.max(0, 1 - dist);
-    });
+    // Static values to remove interactivity
+    const rotateX = 0;
+    const rotateY = 0;
+    const proximity = 1;
 
     // Sharp Entry Animation Logic
     const entryBlur = hasAssembled ? 0 : 20;
@@ -63,12 +58,10 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
             ref={containerRef}
             className="relative select-none py-32 px-6 sm:px-20 flex flex-col items-center justify-center perspective-[1000px]"
         >
-            {/* Ambient Shadow Masking */}
+            {/* Ambient Shadow Masking (Static) */}
             <motion.div
                 style={{
-                    x: useTransform(sx, [-1, 1], [-50, 50]),
-                    y: useTransform(sy, [-1, 1], [-50, 50]),
-                    opacity: useTransform(proximity, [0, 1], [0.1, 0.4])
+                    opacity: 0.15
                 }}
                 className="absolute inset-0 bg-radial-[at_50%_50%] from-white/10 to-transparent blur-[100px] pointer-events-none"
             />
@@ -98,11 +91,11 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                     className="relative w-full flex flex-col items-center"
                 >
                     <div className="relative group w-full flex justify-center">
-                        {/* 3D Floating Shadow (Subtle) */}
+                        {/* 3D Floating Shadow (Static) */}
                         <motion.h2
                             style={{
-                                x: useTransform(sx, [-1, 1], [15, -15]),
-                                y: useTransform(sy, [-1, 1], [10, -10]),
+                                x: 15,
+                                y: 10,
                                 opacity: 0.15
                             }}
                             className="absolute inset-0 font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none text-center"
@@ -127,19 +120,17 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             {text}
                         </h2>
 
-                        {/* Specular Highlight (Mouse Bound Only) - Desktop/Touch Sensitive */}
-                        <motion.div
+                        {/* Specular Highlight (Static) */}
+                        <div
                             style={{
-                                opacity: proximity,
-                                x: useTransform(sx, [-1, 1], [-150, 150]),
-                                y: useTransform(sy, [-1, 1], [-30, 30])
+                                opacity: 0.3
                             }}
                             className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light flex justify-center"
                         >
                             <h2 className="font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/20 to-transparent text-center">
                                 {text}
                             </h2>
-                        </motion.div>
+                        </div>
                     </div>
                 </motion.div>
             </motion.div>
