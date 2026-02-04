@@ -91,15 +91,38 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         </button>
                     </div>
 
-                    {/* Mobile Menu Icon */}
-                    <button
-                        onClick={toggleMobileMenu}
-                        className="md:hidden flex flex-col gap-1.5 p-2 bg-white/5 rounded-lg border border-white/10"
-                    >
-                        <div className="w-6 h-px bg-white" />
-                        <div className="w-6 h-px bg-white" />
-                    </button>
+                    {/* Mobile Menu & Admin Icon - High Visibility */}
+                    <div className="md:hidden flex items-center gap-3">
+                        <button
+                            onClick={onAdminClick}
+                            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-white/5 active:scale-90 transition-all text-white/50"
+                        >
+                            <ShieldCheck className="w-5 h-5" />
+                        </button>
+                        <button
+                            onClick={toggleMobileMenu}
+                            className="flex flex-col gap-1.5 p-2"
+                        >
+                            <motion.span
+                                animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                                className="w-6 h-px bg-white block"
+                            />
+                            <motion.span
+                                animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                                className="w-6 h-px bg-white block"
+                            />
+                        </button>
+                    </div>
                 </div>
+
+                {/* Background Shimmer Effect during scroll */}
+                <motion.div
+                    animate={{
+                        opacity: isScrolled ? [0, 0.05, 0] : 0,
+                    }}
+                    transition={{ duration: 5, repeat: Infinity }}
+                    className="absolute inset-0 bg-white/10 pointer-events-none"
+                />
             </motion.nav>
 
             {/* Mobile Sidebar */}
@@ -112,27 +135,17 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="fixed inset-0 z-[200] bg-black/98 backdrop-blur-3xl flex flex-col justify-center px-12 md:hidden"
                     >
-                        <div className="flex flex-col gap-5">
-                            {/* Management Entry FIRST for Guaranteed Visibility */}
-                            <button
-                                onClick={() => {
-                                    onAdminClick();
-                                    setIsMobileMenuOpen(false);
-                                }}
-                                className="text-left font-syne text-4xl font-black uppercase tracking-tighter text-red-500 hover:text-white transition-colors border-b border-white/10 pb-4 mb-2"
-                            >
-                                Yönetim
-                            </button>
-
-                            {["Koleksiyon", "Hakkımda", "Tasarım", "İletişim"].map((item) => (
+                        <div className="flex flex-col gap-8">
+                            {["Yönetim", "Koleksiyon", "Hakkımda", "Tasarım", "İletişim"].map((item) => (
                                 <button
                                     key={item}
                                     onClick={() => {
                                         if (item === "Hakkımda") onAboutClick();
                                         else if (item === "İletişim") onContactClick();
+                                        else if (item === "Yönetim") onAdminClick();
                                         setIsMobileMenuOpen(false);
                                     }}
-                                    className="text-left font-syne text-4xl font-black uppercase tracking-tighter text-white/30 hover:text-white transition-colors"
+                                    className={`text-left font-syne text-5xl font-black uppercase tracking-tighter transition-colors ${item === 'Yönetim' ? 'text-white' : 'text-white/20'} hover:text-white`}
                                 >
                                     {item}
                                 </button>
