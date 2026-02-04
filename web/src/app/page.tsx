@@ -224,13 +224,14 @@ export default function Home() {
       </section>
 
       {/* Gallery Section - Full Width Transition */}
-      <section id="archive" className="relative z-10 w-full py-20 bg-black overflow-hidden px-12 sm:px-24">
+      <section id="archive" className="relative z-10 w-full py-20 bg-black overflow-hidden sm:px-24">
+        {/* Header container with mobile padding */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="max-w-[1800px] mx-auto mb-16 flex flex-col gap-12 sm:flex-row sm:items-end sm:justify-between border-t border-white/5 pt-12"
+          className="max-w-[1800px] mx-auto mb-16 flex flex-col gap-12 sm:flex-row sm:items-end sm:justify-between border-t border-white/5 pt-12 px-12 sm:px-0"
         >
           <div className="flex flex-col gap-4">
             <h2 className="font-syne text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">
@@ -256,7 +257,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="max-w-[1800px] mx-auto columns-2 gap-1 space-y-1 sm:columns-3 md:columns-5 lg:columns-8 xl:columns-10">
+        <div className="max-w-[1800px] mx-auto columns-1 gap-0 space-y-0 sm:columns-3 md:columns-5 lg:columns-8 xl:columns-10 sm:gap-1 sm:space-y-1">
           {filteredPhotos.map((photo) => (
             <div key={photo.id} className="break-inside-avoid">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
