@@ -15,7 +15,7 @@ import { ArrowDown } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import AboutModal from "@/components/AboutModal";
 import ContactModal from "@/components/ContactModal";
-import ArchitectHeroText from "@/components/ArchitectHeroText";
+import EliteHeroText from "@/components/EliteHeroText";
 
 export default function Home() {
   const [mounted, setMounted] = useState(false);
@@ -195,7 +195,7 @@ export default function Home() {
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
           className="flex flex-col items-center"
         >
-          <ArchitectHeroText text="MUTENA" />
+          <EliteHeroText text="MUTENA" />
 
           <motion.p
             initial={{ opacity: 0 }}
@@ -257,10 +257,12 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="max-w-[1800px] mx-auto flex flex-col gap-0 sm:block sm:columns-3 md:columns-5 lg:columns-8 xl:columns-10 sm:gap-1 sm:space-y-1">
+        <div className="max-w-[1800px] mx-auto flex flex-col gap-0 snap-y snap-mandatory sm:block sm:columns-3 md:columns-5 lg:columns-8 xl:columns-10 sm:gap-1 sm:space-y-1 overflow-y-auto">
           {filteredPhotos.map((photo) => (
-            <div key={photo.id} className="sm:break-inside-avoid">
-              <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
+            <div key={photo.id} className="w-full h-screen snap-start sm:h-auto sm:break-inside-avoid flex items-center justify-center bg-black overflow-hidden border-b border-white/5 sm:border-none relative">
+              <div className="w-full h-full flex items-center justify-center p-0">
+                <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
+              </div>
             </div>
           ))}
         </div>
