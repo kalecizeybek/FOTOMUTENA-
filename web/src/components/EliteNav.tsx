@@ -22,9 +22,9 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
     // Ultra-Elite Cinematic Timing
-    const transitionConfig = {
+    const transitionConfig: any = {
         duration: 3.5,
-        ease: [0.16, 1, 0.3, 1], // Custom slow-out expo
+        ease: [0.16, 1, 0.3, 1],
         layout: { duration: 2.8, ease: [0.16, 1, 0.3, 1] }
     };
 
@@ -47,8 +47,8 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                 }}
                 transition={transitionConfig}
                 className={`fixed z-[150] border ${isScrolled
-                        ? "border-white/10 py-3 shadow-[0_40px_100px_rgba(0,0,0,0.8)]"
-                        : "border-transparent py-12 w-full"
+                    ? "border-white/10 py-3 shadow-[0_40px_100px_rgba(0,0,0,0.8)]"
+                    : "border-transparent py-12 w-full"
                     } flex items-center justify-center overflow-hidden`}
             >
                 {/* Internal container to manage layout shift smoothly */}
@@ -60,15 +60,17 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                             layout
                             animate={{
                                 scale: isScrolled ? 0.85 : 1,
-                                opacity: [0.8, 1, 0.8],
-                                letterSpacing: isScrolled ? "0.4em" : "0.2em"
+                                opacity: [0.7, 1, 0.7],
+                                letterSpacing: isScrolled ? "0.4em" : "0.2em",
+                                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
                             }}
                             transition={{
                                 scale: { duration: 3, ease: [0.16, 1, 0.3, 1] },
-                                opacity: { duration: 10, repeat: Infinity, ease: "easeInOut" },
-                                letterSpacing: { duration: 3, ease: [0.16, 1, 0.3, 1] }
+                                opacity: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                                letterSpacing: { duration: 3, ease: [0.16, 1, 0.3, 1] },
+                                backgroundPosition: { duration: 10, repeat: Infinity, ease: "linear" }
                             }}
-                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[3s] ${isScrolled ? "text-sm" : "text-2xl"}`}
+                            className={`font-syne font-black tracking-tighter uppercase leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-white bg-[length:200%_auto] transition-all duration-[3s] ${isScrolled ? "text-sm" : "text-2xl"}`}
                         >
                             FOTOMUTENA
                         </motion.h1>

@@ -67,8 +67,8 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
             <motion.div
                 animate={{
-                    scale: [1, 1.04, 1],
-                    opacity: [0.85, 1, 0.85]
+                    scale: [1, 1.03, 1],
+                    opacity: [0.8, 1, 0.8],
                 }}
                 transition={{
                     duration: 12,
@@ -88,56 +88,56 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                     className="relative transition-all duration-700 ease-out"
                 >
                     <div className="relative group">
-                        {/* Soft Ambient Glow following the breathing */}
+                        {/* Soft Ambient Refraction Glow */}
                         <motion.div
-                            animate={{ opacity: [0.1, 0.25, 0.1], scale: [1, 1.15, 1] }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute inset-x-[-20%] inset-y-[-50%] bg-white/5 blur-[100px] rounded-full pointer-events-none"
+                            animate={{ opacity: [0.1, 0.2, 0.1], scale: [1, 1.1, 1] }}
+                            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute inset-x-[-15%] inset-y-[-30%] bg-gradient-to-tr from-white/5 via-zinc-500/5 to-white/5 blur-[90px] rounded-full pointer-events-none z-0"
                         />
 
-                        {/* Shadow Layer for Depth */}
+                        {/* 3D Floating Shadow */}
                         <motion.h2
-                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/40 blur-[4px] translate-y-4"
+                            style={{
+                                x: useTransform(sx, [-1, 1], [20, -20]),
+                                y: useTransform(sy, [-1, 1], [15, -15]),
+                                opacity: useTransform(proximity, [0, 1], [0.05, 0.3])
+                            }}
+                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/50 blur-[5px] translate-y-6 pointer-events-none"
                         >
                             {text}
                         </motion.h2>
 
-                        {/* Continuous Chrome Shine Animation (More prominent Liquid Sweep) */}
+                        {/* Continuous Crystal Shine (Diagonal Sweep) */}
                         <motion.div
                             animate={{
-                                opacity: [0, 0.5, 0],
-                                x: ["-120%", "120%"]
+                                backgroundPosition: ["-200% 0%", "200% 0%"],
                             }}
                             transition={{
-                                duration: 8,
+                                duration: 9,
                                 repeat: Infinity,
-                                ease: [0.4, 0, 0.2, 1],
-                                repeatDelay: 1
+                                ease: "linear"
                             }}
-                            className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"
+                            className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.4)_50%,transparent_75%)] bg-[length:200%_100%]"
                         />
 
-                        {/* Main Chrome/Silver Effect - Animated Depth Pulse */}
+                        {/* Main Body - Chrome Glass Effect */}
                         <motion.h2
                             style={{ opacity: textOpacity }}
-                            animate={{
-                                filter: ["brightness(1)", "brightness(1.25)", "brightness(1)"],
-                            }}
-                            transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-zinc-900 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                         >
                             {text}
                         </motion.h2>
 
-                        {/* High Intensity Reflection (Mouse-Driven + Pulse) */}
+                        {/* High Fidelity Highlight (Mouse Bound) */}
                         <motion.div
                             style={{
                                 opacity: proximity,
-                                x: useTransform(sx, [-1, 1], [-150, 150])
+                                x: useTransform(sx, [-1, 1], [-180, 180]),
+                                y: useTransform(sy, [-1, 1], [-40, 40])
                             }}
-                            className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay"
+                            className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light"
                         >
-                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-r from-transparent via-white/80 to-transparent">
+                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/40 to-transparent blur-[1px]">
                                 {text}
                             </h2>
                         </motion.div>
