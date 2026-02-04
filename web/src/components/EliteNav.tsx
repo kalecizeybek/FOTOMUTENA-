@@ -140,12 +140,12 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                     </motion.div>
 
                     {/* Mobile Menu & Admin Icon */}
-                    <div className="md:hidden flex items-center gap-4">
+                    <div className="md:hidden flex items-center gap-3">
                         <button
                             onClick={onAdminClick}
-                            className="p-2 text-white/40 hover:text-white transition-colors"
+                            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 active:scale-95 transition-all text-white"
                         >
-                            <ShieldCheck className="w-6 h-6" />
+                            <ShieldCheck className="w-5 h-5" />
                         </button>
                         <button
                             onClick={toggleMobileMenu}
@@ -192,7 +192,7 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                         else if (item === "İletişim") onContactClick();
                                         setIsMobileMenuOpen(false);
                                     }}
-                                    className="text-left font-syne text-5xl font-black uppercase tracking-tighter text-zinc-800 hover:text-white transition-colors"
+                                    className="text-left font-syne text-5xl font-black uppercase tracking-tighter text-white/20 hover:text-white transition-colors"
                                 >
                                     {item}
                                 </button>
@@ -202,9 +202,9 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                     onAdminClick();
                                     setIsMobileMenuOpen(false);
                                 }}
-                                className="flex items-center gap-4 text-left font-syne text-3xl font-black uppercase tracking-tighter text-zinc-800 hover:text-zinc-400 transition-colors pt-8 border-t border-white/5"
+                                className="flex items-center gap-4 text-left font-syne text-3xl font-black uppercase tracking-tighter text-white/40 hover:text-white transition-colors pt-8 border-t border-white/10"
                             >
-                                <ShieldCheck className="w-8 h-8" />
+                                <ShieldCheck className="w-8 h-8 text-white/60" />
                                 Yönetim Paneli
                             </button>
                         </div>
