@@ -65,7 +65,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-auto transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
 
             {/* Museum Label (Invisible/Subtle) */}
