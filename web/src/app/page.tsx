@@ -224,9 +224,9 @@ export default function Home() {
         >
           <div className="flex flex-col gap-4">
             <h2 className="font-syne text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">
-              Archive
+              Halil Topal
             </h2>
-            <p className="text-[10px] text-zinc-700 font-bold tracking-[0.4em] uppercase">Visual Inventory // {photos.length} Pieces</p>
+            <p className="text-[10px] text-zinc-700 font-bold tracking-[0.4em] uppercase">Inventory // {photos.length} Pieces</p>
           </div>
 
           {/* Minimal Text Filters */}
@@ -283,7 +283,7 @@ export default function Home() {
         <div className="mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between gap-6 text-[8px] font-bold text-zinc-800 uppercase tracking-[0.4em]">
           <span>&copy; 2026 Fotomutena</span>
           <span>Designed for clarity & character</span>
-          <span className="text-zinc-900">v3.0.0 Museum Archive</span>
+          <span className="text-zinc-900">v3.0.0 Halil Topal</span>
         </div>
       </footer>
     </div>

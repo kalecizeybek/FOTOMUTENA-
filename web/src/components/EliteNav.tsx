@@ -130,7 +130,7 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                 Erişim Paneli
                             </button>
                             <p className="font-sans text-[8px] text-zinc-900 uppercase tracking-[0.2em]">
-                                MUTENA &copy; 2026 // Global Visual Archive
+                                MUTENA &copy; 2026 // Halil Topal
                             </p>
                         </div>
                     </motion.div>
