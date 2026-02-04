@@ -91,26 +91,20 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         </button>
                     </div>
 
-                    {/* Mobile Menu & Admin Icon - High Visibility */}
                     <div className="md:hidden flex items-center gap-3">
                         <button
                             onClick={onAdminClick}
-                            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/20 bg-white/5 active:scale-90 transition-all text-white/50"
+                            className="relative flex items-center justify-center w-12 h-12 rounded-full border-2 border-red-500/50 bg-red-500/10 active:scale-90 transition-all text-red-500"
                         >
-                            <ShieldCheck className="w-5 h-5" />
+                            <ShieldCheck className="w-6 h-6" />
+                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-ping" />
                         </button>
                         <button
                             onClick={toggleMobileMenu}
-                            className="flex flex-col gap-1.5 p-2"
+                            className="flex flex-col gap-1.5 p-3 bg-white/5 rounded-xl border border-white/10"
                         >
-                            <motion.span
-                                animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                                className="w-6 h-px bg-white block"
-                            />
-                            <motion.span
-                                animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                                className="w-6 h-px bg-white block"
-                            />
+                            <div className="w-6 h-px bg-white" />
+                            <div className="w-6 h-px bg-white" />
                         </button>
                     </div>
                 </div>
@@ -145,9 +139,12 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                         else if (item === "Yönetim") onAdminClick();
                                         setIsMobileMenuOpen(false);
                                     }}
-                                    className={`text-left font-syne text-5xl font-black uppercase tracking-tighter transition-colors ${item === 'Yönetim' ? 'text-white' : 'text-white/20'} hover:text-white`}
+                                    className={`text-left font-syne text-5xl font-black uppercase tracking-tighter transition-colors flex items-center gap-4 ${item === 'Yönetim' ? 'text-red-500' : 'text-white/20'} hover:text-white`}
                                 >
                                     {item}
+                                    {item === "Yönetim" && (
+                                        <span className="text-[10px] bg-red-500 text-white px-2 py-0.5 rounded font-mono tracking-widest animate-pulse">LIVE</span>
+                                    )}
                                 </button>
                             ))}
                         </div>
