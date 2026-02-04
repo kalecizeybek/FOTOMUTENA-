@@ -257,9 +257,9 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="max-w-[1800px] mx-auto flex flex-col gap-1 sm:block sm:columns-3 md:columns-5 lg:columns-8 xl:columns-10 sm:gap-1 sm:space-y-1">
+        <div className="max-w-[1800px] mx-auto flex flex-col gap-2 md:block md:columns-4 lg:columns-6 xl:columns-8 2xl:columns-10 md:gap-1 md:space-y-1">
           {filteredPhotos.map((photo) => (
-            <div key={photo.id} className="w-full sm:break-inside-avoid">
+            <div key={photo.id} className="w-full md:break-inside-avoid mb-2 md:mb-0">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
             </div>
           ))}

@@ -67,11 +67,10 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
             <motion.div
                 animate={{
-                    scale: [1, 1.05, 1],
-                    opacity: [0.8, 1, 0.8],
+                    opacity: [0.7, 1, 0.7],
                 }}
                 transition={{
-                    duration: 15,
+                    duration: 20,
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
@@ -87,66 +86,71 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                     className="relative transition-all duration-1000 ease-out"
                 >
                     <div className="relative group">
-                        {/* 3D Depth Shadow - Moves opposite to light */}
+                        {/* Prismatic Aberration Layer - Red (Mouse Reactive) */}
                         <motion.h2
                             style={{
-                                x: useTransform(sx, [-1, 1], [15, -15]),
-                                y: useTransform(sy, [-1, 1], [15, -15]),
-                                opacity: useTransform(proximity, [0, 1], [0.1, 0.4])
+                                x: useTransform(sx, [-1, 1], [-5, 5]),
+                                opacity: useTransform(proximity, [0, 1], [0.1, 0.3]),
                             }}
-                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/60 blur-[6px] pointer-events-none"
+                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-[#ff0000] mix-blend-screen blur-[2px] pointer-events-none"
                         >
                             {text}
                         </motion.h2>
 
-                        {/* Continuous Liquid Metal Sweep (Cinematic) */}
-                        <motion.div
-                            animate={{
-                                x: ["-100%", "200%"],
-                                opacity: [0, 0.4, 0]
+                        {/* Prismatic Aberration Layer - Blue (Mouse Reactive) */}
+                        <motion.h2
+                            style={{
+                                x: useTransform(sx, [-1, 1], [5, -5]),
+                                opacity: useTransform(proximity, [0, 1], [0.1, 0.3]),
                             }}
-                            transition={{
-                                duration: 12,
-                                repeat: Infinity,
-                                ease: [0.4, 0, 0.2, 1],
-                                repeatDelay: 2
-                            }}
-                            className="absolute inset-x-0 top-0 bottom-0 z-30 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none mix-blend-overlay"
-                        />
+                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-[#0000ff] mix-blend-screen blur-[2px] pointer-events-none"
+                        >
+                            {text}
+                        </motion.h2>
 
-                        {/* Primary Text Layer - Chromatic Silver */}
+                        {/* Shadow Depth Layer */}
+                        <motion.h2
+                            style={{
+                                x: useTransform(sx, [-1, 1], [10, -10]),
+                                y: useTransform(sy, [-1, 1], [10, -10]),
+                                opacity: useTransform(proximity, [0, 1], [0.1, 0.5])
+                            }}
+                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/80 blur-[8px] pointer-events-none"
+                        >
+                            {text}
+                        </motion.h2>
+
+                        {/* Main Ethereal Body - Shifting Gradients */}
                         <motion.h2
                             style={{
                                 opacity: textOpacity,
                                 letterSpacing
                             }}
-                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#ffffff] via-[#a1a1aa] to-[#18181b] drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]"
+                            animate={{
+                                backgroundImage: [
+                                    "linear-gradient(to bottom, #ffffff, #d4d4d8, #52525b)",
+                                    "linear-gradient(to bottom, #d4d4d8, #ffffff, #a1a1aa)",
+                                    "linear-gradient(to bottom, #ffffff, #d4d4d8, #52525b)"
+                                ]
+                            }}
+                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text drop-shadow-[0_0_10px_rgba(255,255,255,0.1)]"
                         >
                             {text}
                         </motion.h2>
 
-                        {/* Mouse Reactive Specular Reflection */}
-                        <motion.div
-                            style={{
-                                opacity: proximity,
-                                x: useTransform(sx, [-1, 1], [-200, 200]),
-                                y: useTransform(sy, [-1, 1], [-50, 50]),
-                                scale: 1.1,
-                            }}
-                            className="absolute inset-0 z-20 pointer-events-none mix-blend-color-dodge"
-                        >
-                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/30 to-transparent blur-[2px]">
-                                {text}
-                            </h2>
-                        </motion.div>
-
-                        {/* Internal Prism Glow */}
+                        {/* Ethereal Light Leak (Slow Sweep) */}
                         <motion.div
                             animate={{
-                                opacity: [0.1, 0.3, 0.1],
+                                x: ["-150%", "150%"],
+                                opacity: [0, 0.2, 0]
                             }}
-                            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute inset-x-[-10%] inset-y-[-20%] bg-gradient-to-tr from-zinc-500/10 via-white/5 to-zinc-500/10 blur-[80px] rounded-full pointer-events-none z-0"
+                            transition={{
+                                duration: 18,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            className="absolute inset-0 z-40 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-30deg] pointer-events-none"
                         />
                     </div>
                 </motion.div>
