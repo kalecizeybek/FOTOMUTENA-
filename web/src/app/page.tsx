@@ -11,7 +11,7 @@ import PhotoModal from "@/components/PhotoModal";
 import EliteNav from "@/components/EliteNav";
 import AdminPanel from "@/components/AdminPanel";
 import AmbientPlayer from "@/components/AmbientPlayer";
-import { ArrowDown } from "lucide-react";
+import { ArrowDown, ShieldCheck } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import AboutModal from "@/components/AboutModal";
 import ContactModal from "@/components/ContactModal";
@@ -153,16 +153,20 @@ export default function Home() {
         onContactClick={() => setIsContactOpen(true)}
       />
 
-      {/* EMERGENCY MOBILE ADMIN BUTTON - Top Level */}
-      <div className="md:hidden fixed top-32 right-0 z-[999] pointer-events-auto">
+      {/* ABSOLUTE GUARANTEED MOBILE ADMIN ENTRY */}
+      <div className="fixed top-40 right-4 z-[99999]">
         <button
           onClick={() => setIsAdminOpen(true)}
-          className="bg-red-600 text-white px-4 py-3 rounded-l-2xl font-black text-[10px] uppercase tracking-widest shadow-2xl flex items-center gap-2 border-y border-l border-white/20"
+          className="group flex items-center gap-3 bg-red-600 text-white p-4 rounded-2xl shadow-[0_0_30px_rgba(220,38,38,0.6)] border border-white/40 active:scale-90 transition-all"
         >
-          <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
-          Yönetim
+          <div className="relative">
+            <ShieldCheck className="w-6 h-6" />
+            <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full animate-ping" />
+          </div>
+          <span className="font-black text-[12px] uppercase tracking-tighter">YÖNETİM</span>
         </button>
       </div>
+
       <AmbientPlayer />
 
       {/* Overlays */}
