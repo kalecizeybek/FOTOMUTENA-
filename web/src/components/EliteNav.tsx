@@ -29,16 +29,23 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                 animate={{
                     y: 0,
                     opacity: 1,
-                    background: isScrolled ? "rgba(0,0,0,0.6)" : "transparent",
-                    backdropFilter: isScrolled ? "blur(40px)" : "blur(0px)"
+                    width: isScrolled ? "fit-content" : "100%",
+                    x: isScrolled ? "-50%" : "0%",
+                    left: isScrolled ? "50%" : "0",
+                    top: isScrolled ? "24px" : "0px",
+                    borderRadius: isScrolled ? "100px" : "0px",
+                    background: isScrolled ? "rgba(0,0,0,0.4)" : "transparent",
+                    backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)",
+                    paddingLeft: isScrolled ? "32px" : "var(--page-margin)",
+                    paddingRight: isScrolled ? "32px" : "var(--page-margin)",
                 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className={`fixed top-0 left-0 w-full z-[150] transition-all duration-500 border-b ${isScrolled ? "border-white/5 py-4" : "border-transparent py-8"} px-[var(--page-margin)]`}
+                className={`fixed z-[150] transition-all duration-500 border ${isScrolled ? "border-white/10 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)]" : "border-transparent py-8 w-full"} flex items-center justify-center`}
             >
-                <div className="flex items-center justify-between w-full">
+                <div className={`flex items-center justify-between ${isScrolled ? "gap-12" : "w-full"}`}>
                     {/* Brand */}
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                        <h1 className="font-syne font-black text-2xl tracking-tighter uppercase leading-none text-white">
+                        <h1 className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-500 ${isScrolled ? "text-lg" : "text-2xl"}`}>
                             FOTOMUTENA
                         </h1>
                     </Link>
