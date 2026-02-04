@@ -224,7 +224,7 @@ export default function Home() {
       </section>
 
       {/* Gallery Section - Full Width Transition */}
-      <section id="archive" className="relative z-10 w-full py-20 bg-black overflow-hidden px-8">
+      <section id="archive" className="relative z-10 w-full py-20 bg-black overflow-hidden px-12 sm:px-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -234,7 +234,7 @@ export default function Home() {
         >
           <div className="flex flex-col gap-4">
             <h2 className="font-syne text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">
-              Halil Topal
+              Collection
             </h2>
             <p className="text-[10px] text-zinc-700 font-bold tracking-[0.4em] uppercase">Inventory // {photos.length} Pieces</p>
           </div>
