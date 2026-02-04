@@ -19,45 +19,45 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             whileHover={{
-                scale: 1.05,
-                zIndex: 40,
+                scale: 1.15,
+                zIndex: 50,
             }}
             transition={{
-                duration: 0.8,
+                duration: 0.6,
                 ease: [0.16, 1, 0.3, 1],
-                scale: { duration: 0.5 }
+                scale: { duration: 0.4 }
             }}
             viewport={{ once: true }}
             onClick={() => onClick(photo)}
-            className="group relative w-full cursor-pointer overflow-hidden bg-black"
+            className="group relative w-full cursor-pointer overflow-visible bg-transparent"
         >
-            {/* Skeleton Loading State */}
+            {/* Skeleton Loading State - Minimal & Transparent */}
             <AnimatePresence mode="wait">
                 {!isLoaded && !hasError && (
                     <motion.div
                         key="skeleton"
                         initial={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute inset-0 z-10 bg-zinc-950 flex items-center justify-center min-h-[400px]"
+                        className="absolute inset-0 z-10 bg-white/[0.02] flex items-center justify-center"
                     >
-                        <div className="w-6 h-[1px] bg-white/5 animate-pulse" />
+                        <div className="w-6 h-[1px] bg-white/10 animate-pulse" />
                     </motion.div>
                 )}
             </AnimatePresence>
 
             {hasError && (
-                <div className="flex items-center justify-center p-20 bg-zinc-900 border border-white/5">
+                <div className="flex items-center justify-center p-20 bg-zinc-900/50 border border-white/5">
                     <span className="text-[8px] text-zinc-700 uppercase tracking-widest">Error // Image Load</span>
                 </div>
             )}
 
             <motion.img
-                initial={{ opacity: 0, scale: 1.02 }}
+                initial={{ opacity: 0, scale: 1.05 }}
                 animate={{
                     opacity: isLoaded ? 1 : 0,
-                    scale: isLoaded ? 1 : 1.02
+                    scale: isLoaded ? 1 : 1.05
                 }}
-                transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 src={photo.url}
                 alt={photo.title}
                 onLoad={() => setIsLoaded(true)}
@@ -65,7 +65,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-auto block transition-transform duration-1000 ease-out group-hover:scale-110"
+                className="w-full block transition-transform duration-700 ease-out group-hover:scale-115"
             />
 
             {/* Museum Label */}
