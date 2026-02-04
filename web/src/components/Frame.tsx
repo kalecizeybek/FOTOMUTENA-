@@ -16,15 +16,20 @@ const Frame = ({ photo, onClick }: FrameProps) => {
     return (
         <motion.div
             layout
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            whileHover={{
+                scale: 1.1,
+                zIndex: 50,
+            }}
             transition={{
-                duration: 1.2,
-                ease: [0.16, 1, 0.3, 1]
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1],
+                scale: { duration: 0.5 }
             }}
             viewport={{ once: true }}
             onClick={() => onClick(photo)}
-            className="group relative w-full h-full cursor-pointer overflow-hidden bg-black flex items-center justify-center"
+            className="group relative w-full cursor-pointer overflow-visible bg-transparent rounded-sm"
         >
             {/* Minimal Skeleton */}
             {!isLoaded && !hasError && (
@@ -38,12 +43,11 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             )}
 
             <motion.img
-                initial={{ opacity: 0, scale: 1.1 }}
+                initial={{ opacity: 0 }}
                 animate={{
                     opacity: isLoaded ? 1 : 0,
-                    scale: isLoaded ? 1 : 1.1
                 }}
-                transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.2 }}
                 src={photo.url}
                 alt={photo.title}
                 onLoad={() => setIsLoaded(true)}
@@ -51,24 +55,21 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-full object-cover sm:h-auto sm:object-contain transition-transform duration-[2s] ease-out group-hover:scale-110"
+                className="w-full h-auto block transition-transform duration-1000 ease-out group-hover:scale-125 rounded-sm"
             />
 
-            {/* Museum Label - Refined for both mobile/desktop */}
-            <div className="absolute bottom-10 left-10 md:top-8 md:left-8 md:bottom-auto opacity-0 group-hover:opacity-100 sm:group-hover:opacity-100 transition-all duration-700 translate-y-4 group-hover:translate-y-0 z-50">
-                <div className="flex flex-col gap-2">
-                    <span className="text-[8px] text-white/40 uppercase tracking-[0.5em] font-medium">
-                        {photo.category} // {photo.id}
-                    </span>
-                    <h3 className="text-sm text-white font-syne font-black uppercase tracking-tighter">{photo.title}</h3>
-                </div>
+            {/* Museum Label */}
+            <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 z-50">
+                <span className="bg-black/80 backdrop-blur-2xl px-4 py-1.5 text-[8px] text-white/50 uppercase tracking-[0.4em] font-medium border border-white/5">
+                    {photo.id} // Index
+                </span>
             </div>
 
-            {/* Subtle Gradient Overlay for Mobile Readability */}
-            <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black to-transparent opacity-40 sm:hidden pointer-events-none" />
+            {/* Hover Reveal Border */}
+            <div className="absolute inset-0 border border-white/0 group-hover:border-white/10 transition-all duration-500 pointer-events-none rounded-sm" />
 
-            {/* Hover Reveal Border - Desktop Only */}
-            <div className="absolute inset-0 border border-white/0 sm:group-hover:border-white/10 transition-all duration-700 pointer-events-none" />
+            {/* Soft Shadow on Hover */}
+            <div className="absolute inset-x-0 -bottom-10 h-20 bg-black/40 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none z-10" />
         </motion.div>
     );
 };
