@@ -66,44 +66,57 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
             />
 
             <motion.div
-                style={{
-                    rotateX,
-                    rotateY,
-                    scale,
-                    filter: useTransform(blurValue, (v) => `blur(${v}px)`),
-                    letterSpacing
+                animate={{
+                    scale: [1, 1.02, 1],
+                    opacity: [0.95, 1, 0.95]
                 }}
-                className="relative z-10 transition-all duration-300 ease-out"
+                transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                }}
+                className="relative z-10"
             >
-                <div className="relative">
-                    {/* Shadow Layer for Depth */}
-                    <motion.h2
-                        className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/40 blur-[4px] translate-y-4"
-                    >
-                        {text}
-                    </motion.h2>
-
-                    {/* Main Chrome/Silver Effect */}
-                    <motion.h2
-                        style={{ opacity: textOpacity }}
-                        className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-zinc-900"
-                    >
-                        {text}
-                    </motion.h2>
-
-                    {/* High Intensity Reflection */}
-                    <motion.div
-                        style={{
-                            opacity: proximity,
-                            x: useTransform(sx, [-1, 1], [-100, 100])
-                        }}
-                        className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay"
-                    >
-                        <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-r from-transparent via-white/80 to-transparent">
+                <motion.div
+                    style={{
+                        rotateX,
+                        rotateY,
+                        scale,
+                        filter: useTransform(blurValue, (v) => `blur(${v}px)`),
+                        letterSpacing
+                    }}
+                    className="relative transition-all duration-700 ease-out"
+                >
+                    <div className="relative">
+                        {/* Shadow Layer for Depth */}
+                        <motion.h2
+                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/40 blur-[4px] translate-y-4"
+                        >
                             {text}
-                        </h2>
-                    </motion.div>
-                </div>
+                        </motion.h2>
+
+                        {/* Main Chrome/Silver Effect */}
+                        <motion.h2
+                            style={{ opacity: textOpacity }}
+                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-zinc-900"
+                        >
+                            {text}
+                        </motion.h2>
+
+                        {/* High Intensity Reflection */}
+                        <motion.div
+                            style={{
+                                opacity: proximity,
+                                x: useTransform(sx, [-1, 1], [-100, 100])
+                            }}
+                            className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay"
+                        >
+                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-r from-transparent via-white/80 to-transparent">
+                                {text}
+                            </h2>
+                        </motion.div>
+                    </div>
+                </motion.div>
             </motion.div>
 
             {/* Dynamic Synchronized Subtext */}

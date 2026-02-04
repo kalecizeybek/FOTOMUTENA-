@@ -40,9 +40,9 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                     paddingRight: isScrolled ? "40px" : "var(--page-margin)",
                 }}
                 transition={{
-                    duration: 2.5,
-                    ease: [0.19, 1, 0.22, 1], // cinematic slow
-                    layout: { duration: 2.0, ease: [0.19, 1, 0.22, 1] }
+                    duration: 3.5,
+                    ease: [0.19, 1, 0.22, 1], // deep cinematic slow
+                    layout: { duration: 3.0, ease: [0.19, 1, 0.22, 1] }
                 }}
                 className={`fixed z-[150] border ${isScrolled ? "border-white/5 py-3.5 shadow-[0_30px_100px_rgba(0,0,0,0.6)]" : "border-transparent py-12 w-full"} flex items-center justify-center`}
             >
@@ -52,15 +52,16 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         <motion.h1
                             layout
                             animate={{
-                                scale: [1, 1.03, 1],
-                                opacity: [0.9, 1, 0.9]
+                                scale: [1, 1.02, 1],
+                                opacity: [0.8, 1, 0.8],
+                                letterSpacing: isScrolled ? ["0.3em", "0.4em", "0.3em"] : ["0.1em", "0.2em", "0.1em"]
                             }}
                             transition={{
-                                duration: 6,
+                                duration: 8,
                                 repeat: Infinity,
                                 ease: "easeInOut"
                             }}
-                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[1.5s] ${isScrolled ? "text-sm" : "text-2xl"}`}
+                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[2s] ${isScrolled ? "text-sm" : "text-2xl"}`}
                         >
                             FOTOMUTENA
                         </motion.h1>
