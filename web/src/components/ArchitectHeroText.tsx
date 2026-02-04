@@ -15,53 +15,38 @@ const ArchitecturalLetter = ({ letter, index }: { letter: string; index: number 
         return () => clearTimeout(timer);
     }, [index]);
 
-    // High-tension spring for the "snap" effect
-    const springConfig = { stiffness: 200, damping: 25, mass: 1 };
-
     return (
-        <div className="relative inline-block mx-[0.05em] px-1 sm:mx-[0.2em] sm:px-4">
-            {/* The Main Letter (Revealed after snap) */}
+        <div className="relative inline-block mx-[0.1em] sm:mx-[0.2em]">
+            {/* Background Glow Depth */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={assembled ? { opacity: [0, 0.4, 0], scale: [0.8, 1.2, 1.5] } : {}}
+                transition={{ duration: 2, ease: "easeOut" }}
+                className="absolute inset-0 bg-white/10 blur-2xl rounded-full"
+            />
+
+            {/* The Main Letter */}
             <motion.span
-                initial={{ opacity: 0, scale: 0.8, filter: "blur(20px)" }}
-                animate={assembled ? { opacity: 1, scale: 1, filter: "blur(0px)" } : {}}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                className="relative z-10 font-syne text-[18vw] sm:text-[14vw] md:text-[15vw] font-black leading-[0.8] tracking-tighter sm:tracking-normal uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900"
+                initial={{ opacity: 0, y: 40, filter: "blur(15px)" }}
+                animate={assembled ? {
+                    opacity: 1,
+                    y: 0,
+                    filter: "blur(0px)",
+                    transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] }
+                } : {}}
+                className="relative z-10 font-syne text-[16vw] sm:text-[14vw] md:text-[15vw] font-black leading-[0.8] tracking-tighter sm:tracking-normal uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-800 mix-blend-difference"
             >
                 {letter}
             </motion.span>
 
-            {/* Architectural Shards (Large segments forming the letter) */}
-            {!assembled && (
-                <>
-                    {/* Left Diagonal Shard */}
-                    <motion.div
-                        initial={{ x: -300, y: -200, rotate: -45, opacity: 0 }}
-                        animate={{ x: 0, y: 0, rotate: 0, opacity: [0, 1, 0] }}
-                        transition={{ duration: 0.8, delay: index * 0.1, ease: "circOut" }}
-                        className="absolute inset-0 z-20"
-                    >
-                        <div className="w-full h-full bg-gradient-to-br from-white/20 to-transparent skew-x-12 blur-[1px]" />
-                    </motion.div>
-
-                    {/* Right Diagonal Shard */}
-                    <motion.div
-                        initial={{ x: 300, y: 200, rotate: 45, opacity: 0 }}
-                        animate={{ x: 0, y: 0, rotate: 0, opacity: [0, 1, 0] }}
-                        transition={{ duration: 0.8, delay: index * 0.1 + 0.1, ease: "circOut" }}
-                        className="absolute inset-0 z-20"
-                    >
-                        <div className="w-full h-full bg-gradient-to-bl from-white/20 to-transparent -skew-x-12 blur-[1px]" />
-                    </motion.div>
-                </>
-            )}
-
-            {/* The Flash/Impact Effect */}
-            <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={assembled ? { opacity: [0, 1, 0], scale: [0, 1.5, 2] } : {}}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="absolute inset-0 z-30 pointer-events-none bg-white/20 mix-blend-overlay rounded-full blur-xl"
-            />
+            {/* Architectural Shadow Delay (Added Depth) */}
+            <motion.span
+                initial={{ opacity: 0 }}
+                animate={assembled ? { opacity: 0.15 } : {}}
+                className="absolute top-2 left-1 z-0 font-syne text-[16vw] sm:text-[14vw] md:text-[15vw] font-black leading-[0.8] tracking-tighter uppercase text-white/10 blur-[2px]"
+            >
+                {letter}
+            </motion.span>
         </div>
     );
 };
@@ -83,6 +68,51 @@ const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
                 transition={{ duration: 1.5, delay: 2.2 }}
                 className="mt-16 sm:mt-24 flex flex-col items-center gap-8"
             >
+                {/* Ultra-Minimalist Architectural Mobile Layout */}
+                <div className="flex md:hidden flex-col items-center gap-12 relative w-full px-4">
+                    {/* The Kinetic Frame (The "Something Extra") */}
+                    <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[85vw] h-[60vw] pointer-events-none">
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 2, delay: 1 }}
+                            className="absolute inset-0 border-[0.5px] border-white/5 rounded-sm"
+                        >
+                            {/* Corner L-Shapes */}
+                            <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-emerald-500/30" />
+                            <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-white/10" />
+                            <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-white/10" />
+                            <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-emerald-500/30" />
+                        </motion.div>
+
+                        {/* Vertical Scanning Detail */}
+                        <motion.div
+                            animate={{ top: ["10%", "90%", "10%"] }}
+                            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                            className="absolute left-[-5%] w-[110%] h-px bg-gradient-to-r from-transparent via-white/[0.03] to-transparent"
+                        />
+                    </div>
+
+                    {/* Sophisticated Text Elements */}
+                    <div className="flex flex-col items-center gap-4 z-10">
+                        <div className="flex items-center gap-6">
+                            <span className="text-[6px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Visual_Arch</span>
+                            <div className="h-[0.5px] w-6 bg-white/5" />
+                            <span className="text-[6px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Ref_2026</span>
+                        </div>
+
+                        <div className="flex flex-col items-center gap-1">
+                            <div className="flex items-center gap-2">
+                                <div className="h-[1px] w-2 bg-emerald-500/40" />
+                                <span className="text-[7px] text-emerald-500/60 font-mono tracking-[0.3em] uppercase">[ Global_Archive ]</span>
+                                <div className="h-[1px] w-2 bg-emerald-500/40" />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Architectural Pillar Line */}
+                    <div className="h-16 w-px bg-gradient-to-b from-white/10 to-transparent" />
+                </div>
 
                 {/* Desktop Layout (768px and up) */}
                 <div className="hidden md:flex flex-col items-center gap-6">
