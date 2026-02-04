@@ -17,11 +17,16 @@ const Frame = ({ photo, onClick }: FrameProps) => {
     return (
         <motion.div
             layout
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            whileHover={{
+                scale: 1.02,
+                zIndex: 20,
+                transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] }
+            }}
+            viewport={{ once: true, margin: "-50px" }}
             onClick={() => onClick(photo)}
-            className="group relative w-full cursor-pointer overflow-hidden mb-1"
+            className="group relative w-full cursor-pointer overflow-hidden"
             style={{
                 aspectRatio: photo.aspectRatio ? `${photo.aspectRatio}` : 'auto',
                 minHeight: !photo.aspectRatio ? '300px' : 'auto'
@@ -47,8 +52,12 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             )}
 
             <motion.img
-                initial={{ opacity: 0 }}
-                animate={{ opacity: isLoaded ? 1 : 0 }}
+                initial={{ opacity: 0, scale: 1.1 }}
+                animate={{
+                    opacity: isLoaded ? 1 : 0,
+                    scale: isLoaded ? 1 : 1.1
+                }}
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
                 src={photo.url}
                 alt={photo.title}
                 onLoad={() => setIsLoaded(true)}
@@ -56,7 +65,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-auto"
+                className="w-full h-auto transition-transform duration-700 group-hover:scale-110"
             />
 
             {/* Museum Label (Invisible/Subtle) */}
