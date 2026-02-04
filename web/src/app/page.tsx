@@ -224,7 +224,7 @@ export default function Home() {
       </section>
 
       {/* Gallery Section - Full Width Transition */}
-      <section id="archive" className="relative z-10 w-full py-20 bg-black overflow-hidden sm:px-24">
+      <section id="archive" className="relative z-10 w-full py-20 bg-black overflow-hidden px-0 sm:px-24">
         {/* Header container with mobile padding */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -257,7 +257,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="max-w-[1800px] mx-auto flex flex-col gap-4 md:block md:columns-4 lg:columns-6 xl:columns-8 2xl:columns-10 md:gap-1 md:space-y-1 px-8 md:px-0">
+        <div className="max-w-[1800px] mx-auto flex flex-col gap-0 md:block md:columns-4 lg:columns-6 xl:columns-8 2xl:columns-10 md:gap-1 md:space-y-1 px-0">
           {filteredPhotos.map((photo) => (
             <div key={photo.id} className="w-full md:break-inside-avoid">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />

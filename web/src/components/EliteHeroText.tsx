@@ -75,14 +75,15 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
             <motion.div
                 animate={{
-                    scale: entryScale,
-                    opacity: entryOpacity
+                    scale: hasAssembled ? [1, 1.02, 1] : entryScale,
+                    opacity: hasAssembled ? 1 : entryOpacity
                 }}
                 transition={{
-                    duration: 2.5,
+                    duration: hasAssembled ? 12 : 2.5,
+                    repeat: hasAssembled ? Infinity : 0,
                     ease: "easeOut"
                 }}
-                className="relative z-10"
+                className="relative z-10 w-full"
             >
                 <motion.div
                     animate={{
@@ -94,9 +95,9 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                         rotateY,
                     }}
                     transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative"
+                    className="relative w-full flex flex-col items-center"
                 >
-                    <div className="relative group">
+                    <div className="relative group w-full flex justify-center">
                         {/* 3D Floating Shadow (Subtle) */}
                         <motion.h2
                             style={{
@@ -104,7 +105,7 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                                 y: useTransform(sy, [-1, 1], [10, -10]),
                                 opacity: 0.15
                             }}
-                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none"
+                            className="absolute inset-0 font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none text-center"
                         >
                             {text}
                         </motion.h2>
@@ -121,21 +122,21 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
                         {/* Main Body - Crisp Static Chrome Effect */}
                         <h2
-                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]"
+                            className="relative font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] text-center"
                         >
                             {text}
                         </h2>
 
-                        {/* Specular Highlight (Mouse Bound Only) */}
+                        {/* Specular Highlight (Mouse Bound Only) - Desktop/Touch Sensitive */}
                         <motion.div
                             style={{
                                 opacity: proximity,
                                 x: useTransform(sx, [-1, 1], [-150, 150]),
                                 y: useTransform(sy, [-1, 1], [-30, 30])
                             }}
-                            className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light"
+                            className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light flex justify-center"
                         >
-                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/20 to-transparent">
+                            <h2 className="font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/20 to-transparent text-center">
                                 {text}
                             </h2>
                         </motion.div>
