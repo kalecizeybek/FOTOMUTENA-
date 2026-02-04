@@ -11,42 +11,43 @@ const ArchitecturalLetter = ({ letter, index }: { letter: string; index: number 
     const [assembled, setAssembled] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => setAssembled(true), 400 + index * 150);
+        const timer = setTimeout(() => setAssembled(true), 150 + index * 100);
         return () => clearTimeout(timer);
     }, [index]);
 
     return (
-        <div className="relative inline-block mx-[0.1em] sm:mx-[0.2em]">
-            {/* Background Glow Depth */}
+        <div className="relative inline-block mx-[0.2em] sm:mx-[0.4em]">
+            {/* Layer 1: Vertical Entry Mask */}
             <motion.div
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={assembled ? { opacity: [0, 0.4, 0], scale: [0.8, 1.2, 1.5] } : {}}
-                transition={{ duration: 2, ease: "easeOut" }}
-                className="absolute inset-0 bg-white/10 blur-2xl rounded-full"
+                initial={{ height: "0%", opacity: 0 }}
+                animate={assembled ? { height: "100%", opacity: 1 } : {}}
+                transition={{ duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
+                className="absolute inset-x-0 bottom-0 bg-white/5 z-0"
             />
 
-            {/* The Main Letter */}
+            {/* Layer 2: Sharp Glass Text */}
             <motion.span
-                initial={{ opacity: 0, y: 40, filter: "blur(15px)" }}
+                initial={{ opacity: 0, y: 100 }}
                 animate={assembled ? {
                     opacity: 1,
                     y: 0,
-                    filter: "blur(0px)",
-                    transition: { duration: 1.5, ease: [0.22, 1, 0.36, 1] }
                 } : {}}
-                className="relative z-10 font-syne text-[16vw] sm:text-[14vw] md:text-[15vw] font-black leading-[0.8] tracking-tighter sm:tracking-normal uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-800 mix-blend-difference"
+                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                className="relative z-10 font-syne text-[14vw] sm:text-[12vw] font-black leading-[0.8] tracking-widest uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-transparent"
+                style={{ WebkitTextStroke: "1px rgba(255,255,255,0.1)" }}
             >
                 {letter}
             </motion.span>
 
-            {/* Architectural Shadow Delay (Added Depth) */}
-            <motion.span
-                initial={{ opacity: 0 }}
-                animate={assembled ? { opacity: 0.15 } : {}}
-                className="absolute top-2 left-1 z-0 font-syne text-[16vw] sm:text-[14vw] md:text-[15vw] font-black leading-[0.8] tracking-tighter uppercase text-white/10 blur-[2px]"
-            >
-                {letter}
-            </motion.span>
+            {/* Layer 3: Light Reflection Pulse */}
+            <motion.div
+                animate={assembled ? {
+                    opacity: [0, 0.8, 0],
+                    x: ["-100%", "200%"]
+                } : {}}
+                transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 + index * 0.5 }}
+                className="absolute inset-0 z-20 pointer-events-none bg-gradient-to-r from-transparent via-white/40 to-transparent skew-x-12"
+            />
         </div>
     );
 };
@@ -68,50 +69,47 @@ const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
                 transition={{ duration: 1.5, delay: 2.2 }}
                 className="mt-16 sm:mt-24 flex flex-col items-center gap-8"
             >
-                {/* Ultra-Minimalist Architectural Mobile Layout */}
-                <div className="flex md:hidden flex-col items-center gap-12 relative w-full px-4">
-                    {/* The Kinetic Frame (The "Something Extra") */}
-                    <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[85vw] h-[60vw] pointer-events-none">
+                {/* Radar-Minimalist Architectural Mobile Layout */}
+                <div className="flex md:hidden flex-col items-center gap-16 relative w-full pt-12">
+                    {/* The Concentric Radar Detail */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] h-[80vw] pointer-events-none opacity-20">
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            transition={{ duration: 2, delay: 1 }}
-                            className="absolute inset-0 border-[0.5px] border-white/5 rounded-sm"
-                        >
-                            {/* Corner L-Shapes */}
-                            <div className="absolute top-0 left-0 w-3 h-3 border-t border-l border-emerald-500/30" />
-                            <div className="absolute top-0 right-0 w-3 h-3 border-t border-r border-white/10" />
-                            <div className="absolute bottom-0 left-0 w-3 h-3 border-b border-l border-white/10" />
-                            <div className="absolute bottom-0 right-0 w-3 h-3 border-b border-r border-emerald-500/30" />
-                        </motion.div>
-
-                        {/* Vertical Scanning Detail */}
+                            initial={{ scale: 0.8, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ duration: 1.5 }}
+                            className="absolute inset-0 border border-white/10 rounded-full"
+                        />
                         <motion.div
-                            animate={{ top: ["10%", "90%", "10%"] }}
-                            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
-                            className="absolute left-[-5%] w-[110%] h-px bg-gradient-to-r from-transparent via-white/[0.03] to-transparent"
+                            initial={{ scale: 0.5, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 0.5 }}
+                            transition={{ duration: 2, delay: 0.5 }}
+                            className="absolute inset-[25%] border border-white/5 rounded-full"
+                        />
+                        {/* Scanning Sweep */}
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                            className="absolute inset-0 bg-gradient-to-tr from-emerald-500/20 via-transparent to-transparent rounded-full"
                         />
                     </div>
 
-                    {/* Sophisticated Text Elements */}
-                    <div className="flex flex-col items-center gap-4 z-10">
-                        <div className="flex items-center gap-6">
-                            <span className="text-[6px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Visual_Arch</span>
-                            <div className="h-[0.5px] w-6 bg-white/5" />
-                            <span className="text-[6px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Ref_2026</span>
-                        </div>
+                    {/* Content */}
+                    <div className="flex flex-col items-center gap-6 z-10">
+                        <div className="h-24 w-px bg-gradient-to-b from-transparent via-emerald-500/40 to-transparent" />
 
                         <div className="flex flex-col items-center gap-1">
-                            <div className="flex items-center gap-2">
-                                <div className="h-[1px] w-2 bg-emerald-500/40" />
-                                <span className="text-[7px] text-emerald-500/60 font-mono tracking-[0.3em] uppercase">[ Global_Archive ]</span>
-                                <div className="h-[1px] w-2 bg-emerald-500/40" />
+                            <span className="text-[6px] text-zinc-600 font-mono tracking-[1em] uppercase">Visual_Inventory</span>
+                            <div className="text-[14px] text-white font-serif italic tracking-[0.2em]">M. Archive</div>
+                        </div>
+
+                        <div className="flex items-center gap-4 mt-4">
+                            <span className="text-[5px] text-zinc-800 font-mono tracking-[0.5em] uppercase">Ref. 2026</span>
+                            <div className="w-2 h-2 rounded-full border border-white/20 flex items-center justify-center">
+                                <div className="w-0.5 h-0.5 bg-emerald-500 rounded-full animate-ping" />
                             </div>
+                            <span className="text-[5px] text-zinc-800 font-mono tracking-[0.5em] uppercase">v. 2.1.2</span>
                         </div>
                     </div>
-
-                    {/* Architectural Pillar Line */}
-                    <div className="h-16 w-px bg-gradient-to-b from-white/10 to-transparent" />
                 </div>
 
                 {/* Desktop Layout (768px and up) */}
