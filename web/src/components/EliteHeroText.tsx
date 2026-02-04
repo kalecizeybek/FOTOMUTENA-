@@ -67,11 +67,11 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
             <motion.div
                 animate={{
-                    scale: [1, 1.02, 1],
-                    opacity: [0.95, 1, 0.95]
+                    scale: [1, 1.03, 1],
+                    opacity: [0.9, 1, 0.9]
                 }}
                 transition={{
-                    duration: 10,
+                    duration: 12,
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
@@ -87,7 +87,7 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                     }}
                     className="relative transition-all duration-700 ease-out"
                 >
-                    <div className="relative">
+                    <div className="relative group">
                         {/* Shadow Layer for Depth */}
                         <motion.h2
                             className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/40 blur-[4px] translate-y-4"
@@ -95,7 +95,20 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             {text}
                         </motion.h2>
 
-                        {/* Main Chrome/Silver Effect */}
+                        {/* Continuous Chrome Shine Animation (Sweep) */}
+                        <motion.div
+                            animate={{
+                                opacity: [0.2, 0.4, 0.2],
+                                x: ["-100%", "100%"]
+                            }}
+                            transition={{
+                                x: { duration: 10, repeat: Infinity, ease: "linear" },
+                                opacity: { duration: 10, repeat: Infinity, ease: "linear" }
+                            }}
+                            className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                        />
+
+                        {/* Main Chrome/Silver Effect - Slightly Animated Fade */}
                         <motion.h2
                             style={{ opacity: textOpacity }}
                             className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-zinc-900"
@@ -103,7 +116,7 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             {text}
                         </motion.h2>
 
-                        {/* High Intensity Reflection */}
+                        {/* High Intensity Reflection (Mouse-Driven) */}
                         <motion.div
                             style={{
                                 opacity: proximity,
