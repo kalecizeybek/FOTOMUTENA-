@@ -36,24 +36,25 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                 animate={{
                     y: 0,
                     opacity: 1,
-                    width: isScrolled ? "fit-content" : "100%",
+                    // Bulletproof mobile widths
+                    width: isScrolled ? (typeof window !== 'undefined' && window.innerWidth < 768 ? "92%" : "fit-content") : "100%",
                     x: isScrolled ? "-50%" : "0%",
                     left: isScrolled ? "50%" : "0",
-                    top: isScrolled ? "32px" : "0px",
-                    borderRadius: isScrolled ? "80px" : "0px",
-                    background: isScrolled ? "rgba(255, 255, 255, 0.05)" : "rgba(0,0,0,0)",
-                    backdropFilter: isScrolled ? "blur(40px)" : "blur(0px)",
-                    paddingLeft: isScrolled ? "32px" : "var(--page-margin)",
-                    paddingRight: isScrolled ? "32px" : "var(--page-margin)",
+                    top: isScrolled ? "20px" : "0px",
+                    borderRadius: isScrolled ? "30px" : "0px",
+                    background: isScrolled ? "rgba(10, 10, 10, 0.8)" : "rgba(0,0,0,0)",
+                    backdropFilter: isScrolled ? "blur(25px)" : "blur(0px)",
+                    paddingLeft: isScrolled ? "20px" : "var(--page-margin)",
+                    paddingRight: isScrolled ? "20px" : "var(--page-margin)",
                 }}
                 transition={transitionConfig}
                 className={`fixed z-[150] border ${isScrolled
-                    ? "border-white/10 py-3 shadow-[0_40px_100px_rgba(0,0,0,0.8)]"
+                    ? "border-white/20 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                     : "border-transparent py-12 w-full"
-                    } flex items-center justify-center overflow-hidden`}
+                    } flex items-center justify-center`}
             >
-                {/* Internal container to manage layout shift smoothly */}
-                <div className={`flex items-center justify-between ${isScrolled ? "gap-14" : "w-full"} relative z-10`}>
+                {/* Internal container - Enhanced for mobile visibility */}
+                <div className={`flex items-center justify-between w-full relative z-10 ${isScrolled ? "md:gap-14" : "md:w-auto"}`}>
 
                     {/* Brand with its own slow transformation */}
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex flex-col items-center">
@@ -211,6 +212,18 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                     </motion.div>
                 )}
             </AnimatePresence>
+            {/* Fixed Mobile Admin Shortcut - Bulletproof Visibility */}
+            <div className="md:hidden fixed bottom-8 right-8 z-[200]">
+                <motion.button
+                    initial={{ scale: 0, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={onAdminClick}
+                    className="w-14 h-14 bg-white text-black rounded-full shadow-[0_10px_30px_rgba(255,255,255,0.3)] flex items-center justify-center border-4 border-black/10"
+                >
+                    <ShieldCheck className="w-7 h-7" />
+                </motion.button>
+            </div>
         </>
     );
 };
