@@ -42,10 +42,15 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
         return () => clearTimeout(timer);
     }, []);
 
-    // Static values to remove interactivity
-    const rotateX = 0;
-    const rotateY = 0;
-    const proximity = 1;
+    // 3D Tilt Effect - Responsive
+    const rotateX = useTransform(sy, [-1, 1], [10, -10]);
+    const rotateY = useTransform(sx, [-1, 1], [-10, 10]);
+
+    // Proximity state for subtle reactive effects
+    const proximity = useTransform([sx, sy], ([x, y]) => {
+        const dist = Math.sqrt((x as number) ** 2 + (y as number) ** 2);
+        return Math.max(0, 1 - dist);
+    });
 
     // Sharp Entry Animation Logic
     const entryBlur = hasAssembled ? 0 : 20;
@@ -84,18 +89,19 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                         letterSpacing: entryLetterSpacing,
                     }}
                     style={{
-                        rotateX,
-                        rotateY,
+                        // Only apply rotation on PC (md and up)
+                        rotateX: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : rotateX,
+                        rotateY: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : rotateY,
                     }}
                     transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
                     className="relative w-full flex flex-col items-center"
                 >
                     <div className="relative group w-full flex justify-center">
-                        {/* 3D Floating Shadow (Static) */}
+                        {/* 3D Floating Shadow */}
                         <motion.h2
                             style={{
-                                x: 15,
-                                y: 10,
+                                x: typeof window !== 'undefined' && window.innerWidth < 768 ? 5 : 15,
+                                y: typeof window !== 'undefined' && window.innerWidth < 768 ? 5 : 10,
                                 opacity: 0.15
                             }}
                             className="absolute inset-0 font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none text-center"
@@ -120,17 +126,19 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             {text}
                         </h2>
 
-                        {/* Specular Highlight (Static) */}
-                        <div
+                        {/* Specular Highlight */}
+                        <motion.div
                             style={{
-                                opacity: 0.3
+                                opacity: typeof window !== 'undefined' && window.innerWidth < 768 ? 0.3 : proximity,
+                                x: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : useTransform(sx, [-1, 1], [-150, 150]),
+                                y: typeof window !== 'undefined' && window.innerWidth < 768 ? 0 : useTransform(sy, [-1, 1], [-30, 30])
                             }}
                             className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light flex justify-center"
                         >
                             <h2 className="font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/20 to-transparent text-center">
                                 {text}
                             </h2>
-                        </div>
+                        </motion.div>
                     </div>
                 </motion.div>
             </motion.div>

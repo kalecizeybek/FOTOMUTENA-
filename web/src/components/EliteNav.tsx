@@ -139,20 +139,28 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         </motion.button>
                     </motion.div>
 
-                    {/* Mobile Menu Icon */}
-                    <button
-                        onClick={toggleMobileMenu}
-                        className="md:hidden flex flex-col gap-1.5 p-2"
-                    >
-                        <motion.span
-                            animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                            className="w-6 h-px bg-white block"
-                        />
-                        <motion.span
-                            animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                            className="w-6 h-px bg-white block"
-                        />
-                    </button>
+                    {/* Mobile Menu & Admin Icon */}
+                    <div className="md:hidden flex items-center gap-4">
+                        <button
+                            onClick={onAdminClick}
+                            className="p-2 text-white/40 hover:text-white transition-colors"
+                        >
+                            <ShieldCheck className="w-6 h-6" />
+                        </button>
+                        <button
+                            onClick={toggleMobileMenu}
+                            className="flex flex-col gap-1.5 p-2"
+                        >
+                            <motion.span
+                                animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                                className="w-6 h-px bg-white block"
+                            />
+                            <motion.span
+                                animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                                className="w-6 h-px bg-white block"
+                            />
+                        </button>
+                    </div>
                 </div>
 
                 {/* Background Shimmer Effect during scroll */}
