@@ -178,24 +178,23 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Hero Section - Confident Editorial Layout */}
-      <section className="relative flex flex-col justify-center min-h-[90vh] pt-32 pb-20">
+      {/* Hero Section - Centered Identity */}
+      <section className="relative flex flex-col items-center justify-center text-center min-h-[90vh] pt-32 pb-20">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl"
+          className="flex flex-col items-center"
         >
           <ArchitectHeroText text="MUTENA" />
 
           <motion.p
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
+            animate={{ opacity: 0.8 }}
             transition={{ delay: 1, duration: 1.5 }}
-            className="mt-8 text-lg sm:text-2xl font-light tracking-tight max-w-xl leading-relaxed"
+            className="mt-12 text-sm sm:text-lg font-light tracking-[0.2em] uppercase max-w-xl leading-relaxed opacity-60"
           >
-            Işığın ve gölgenin ötesinde, <br />
-            zamanın sessiz tanıkları için bir arşiv.
+            Işığın ve gölgenin ötesinde bir arşiv.
           </motion.p>
 
           <motion.div
