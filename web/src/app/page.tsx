@@ -152,6 +152,17 @@ export default function Home() {
         onAboutClick={() => setIsAboutOpen(true)}
         onContactClick={() => setIsContactOpen(true)}
       />
+
+      {/* EMERGENCY MOBILE ADMIN BUTTON - Top Level */}
+      <div className="md:hidden fixed top-32 right-0 z-[999] pointer-events-auto">
+        <button
+          onClick={() => setIsAdminOpen(true)}
+          className="bg-red-600 text-white px-4 py-3 rounded-l-2xl font-black text-[10px] uppercase tracking-widest shadow-2xl flex items-center gap-2 border-y border-l border-white/20"
+        >
+          <span className="w-2 h-2 bg-white rounded-full animate-pulse" />
+          Yönetim
+        </button>
+      </div>
       <AmbientPlayer />
 
       {/* Overlays */}

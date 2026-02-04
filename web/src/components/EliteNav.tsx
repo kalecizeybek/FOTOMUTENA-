@@ -140,13 +140,13 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         </motion.button>
                     </motion.div>
 
-                    {/* Mobile Menu & Admin Icon */}
+                    {/* Mobile Menu & Admin Icon - Emergency High Visibility */}
                     <div className="md:hidden flex items-center gap-3">
                         <button
                             onClick={onAdminClick}
-                            className="flex items-center justify-center w-10 h-10 rounded-full border border-white/30 bg-white/10 active:scale-95 transition-all text-white"
+                            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-red-500 bg-red-500/20 active:scale-90 transition-all text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]"
                         >
-                            <ShieldCheck className="w-5 h-5" />
+                            <ShieldCheck className="w-6 h-6" />
                         </button>
                         <button
                             onClick={toggleMobileMenu}
@@ -203,9 +203,9 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                     onAdminClick();
                                     setIsMobileMenuOpen(false);
                                 }}
-                                className="flex items-center gap-4 text-left font-syne text-3xl font-black uppercase tracking-tighter text-white/40 hover:text-white transition-colors pt-8 border-t border-white/10"
+                                className="flex items-center gap-4 text-left font-syne text-3xl font-black uppercase tracking-tighter text-white hover:text-red-500 transition-colors pt-8 border-t border-white/20"
                             >
-                                <ShieldCheck className="w-8 h-8 text-white/60" />
+                                <ShieldCheck className="w-8 h-8 text-red-500" />
                                 Yönetim Paneli
                             </button>
                         </div>
