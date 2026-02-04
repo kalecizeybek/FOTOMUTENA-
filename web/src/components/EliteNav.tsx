@@ -32,17 +32,17 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                     width: isScrolled ? "fit-content" : "100%",
                     x: isScrolled ? "-50%" : "0%",
                     left: isScrolled ? "50%" : "0",
-                    top: isScrolled ? "24px" : "0px",
+                    top: isScrolled ? "32px" : "0px",
                     borderRadius: isScrolled ? "100px" : "0px",
-                    background: isScrolled ? "rgba(255,255,255,0.05)" : "transparent",
-                    backdropFilter: isScrolled ? "blur(40px)" : "blur(0px)",
-                    paddingLeft: isScrolled ? "32px" : "var(--page-margin)",
-                    paddingRight: isScrolled ? "32px" : "var(--page-margin)",
+                    background: isScrolled ? "rgba(0,0,0,0.3)" : "transparent",
+                    backdropFilter: isScrolled ? "blur(24px)" : "blur(0px)",
+                    paddingLeft: isScrolled ? "40px" : "var(--page-margin)",
+                    paddingRight: isScrolled ? "40px" : "var(--page-margin)",
                 }}
                 transition={{
-                    duration: 2.2,
-                    ease: [0.22, 1, 0.36, 1],
-                    layout: { duration: 2.0, ease: [0.22, 1, 0.36, 1] }
+                    duration: 3.5,
+                    ease: [0.19, 1, 0.22, 1], // deep cinematic slow
+                    layout: { duration: 3.0, ease: [0.19, 1, 0.22, 1] }
                 }}
                 className={`fixed z-[150] border ${isScrolled ? "border-white/5 py-3.5 shadow-[0_30px_100px_rgba(0,0,0,0.6)]" : "border-transparent py-12 w-full"} flex items-center justify-center`}
             >
@@ -52,65 +52,50 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         <motion.h1
                             layout
                             animate={{
-                                scale: isScrolled ? 0.85 : 1,
+                                scale: [1, 1.02, 1],
                                 opacity: [0.8, 1, 0.8],
-                                letterSpacing: isScrolled ? "0.4em" : "0.2em"
+                                letterSpacing: isScrolled ? ["0.3em", "0.4em", "0.3em"] : ["0.1em", "0.2em", "0.1em"]
                             }}
                             transition={{
-                                scale: { duration: 1.8, ease: [0.16, 1, 0.3, 1] },
-                                opacity: { duration: 10, repeat: Infinity, ease: "easeInOut" }
+                                duration: 8,
+                                repeat: Infinity,
+                                ease: "easeInOut"
                             }}
-                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[1.8s] ${isScrolled ? "text-sm" : "text-2xl"}`}
+                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[2s] ${isScrolled ? "text-sm" : "text-2xl"}`}
                         >
                             FOTOMUTENA
                         </motion.h1>
                     </Link>
 
-                    {/* Desktop Links - Refined Elite Style */}
+                    {/* Desktop Links - Ultra Minimal Elite Style */}
                     <motion.div
                         layout
-                        className="hidden md:flex items-center gap-10"
+                        className={`hidden md:flex items-center gap-12 text-[9px] font-bold tracking-[0.5em] uppercase ${isScrolled ? "text-zinc-300" : "text-zinc-500"}`}
                     >
-                        {[
-                            { label: "Koleksiyon", href: "/#archive" },
-                            { label: "Hakkımda", action: onAboutClick },
-                            { label: "Tasarım", href: "/designs" },
-                            { label: "İletişim", action: onContactClick }
-                        ].map((item, i) => (
-                            <motion.div
-                                key={item.label}
-                                animate={{
-                                    opacity: isScrolled ? 1 : 0.6,
-                                    scale: isScrolled ? 0.95 : 1,
-                                    color: isScrolled ? "#fff" : "#71717a"
-                                }}
-                                transition={{ delay: i * 0.1, duration: 1.2 }}
-                                className="text-[9px] font-bold tracking-[0.4em] uppercase"
-                            >
-                                {item.href ? (
-                                    <Link href={item.href} className="hover:text-white transition-colors relative group">
-                                        {item.label}
-                                        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all group-hover:w-full opacity-30" />
-                                    </Link>
-                                ) : (
-                                    <button onClick={item.action} className="hover:text-white transition-colors relative group uppercase">
-                                        {item.label}
-                                        <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all group-hover:w-full opacity-30" />
-                                    </button>
-                                )}
-                            </motion.div>
-                        ))}
+                        <Link href="/#archive" className="hover:text-white transition-all duration-700 relative group">
+                            Koleksiyon
+                            <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full group-hover:left-0 opacity-30" />
+                        </Link>
+                        <button onClick={onAboutClick} className="hover:text-white transition-all duration-700 uppercase relative group text-left">
+                            Hakkımda
+                            <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full group-hover:left-0 opacity-30" />
+                        </button>
+                        <Link href="/designs" className="hover:text-white transition-all duration-700 relative group">
+                            Tasarım
+                            <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full group-hover:left-0 opacity-30" />
+                        </Link>
+                        <button onClick={onContactClick} className="hover:text-white transition-all duration-700 uppercase relative group text-left">
+                            İletişim
+                            <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full group-hover:left-0 opacity-30" />
+                        </button>
 
                         {/* Dot for Admin */}
                         <motion.button
                             initial={false}
-                            animate={{
-                                scale: isScrolled ? 0.8 : 1,
-                                borderColor: isScrolled ? "rgba(255,255,255,0.4)" : "rgba(255,255,255,0.1)"
-                            }}
-                            whileHover={{ scale: 1.4, backgroundColor: "#fff" }}
+                            animate={{ scale: isScrolled ? 0.8 : 1 }}
+                            whileHover={{ scale: 1.5, backgroundColor: "#fff" }}
                             onClick={onAdminClick}
-                            className={`w-2 h-2 rounded-full border transition-all duration-1000 ${isScrolled ? "ml-4" : "ml-8"}`}
+                            className={`w-2 h-2 rounded-full border border-white/20 transition-all duration-1000 ${isScrolled ? "ml-4" : "ml-8"}`}
                         />
                     </motion.div>
 
