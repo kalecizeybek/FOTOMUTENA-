@@ -255,7 +255,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="mx-auto columns-1 gap-1 space-y-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
+        <div className="max-w-[1400px] mx-auto columns-1 gap-1 space-y-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5 px-1">
           {filteredPhotos.map((photo) => (
             <div key={photo.id} className="break-inside-avoid">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
