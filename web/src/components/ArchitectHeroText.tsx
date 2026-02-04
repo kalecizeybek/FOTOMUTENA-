@@ -43,13 +43,13 @@ const ArchitecturalLetter = ({ letter, index }: { letter: string; index: number 
 
 const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
     return (
-        <div className="relative flex flex-col items-center justify-center py-24 sm:py-48 bg-black select-none overflow-hidden w-full">
+        <div className="relative flex flex-col items-center justify-center py-10 sm:py-24 bg-black select-none overflow-hidden w-full">
             {/* Viewfinder Corners (The Professional Edge) */}
             <div className="absolute inset-8 pointer-events-none z-20">
-                <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/20" />
-                <div className="absolute top-0 right-0 w-8 h-8 border-t border-r border-white/20" />
-                <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-white/20" />
-                <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-white/20" />
+                <div className="absolute top-0 left-0 w-6 h-6 border-t border-l border-white/10" />
+                <div className="absolute top-0 right-0 w-6 h-6 border-t border-r border-white/10" />
+                <div className="absolute bottom-0 left-0 w-6 h-6 border-b border-l border-white/10" />
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b border-r border-white/10" />
 
                 {/* Center Crosshair */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-[1px] bg-white/10" />
@@ -70,32 +70,10 @@ const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
                 transition={{ duration: 1.5, delay: 2.2 }}
                 className="mt-16 sm:mt-24 flex flex-col items-center gap-8"
             >
-                {/* Technical Specification Grid (v2.3) */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-6 w-full max-w-2xl px-8 z-10 mt-12">
-                    <div className="flex flex-col gap-1 border-l border-white/10 pl-4">
-                        <span className="text-[6px] text-zinc-600 font-mono tracking-widest uppercase">Lens_Data</span>
-                        <span className="text-[10px] text-white font-mono tracking-wider">35mm f/1.4 G-Master</span>
-                    </div>
-                    <div className="flex flex-col gap-1 border-l border-white/10 pl-4">
-                        <span className="text-[6px] text-zinc-600 font-mono tracking-widest uppercase">Coordinates</span>
-                        <span className="text-[10px] text-white font-mono tracking-wider text-emerald-500/80">41.008° N, 28.978° E</span>
-                    </div>
-                    <div className="flex flex-col gap-1 border-l border-white/10 pl-4">
-                        <span className="text-[6px] text-zinc-600 font-mono tracking-widest uppercase">System_State</span>
-                        <span className="text-[10px] text-white font-mono tracking-wider">Visual_Arch_v2.3.0</span>
-                    </div>
-                    <div className="flex flex-col gap-1 border-l border-white/10 pl-4">
-                        <span className="text-[6px] text-zinc-600 font-mono tracking-widest uppercase">Exposure</span>
-                        <span className="text-[10px] text-white font-mono tracking-wider uppercase">ISO 100 // 1/250s</span>
-                    </div>
-                </div>
-
-                {/* Desktop Pillar (Hidden on mobile) */}
-                <div className="hidden md:flex flex-col items-center gap-6 mt-16 w-full">
-                    <div className="h-px w-full max-w-md bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-                    <div className="text-[9px] text-zinc-700 font-mono font-light uppercase tracking-[2em] text-center w-full">
-                        MUTENA ARCHITECTURAL ARCHIVE // 2026
-                    </div>
+                {/* Minimalist Version Marker */}
+                <div className="flex flex-col items-center gap-4 mt-8 z-10">
+                    <div className="h-px w-12 bg-emerald-500/20" />
+                    <span className="text-[7px] text-zinc-600 font-mono tracking-[1em] uppercase">Archive_v2.4</span>
                 </div>
             </motion.div>
 

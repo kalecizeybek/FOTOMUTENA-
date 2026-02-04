@@ -189,7 +189,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="relative flex h-screen items-center justify-center px-4 sm:px-10">
+      <section className="relative flex h-[75vh] sm:h-screen items-center justify-center px-4 sm:px-10">
         <div className="absolute inset-0 z-0">
           <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-zinc-800/20 rounded-full blur-[120px] mix-blend-screen animate-pulse hidden sm:block" style={{ animationDuration: '6s' }} />
           <div className="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-neutral-800/10 rounded-full blur-[100px] mix-blend-screen animate-pulse hidden sm:block" style={{ animationDuration: '9s' }} />
