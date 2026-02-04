@@ -201,7 +201,7 @@ export default function Home() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.8 }}
             transition={{ delay: 1.2, duration: 1 }}
-            className="mt-6 text-[11px] sm:text-[13px] font-serif font-light tracking-[0.6em] uppercase max-w-xl leading-relaxed opacity-50 text-white italic"
+            className="mt-6 text-[10px] sm:text-[12px] font-syne font-bold tracking-[0.4em] uppercase max-w-xl leading-relaxed opacity-60 text-white"
           >
             Işığın ötesinde bir arşiv
           </motion.p>
