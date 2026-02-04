@@ -200,22 +200,22 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.8 }}
-            transition={{ delay: 1, duration: 1.5 }}
-            className="mt-12 text-sm sm:text-lg font-light tracking-[0.2em] uppercase max-w-xl leading-relaxed opacity-60"
+            transition={{ delay: 1.2, duration: 1 }}
+            className="mt-6 text-[10px] sm:text-[12px] font-medium tracking-[0.4em] uppercase max-w-xl leading-relaxed opacity-60 text-white"
           >
-            Işığın ve gölgenin ötesinde bir arşiv.
+            Işığın ötesinde bir arşiv
           </motion.p>
 
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.5, duration: 1 }}
-            className="mt-12"
+            transition={{ delay: 1.4, duration: 0.8 }}
+            className="mt-8"
           >
             <Link
               href="#archive"
               onClick={scrollToArchive}
-              className="inline-block px-10 py-5 bg-white text-black font-bold text-[11px] tracking-[0.3em] uppercase hover:bg-zinc-200 transition-colors"
+              className="inline-block px-12 py-4 bg-white text-black font-bold text-[10px] tracking-[0.4em] uppercase hover:bg-zinc-200 transition-all active:scale-95"
             >
               View Collection
             </Link>

@@ -143,28 +143,16 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                 </motion.div>
             </motion.div>
 
-            {/* Subtext container remains interactive */}
+            {/* Subtext container - Stable & Elegant */}
             <motion.div
-                style={{
-                    letterSpacing: useTransform(proximity, [0, 1], ["1em", "0.4em"]),
-                    opacity: useTransform(proximity, [0, 1], [0.1, 0.6]),
-                    y: useTransform(proximity, [0, 1], [20, 0])
-                }}
-                className="mt-16 flex flex-col items-center gap-6"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1, duration: 1.5 }}
+                className="mt-12 flex flex-col items-center gap-6"
             >
                 {/* Custom Subtitle */}
-                <motion.div
-                    style={{
-                        opacity: useTransform(proximity, [0, 1], [0.1, 0.4]),
-                        letterSpacing: useTransform(proximity, [0, 1], ["1.2em", "0.8em"]),
-                    }}
-                    className="mt-4 text-[10px] sm:text-[12px] text-white font-syne font-medium uppercase text-center"
-                >
+                <div className="text-[12px] text-white/70 font-syne font-medium uppercase tracking-[0.8em] text-center">
                     Halil Topal
-                </motion.div>
-
-                <div className="hidden md:block text-[8px] text-zinc-500 font-mono font-light uppercase tracking-[0.5em] text-center mt-12">
-                    ARCHIVING THE SUBLIME // STUDIO MUTENA &copy; 2026
                 </div>
             </motion.div>
         </div>
