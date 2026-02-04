@@ -153,18 +153,18 @@ export default function Home() {
         onContactClick={() => setIsContactOpen(true)}
       />
 
-      {/* ABSOLUTE GUARANTEED MOBILE ADMIN ENTRY */}
-      <div className="fixed top-40 right-4 z-[99999]">
-        <button
+      {/* MOBILE ONLY BOTTOM TAB - GUARANTEED ENTRY */}
+      <div className="md:hidden fixed bottom-0 left-0 w-full z-[99999] px-6 pb-8 pt-4 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
+        <motion.button
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          whileTap={{ scale: 0.95 }}
           onClick={() => setIsAdminOpen(true)}
-          className="group flex items-center gap-3 bg-red-600 text-white p-4 rounded-2xl shadow-[0_0_30px_rgba(220,38,38,0.6)] border border-white/40 active:scale-90 transition-all"
+          className="pointer-events-auto w-full group flex items-center justify-center gap-3 bg-white text-black py-4 rounded-2xl shadow-[0_0_50px_rgba(255,255,255,0.2)] border-2 border-white/20 active:bg-zinc-200 transition-all"
         >
-          <div className="relative">
-            <ShieldCheck className="w-6 h-6" />
-            <span className="absolute -top-1 -right-1 w-3 h-3 bg-white rounded-full animate-ping" />
-          </div>
-          <span className="font-black text-[12px] uppercase tracking-tighter">YÖNETİM</span>
-        </button>
+          <ShieldCheck className="w-5 h-5" />
+          <span className="font-bold text-[11px] uppercase tracking-[0.3em]">Yönetim Paneli Girişi</span>
+        </motion.button>
       </div>
 
       <AmbientPlayer />

@@ -140,14 +140,8 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         </motion.button>
                     </motion.div>
 
-                    {/* Mobile Menu & Admin Icon - Emergency High Visibility */}
-                    <div className="md:hidden flex items-center gap-3">
-                        <button
-                            onClick={onAdminClick}
-                            className="flex items-center justify-center w-12 h-12 rounded-full border-2 border-red-500 bg-red-500/20 active:scale-90 transition-all text-white shadow-[0_0_20px_rgba(239,68,68,0.5)]"
-                        >
-                            <ShieldCheck className="w-6 h-6" />
-                        </button>
+                    {/* Mobile Menu Icon Only */}
+                    <div className="md:hidden flex items-center">
                         <button
                             onClick={toggleMobileMenu}
                             className="flex flex-col gap-1.5 p-2"
