@@ -144,6 +144,9 @@ export default function Home() {
 
   return (
     <div className="relative min-h-[500vh] text-[#F5F5F0] bg-[#000000] selection:bg-white selection:text-black cursor-none overflow-x-hidden">
+      <div className="fixed top-0 left-0 w-full z-[9999] bg-emerald-500 text-black text-[8px] font-black uppercase tracking-[0.4em] py-1 text-center">
+        System Sync Active // v2.1 // Build Success
+      </div>
       <DreamyBackground />
       <CustomCursor />
 
