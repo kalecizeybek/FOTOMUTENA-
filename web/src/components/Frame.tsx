@@ -21,7 +21,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onClick={() => onClick(photo)}
-            className="group relative w-full cursor-pointer overflow-hidden mb-4 sm:mb-8"
+            className="group relative w-full cursor-pointer overflow-hidden mb-1"
             style={{
                 aspectRatio: photo.aspectRatio ? `${photo.aspectRatio}` : 'auto',
                 minHeight: !photo.aspectRatio ? '300px' : 'auto'

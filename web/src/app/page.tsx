@@ -132,6 +132,14 @@ export default function Home() {
     }
   };
 
+  const scrollToArchive = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const element = document.getElementById('archive');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   if (!mounted) return null; // Prevent hydration mismatch by holding render until mount
 
   return (
@@ -205,6 +213,7 @@ export default function Home() {
           >
             <Link
               href="#archive"
+              onClick={scrollToArchive}
               className="inline-block px-10 py-5 bg-white text-black font-bold text-[11px] tracking-[0.3em] uppercase hover:bg-zinc-200 transition-colors"
             >
               View Collection
@@ -246,7 +255,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
+        <div className="columns-1 gap-1 space-y-1 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
           {filteredPhotos.map((photo) => (
             <div key={photo.id} className="break-inside-avoid">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
