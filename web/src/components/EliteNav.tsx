@@ -36,25 +36,24 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                 animate={{
                     y: 0,
                     opacity: 1,
-                    // Bulletproof mobile widths
-                    width: isScrolled ? (typeof window !== 'undefined' && window.innerWidth < 768 ? "92%" : "fit-content") : "100%",
+                    width: isScrolled ? "fit-content" : "100%",
                     x: isScrolled ? "-50%" : "0%",
                     left: isScrolled ? "50%" : "0",
-                    top: isScrolled ? "20px" : "0px",
-                    borderRadius: isScrolled ? "30px" : "0px",
-                    background: isScrolled ? "rgba(10, 10, 10, 0.8)" : "rgba(0,0,0,0)",
-                    backdropFilter: isScrolled ? "blur(25px)" : "blur(0px)",
-                    paddingLeft: isScrolled ? "20px" : "var(--page-margin)",
-                    paddingRight: isScrolled ? "20px" : "var(--page-margin)",
+                    top: isScrolled ? "32px" : "0px",
+                    borderRadius: isScrolled ? "80px" : "0px",
+                    background: isScrolled ? "rgba(255, 255, 255, 0.05)" : "rgba(0,0,0,0)",
+                    backdropFilter: isScrolled ? "blur(40px)" : "blur(0px)",
+                    paddingLeft: isScrolled ? "32px" : "var(--page-margin)",
+                    paddingRight: isScrolled ? "32px" : "var(--page-margin)",
                 }}
                 transition={transitionConfig}
                 className={`fixed z-[150] border ${isScrolled
-                    ? "border-white/20 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                    ? "border-white/10 py-3 shadow-[0_40px_100px_rgba(0,0,0,0.8)]"
                     : "border-transparent py-12 w-full"
-                    } flex items-center justify-center`}
+                    } flex items-center justify-center overflow-hidden`}
             >
-                {/* Internal container - Enhanced for mobile visibility */}
-                <div className={`flex items-center justify-between w-full relative z-10 ${isScrolled ? "md:gap-14" : "md:w-auto"}`}>
+                {/* Internal container to manage layout shift smoothly */}
+                <div className={`flex items-center justify-between ${isScrolled ? "gap-14" : "w-full"} relative z-10`}>
 
                     {/* Brand with its own slow transformation */}
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex flex-col items-center">
@@ -140,22 +139,20 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         </motion.button>
                     </motion.div>
 
-                    {/* Mobile Menu Icon Only */}
-                    <div className="md:hidden flex items-center">
-                        <button
-                            onClick={toggleMobileMenu}
-                            className="flex flex-col gap-1.5 p-2"
-                        >
-                            <motion.span
-                                animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                                className="w-6 h-px bg-white block"
-                            />
-                            <motion.span
-                                animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                                className="w-6 h-px bg-white block"
-                            />
-                        </button>
-                    </div>
+                    {/* Mobile Menu Icon */}
+                    <button
+                        onClick={toggleMobileMenu}
+                        className="md:hidden flex flex-col gap-1.5 p-2"
+                    >
+                        <motion.span
+                            animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                            className="w-6 h-px bg-white block"
+                        />
+                        <motion.span
+                            animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                            className="w-6 h-px bg-white block"
+                        />
+                    </button>
                 </div>
 
                 {/* Background Shimmer Effect during scroll */}

@@ -153,20 +153,6 @@ export default function Home() {
         onContactClick={() => setIsContactOpen(true)}
       />
 
-      {/* MOBILE ONLY BOTTOM TAB - GUARANTEED ENTRY */}
-      <div className="md:hidden fixed bottom-0 left-0 w-full z-[99999] px-6 pb-8 pt-4 bg-gradient-to-t from-black via-black/80 to-transparent pointer-events-none">
-        <motion.button
-          initial={{ y: 100 }}
-          animate={{ y: 0 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsAdminOpen(true)}
-          className="pointer-events-auto w-full group flex items-center justify-center gap-3 bg-white text-black py-4 rounded-2xl shadow-[0_0_50px_rgba(255,255,255,0.2)] border-2 border-white/20 active:bg-zinc-200 transition-all"
-        >
-          <ShieldCheck className="w-5 h-5" />
-          <span className="font-bold text-[11px] uppercase tracking-[0.3em]">Yönetim Paneli Girişi</span>
-        </motion.button>
-      </div>
-
       <AmbientPlayer />
 
       {/* Overlays */}
