@@ -252,8 +252,8 @@ const AdminPanel = ({ isOpen, onClose, onUpload, refreshPhotos }: AdminPanelProp
                     {/* Sidebar */}
                     <div className="flex flex-row md:flex-col gap-4 md:gap-8 border-b md:border-b-0 md:border-r border-white/5 p-4 sm:p-8 md:w-1/4 bg-black/20 overflow-x-auto hide-scrollbar">
                         <div className="flex flex-col min-w-[120px] md:min-w-0">
-                            <h2 className="font-syne text-xl font-black uppercase tracking-tighter text-white">MUTENA_OS</h2>
-                            <span className="font-mono text-[8px] text-zinc-500 uppercase tracking-widest mt-1 italic">Visual Intelligence v2.0</span>
+                            <h2 className="font-syne text-xl font-black uppercase tracking-tighter text-white">MUTENA_OS // v2.1</h2>
+                            <span className="font-mono text-[8px] text-zinc-500 uppercase tracking-widest mt-1 italic">Visual Intelligence Active</span>
                         </div>
 
                         <div className="flex md:flex-col gap-2">
@@ -409,7 +409,7 @@ const AdminPanel = ({ isOpen, onClose, onUpload, refreshPhotos }: AdminPanelProp
                                                         e.stopPropagation();
                                                         handleDelete(photo.id);
                                                     }}
-                                                    className="opacity-0 group-hover:opacity-100 p-3 text-zinc-600 hover:text-red-500 transition-all"
+                                                    className="opacity-100 md:opacity-0 md:group-hover:opacity-100 p-3 text-zinc-600 hover:text-red-500 transition-all"
                                                 >
                                                     <Trash2 size={16} />
                                                 </button>

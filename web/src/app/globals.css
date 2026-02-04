@@ -23,14 +23,18 @@
   --font-sans: var(--font-body);
 }
 
-body,
-a,
-button,
-input,
-textarea,
-select,
-img {
-  cursor: none !important;
+/* Custom Cursor only for mouse users */
+@media (pointer: fine) {
+
+  body,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  img {
+    cursor: none !important;
+  }
 }
 
 body {

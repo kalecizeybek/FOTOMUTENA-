@@ -79,13 +79,35 @@ const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
             {/* High-End Subtext Reveal */}
             <motion.div
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 0.6, y: 0 }}
+                animate={{ opacity: 0.8, y: 0 }}
                 transition={{ duration: 1.5, delay: 2.2 }}
-                className="mt-12 sm:mt-24 flex flex-col items-center gap-6"
+                className="mt-16 sm:mt-24 flex flex-col items-center gap-8"
             >
-                <div className="h-px w-40 bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
-                <div className="text-[10px] sm:text-[12px] text-zinc-500 font-mono font-light uppercase tracking-[1.5em] text-center">
-                    STRUCTURAL ARCHIVING // EST. 2026
+                {/* Mobile Specific Refined Layout (Up to 768px) */}
+                <div className="flex md:hidden flex-col items-center gap-8">
+                    <div className="flex items-center gap-6">
+                        <div className="flex flex-col items-end gap-1">
+                            <span className="text-[8px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Visual</span>
+                            <span className="text-[12px] text-white font-black tracking-[0.2em] uppercase leading-none">Archive</span>
+                        </div>
+                        <div className="h-10 w-[1px] bg-gradient-to-b from-transparent via-emerald-500/50 to-transparent" />
+                        <div className="flex flex-col items-start gap-1">
+                            <span className="text-[8px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Integrated</span>
+                            <span className="text-[12px] text-white font-black tracking-[0.2em] uppercase leading-none">Systems</span>
+                        </div>
+                    </div>
+                    <div className="flex flex-col items-center gap-3">
+                        <div className="h-[2px] w-4 bg-emerald-500/60 rounded-full animate-pulse" />
+                        <div className="text-[7px] text-zinc-700 font-mono tracking-[1.5em] font-black uppercase">RECONSTRUCTION_MODE // ACTV_2026</div>
+                    </div>
+                </div>
+
+                {/* Desktop Layout (768px and up) */}
+                <div className="hidden md:flex flex-col items-center gap-6">
+                    <div className="h-px w-40 bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
+                    <div className="text-[12px] text-zinc-500 font-mono font-light uppercase tracking-[1.5em] text-center">
+                        STRUCTURAL ARCHIVING // EST. 2026
+                    </div>
                 </div>
             </motion.div>
 

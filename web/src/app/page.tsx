@@ -293,8 +293,8 @@ export default function Home() {
 
         <footer className="mt-48 flex w-full flex-col items-center justify-between gap-12 px-10 font-sans text-[8px] font-light tracking-[0.5em] uppercase text-zinc-800 sm:flex-row">
           <div className="flex flex-col gap-2 items-center sm:items-start text-center sm:text-left text-zinc-500">
-            <span className="font-syne font-black text-white text-xl tracking-normal">STUDIO MUTENA</span>
-            <span>MUTENA &copy; 2026 // Global Archive</span>
+            <span className="font-syne font-black text-white text-xl tracking-normal uppercase">Mutena // ARC_PRO_2.1</span>
+            <span>MUTENA &copy; 2026 // Global Visual Archive</span>
           </div>
           <div className="flex gap-16 text-zinc-700">
             <button key="yasal" className="hover:text-white transition-colors uppercase">Yasal Uyarı</button>

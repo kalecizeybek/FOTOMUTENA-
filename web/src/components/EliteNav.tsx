@@ -94,8 +94,11 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                     {/* Right Side: Time & Mobile Toggle */}
                     <div className="flex-1 flex items-center justify-end gap-4 sm:gap-10">
                         <div className="hidden flex-col items-end sm:flex text-right">
-                            <span className={`font-mono uppercase tracking-[0.3em] font-bold leading-none transition-colors ${isScrolled ? "text-[10px] text-zinc-600" : "text-[11px] text-white/70"}`}>{currentTime} IST</span>
-                            <span className={`font-mono text-[8px] uppercase tracking-widest mt-1 ${isScrolled ? "text-zinc-700" : "text-white/30"}`}>Live_Stream</span>
+                            <div className="flex items-center gap-2">
+                                <div className="h-1 w-1 bg-emerald-500 rounded-full animate-ping" />
+                                <span className={`font-mono uppercase tracking-[0.3em] font-bold leading-none transition-colors ${isScrolled ? "text-[10px] text-zinc-600" : "text-[11px] text-white/70"}`}>{currentTime} IST</span>
+                            </div>
+                            <span className={`font-mono text-[8px] uppercase tracking-widest mt-1 ${isScrolled ? "text-zinc-700" : "text-white/30"}`}>System_OK_v2.1</span>
                         </div>
 
                         {/* Admin Toggle */}
@@ -168,15 +171,20 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                             </button>
                         </nav>
 
-                        <div className="mt-auto flex flex-col gap-4 border-t border-white/10 pt-8">
-                            <div className="flex justify-between items-end">
+                        <div className="mt-auto flex flex-col gap-6 border-t border-white/10 pt-10">
+                            <button
+                                onClick={() => { onAdminClick(); setIsMobileMenuOpen(false); }}
+                                className="w-full bg-white text-black font-black py-6 rounded-2xl text-[10px] tracking-[0.4em] uppercase flex items-center justify-center gap-3 shadow-xl shadow-white/5 active:scale-95 transition-all"
+                            >
+                                <span className="h-4 w-4 rounded-full border-2 border-black" />
+                                Arşiv Paneli & Yükle
+                            </button>
+                            <div className="flex justify-between items-center px-2">
                                 <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest leading-none">{currentTime} IST</span>
-                                <button onClick={() => { onAdminClick(); setIsMobileMenuOpen(false); }} className="text-white/40 text-[10px] font-bold uppercase tracking-widest h-10 w-10 border border-white/10 rounded-full flex items-center justify-center">
-                                    A
-                                </button>
+                                <span className="font-mono text-[8px] text-emerald-500 uppercase tracking-widest animate-pulse font-bold">v2.1 // LIVE_MODE</span>
                             </div>
-                            <p className="font-sans text-[8px] text-zinc-700 uppercase tracking-[0.4em] leading-relaxed">
-                                STUDIO MUTENA / ARCHIVE 2026.1 <br /> ALL RIGHTS RESERVED.
+                            <p className="font-sans text-[8px] text-zinc-800 uppercase tracking-[0.4em] leading-relaxed text-center">
+                                VISUAL SYNC ACTIVE // 2026.1
                             </p>
                         </div>
                     </motion.div>

@@ -154,8 +154,8 @@ const DesignAdminPanel = ({ isOpen, onClose, onUpload, refreshDesigns }: DesignA
                                                             <h4 className="text-[10px] font-bold text-white uppercase tracking-widest">{design.alt}</h4>
                                                             <p className="text-[8px] text-zinc-500 uppercase tracking-widest">{design.category}</p>
                                                         </div>
-                                                        <button onClick={() => handleDelete(design.id)} className="p-3 text-zinc-600 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all">
-                                                            <Trash2 size={16} />
+                                                        <button onClick={() => handleDelete(design.id)} className="p-3 text-zinc-500 hover:text-red-500 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-all active:scale-95">
+                                                            <Trash2 size={18} />
                                                         </button>
                                                     </div>
                                                 ))}

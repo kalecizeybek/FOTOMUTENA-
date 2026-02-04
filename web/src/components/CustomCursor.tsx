@@ -7,6 +7,7 @@ const CustomCursor = () => {
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
     const [isHovering, setIsHovering] = useState(false);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
 
     // Ultra-fluid and elastic spring config
     const springConfig = { damping: 25, stiffness: 200, mass: 0.5 };
@@ -14,6 +15,16 @@ const CustomCursor = () => {
     const cursorYSpring = useSpring(cursorY, springConfig);
 
     useEffect(() => {
+        // Multi-layered touch detection
+        const touchCheck =
+            'ontouchstart' in window ||
+            navigator.maxTouchPoints > 0 ||
+            window.matchMedia("(pointer: coarse)").matches;
+
+        setIsTouchDevice(touchCheck);
+
+        if (touchCheck) return;
+
         const moveCursor = (e: MouseEvent) => {
             cursorX.set(e.clientX);
             cursorY.set(e.clientY);
@@ -30,11 +41,13 @@ const CustomCursor = () => {
         return () => window.removeEventListener("mousemove", moveCursor);
     }, [cursorX, cursorY]);
 
+    if (isTouchDevice) return null;
+
     return (
         <>
             {/* The Fluid Center Core */}
             <motion.div
-                className="pointer-events-none fixed left-0 top-0 z-[10000] rounded-full bg-white mix-blend-difference"
+                className="pointer-events-none fixed left-0 top-0 z-[10000] rounded-full bg-white mix-blend-difference hidden lg:block"
                 animate={{
                     width: isHovering ? 80 : 8,
                     height: isHovering ? 80 : 8,
@@ -50,7 +63,7 @@ const CustomCursor = () => {
 
             {/* The Outer Ghost Ring */}
             <motion.div
-                className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full border border-white/20"
+                className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full border border-white/20 hidden lg:block"
                 animate={{
                     width: isHovering ? 100 : 40,
                     height: isHovering ? 100 : 40,
@@ -68,7 +81,7 @@ const CustomCursor = () => {
 
             {/* Subtle Trail Light */}
             <motion.div
-                className="pointer-events-none fixed left-0 top-0 z-[9998] h-32 w-32 rounded-full bg-white/[0.03] blur-2xl"
+                className="pointer-events-none fixed left-0 top-0 z-[9998] h-32 w-32 rounded-full bg-white/[0.03] blur-2xl hidden lg:block"
                 style={{
                     x: cursorXSpring,
                     y: cursorYSpring,

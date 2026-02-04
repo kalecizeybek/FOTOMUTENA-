@@ -110,12 +110,30 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
             <motion.div
                 style={{
                     letterSpacing: useTransform(proximity, [0, 1], ["1em", "0.4em"]),
-                    opacity: useTransform(proximity, [0, 1], [0.2, 0.6]),
+                    opacity: useTransform(proximity, [0, 1], [0.2, 0.8]),
                     y: useTransform(proximity, [0, 1], [20, 0])
                 }}
-                className="mt-16 text-[8px] sm:text-[10px] text-zinc-400 font-mono font-light uppercase tracking-[0.5em] text-center"
+                className="mt-16 flex flex-col items-center gap-6"
             >
-                ARCHIVING THE SUBLIME // STUDIO MUTENA &copy; 2026
+                {/* Mobile Specific Refined Layout */}
+                <div className="flex md:hidden flex-col items-center gap-6">
+                    <div className="flex items-center gap-6">
+                        <div className="flex flex-col items-end gap-1">
+                            <span className="text-[7px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Visual</span>
+                            <span className="text-[10px] text-white font-black tracking-[0.2em] uppercase leading-none">Archive</span>
+                        </div>
+                        <div className="h-8 w-[1px] bg-gradient-to-b from-transparent via-emerald-500 to-transparent" />
+                        <div className="flex flex-col items-start gap-1">
+                            <span className="text-[7px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Intelligence</span>
+                            <span className="text-[10px] text-white font-black tracking-[0.2em] uppercase leading-none">Protocol</span>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Desktop Layout */}
+                <div className="hidden md:block text-[8px] sm:text-[10px] text-zinc-400 font-mono font-light uppercase tracking-[0.5em] text-center">
+                    ARCHIVING THE SUBLIME // STUDIO MUTENA &copy; 2026
+                </div>
             </motion.div>
 
             {/* Silver Dust Particles (CSS Animation handled in global if needed, here via motion) */}
