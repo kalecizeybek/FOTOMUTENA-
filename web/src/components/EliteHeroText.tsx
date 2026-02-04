@@ -103,9 +103,9 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             style={{
                                 x: useTransform(sx, [-1, 1], [15, -15]),
                                 y: useTransform(sy, [-1, 1], [10, -10]),
-                                opacity: 0.15
+                                opacity: 0.1
                             }}
-                            className="absolute inset-0 font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none text-center"
+                            className="absolute inset-0 font-serif text-[24vw] sm:text-[18vw] font-light leading-[0.8] tracking-[0.1em] uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none text-center italic"
                         >
                             {text}
                         </motion.h2>
@@ -114,15 +114,15 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                         {!hasAssembled && (
                             <motion.div
                                 initial={{ x: "-100%", opacity: 0 }}
-                                animate={{ x: "200%", opacity: [0, 0.5, 0] }}
-                                transition={{ duration: 2.5, ease: "easeInOut" }}
-                                className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.4)_50%,transparent_75%)] bg-[length:200%_100%]"
+                                animate={{ x: "200%", opacity: [0, 0.4, 0] }}
+                                transition={{ duration: 2.8, ease: "easeInOut" }}
+                                className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.3)_50%,transparent_75%)] bg-[length:200%_100%]"
                             />
                         )}
 
                         {/* Main Body - Crisp Static Chrome Effect */}
                         <h2
-                            className="relative font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.05)] text-center"
+                            className="relative font-serif text-[24vw] sm:text-[18vw] font-light leading-[0.8] tracking-[0.1em] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-zinc-800 drop-shadow-[0_0_15px_rgba(255,255,255,0.02)] text-center italic"
                         >
                             {text}
                         </h2>
@@ -131,12 +131,12 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                         <motion.div
                             style={{
                                 opacity: proximity,
-                                x: useTransform(sx, [-1, 1], [-150, 150]),
-                                y: useTransform(sy, [-1, 1], [-30, 30])
+                                x: useTransform(sx, [-1, 1], [-120, 120]),
+                                y: useTransform(sy, [-1, 1], [-20, 20])
                             }}
                             className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light flex justify-center"
                         >
-                            <h2 className="font-syne text-[20vw] sm:text-[14vw] font-black leading-[0.8] tracking-tighter uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/20 to-transparent text-center">
+                            <h2 className="font-serif text-[24vw] sm:text-[18vw] font-light leading-[0.8] tracking-[0.1em] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/10 to-transparent text-center italic">
                                 {text}
                             </h2>
                         </motion.div>
@@ -152,7 +152,7 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                 className="mt-12 flex flex-col items-center gap-6"
             >
                 {/* Custom Subtitle */}
-                <div className="text-[12px] text-white/70 font-syne font-medium uppercase tracking-[0.8em] text-center">
+                <div className="text-[14px] text-white/60 font-serif font-light uppercase tracking-[1em] text-center italic">
                     Halil Topal
                 </div>
             </motion.div>

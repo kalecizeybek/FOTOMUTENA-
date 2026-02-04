@@ -20,6 +20,7 @@
   --color-accent: var(--accent);
 
   --font-syne: var(--font-primary);
+  --font-serif: 'Cormorant Garamond', serif;
   --font-sans: var(--font-body);
 }
 

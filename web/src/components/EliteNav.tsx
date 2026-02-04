@@ -59,9 +59,9 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                         <motion.h1
                             layout
                             animate={{
-                                scale: isScrolled ? 0.85 : 1,
-                                opacity: [0.7, 1, 0.7],
-                                letterSpacing: isScrolled ? "0.4em" : "0.2em",
+                                scale: isScrolled ? 0.9 : 1,
+                                opacity: [0.8, 1, 0.8],
+                                letterSpacing: isScrolled ? "0.3em" : "0.5em",
                                 backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"]
                             }}
                             transition={{
@@ -70,7 +70,7 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                 letterSpacing: { duration: 3, ease: [0.16, 1, 0.3, 1] },
                                 backgroundPosition: { duration: 10, repeat: Infinity, ease: "linear" }
                             }}
-                            className={`font-syne font-black tracking-tighter uppercase leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-white bg-[length:200%_auto] transition-all duration-[3s] ${isScrolled ? "text-sm" : "text-2xl"}`}
+                            className={`font-serif font-light tracking-[0.2em] uppercase leading-none text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-400 to-white bg-[length:200%_auto] transition-all duration-[3s] italic ${isScrolled ? "text-lg" : "text-3xl"}`}
                         >
                             FOTOMUTENA
                         </motion.h1>
