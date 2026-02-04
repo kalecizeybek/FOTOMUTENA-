@@ -16,7 +16,7 @@ const ArchitecturalLetter = ({ letter, index }: { letter: string; index: number 
     }, [index]);
 
     return (
-        <div className="relative inline-block overflow-hidden mx-[0.05em] sm:mx-[0.1em] px-1">
+        <div className="relative inline-block mx-[0.05em] sm:mx-[0.1em] px-1">
             {/* The Cinematic Slide-up */}
             <motion.span
                 initial={{ y: "110%", opacity: 0 }}

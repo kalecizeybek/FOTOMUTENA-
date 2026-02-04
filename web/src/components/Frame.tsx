@@ -21,7 +21,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onClick={() => onClick(photo)}
-            className="group relative w-full cursor-pointer overflow-hidden bg-zinc-950 mb-4 sm:mb-8"
+            className="group relative w-full cursor-pointer overflow-hidden mb-4 sm:mb-8"
             style={{
                 aspectRatio: photo.aspectRatio ? `${photo.aspectRatio}` : 'auto',
                 minHeight: !photo.aspectRatio ? '300px' : 'auto'
@@ -56,7 +56,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-auto transition-opacity duration-700 hover:opacity-80"
+                className="w-full h-auto"
             />
 
             {/* Museum Label (Invisible/Subtle) */}

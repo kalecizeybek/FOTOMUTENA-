@@ -11,6 +11,7 @@
   --font-primary: 'Syne', sans-serif;
   --font-body: 'Inter', sans-serif;
   --page-margin: 6vw;
+  scroll-behavior: smooth;
 }
 
 @theme inline {

@@ -29,8 +29,8 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                 animate={{
                     y: 0,
                     opacity: 1,
-                    background: isScrolled ? "rgba(0,0,0,0.9)" : "transparent",
-                    backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)"
+                    background: isScrolled ? "rgba(0,0,0,0.6)" : "transparent",
+                    backdropFilter: isScrolled ? "blur(40px)" : "blur(0px)"
                 }}
                 transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                 className={`fixed top-0 left-0 w-full z-[150] transition-all duration-500 border-b ${isScrolled ? "border-white/5 py-4" : "border-transparent py-8"} px-[var(--page-margin)]`}
