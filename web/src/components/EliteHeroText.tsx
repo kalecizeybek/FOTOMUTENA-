@@ -115,20 +115,6 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                 }}
                 className="mt-16 flex flex-col items-center gap-6"
             >
-                {/* Mobile Specific Refined Layout */}
-                <div className="flex md:hidden flex-col items-center gap-6">
-                    <div className="flex items-center gap-6">
-                        <div className="flex flex-col items-end gap-1">
-                            <span className="text-[7px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Visual</span>
-                            <span className="text-[10px] text-white font-black tracking-[0.2em] uppercase leading-none">Archive</span>
-                        </div>
-                        <div className="h-8 w-[1px] bg-gradient-to-b from-transparent via-emerald-500 to-transparent" />
-                        <div className="flex flex-col items-start gap-1">
-                            <span className="text-[7px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Intelligence</span>
-                            <span className="text-[10px] text-white font-black tracking-[0.2em] uppercase leading-none">Protocol</span>
-                        </div>
-                    </div>
-                </div>
 
                 {/* Desktop Layout */}
                 <div className="hidden md:block text-[8px] sm:text-[10px] text-zinc-400 font-mono font-light uppercase tracking-[0.5em] text-center">
