@@ -40,37 +40,30 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                     paddingRight: isScrolled ? "40px" : "var(--page-margin)",
                 }}
                 transition={{
-                    duration: 1.5,
-                    ease: [0.19, 1, 0.22, 1], // Cinematic slow-out
-                    layout: { duration: 1.2, ease: [0.19, 1, 0.22, 1] }
+                    duration: 2.5,
+                    ease: [0.19, 1, 0.22, 1], // cinematic slow
+                    layout: { duration: 2.0, ease: [0.19, 1, 0.22, 1] }
                 }}
                 className={`fixed z-[150] border ${isScrolled ? "border-white/5 py-3.5 shadow-[0_30px_100px_rgba(0,0,0,0.6)]" : "border-transparent py-12 w-full"} flex items-center justify-center`}
             >
                 <div className={`flex items-center justify-between ${isScrolled ? "gap-16" : "w-full"}`}>
                     {/* Brand */}
-                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex flex-col items-center">
+                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
                         <motion.h1
                             layout
                             animate={{
-                                scale: [1, 1.05, 1],
+                                scale: [1, 1.03, 1],
                                 opacity: [0.9, 1, 0.9]
                             }}
                             transition={{
-                                duration: 4,
+                                duration: 6,
                                 repeat: Infinity,
                                 ease: "easeInOut"
                             }}
-                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[1.2s] ${isScrolled ? "text-sm" : "text-2xl"}`}
+                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[1.5s] ${isScrolled ? "text-sm" : "text-2xl"}`}
                         >
                             FOTOMUTENA
                         </motion.h1>
-                        <motion.span
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 0.4 }}
-                            className={`font-syne text-[8px] tracking-[0.6em] uppercase text-white mt-1 transition-all duration-700 ${isScrolled ? "hidden" : "block"}`}
-                        >
-                            Halil Topal
-                        </motion.span>
                     </Link>
 
                     {/* Desktop Links - Ultra Minimal Elite Style */}

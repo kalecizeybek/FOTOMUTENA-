@@ -116,8 +116,19 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                 className="mt-16 flex flex-col items-center gap-6"
             >
 
-                {/* Desktop Layout */}
-                <div className="hidden md:block text-[8px] sm:text-[10px] text-zinc-400 font-mono font-light uppercase tracking-[0.5em] text-center">
+                {/* Custom Subtitle */}
+                <motion.div
+                    style={{
+                        opacity: useTransform(proximity, [0, 1], [0.1, 0.4]),
+                        letterSpacing: useTransform(proximity, [0, 1], ["1.2em", "0.8em"]),
+                    }}
+                    className="mt-4 text-[10px] sm:text-[12px] text-white font-syne font-medium uppercase text-center"
+                >
+                    Halil Topal
+                </motion.div>
+
+                {/* Desktop Layout - Secondary */}
+                <div className="hidden md:block text-[8px] text-zinc-500 font-mono font-light uppercase tracking-[0.5em] text-center mt-12">
                     ARCHIVING THE SUBLIME // STUDIO MUTENA &copy; 2026
                 </div>
             </motion.div>
