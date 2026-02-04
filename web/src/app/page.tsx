@@ -143,7 +143,7 @@ export default function Home() {
   if (!mounted) return null; // Prevent hydration mismatch by holding render until mount
 
   return (
-    <div className="relative min-h-[500vh] text-[#F5F5F0] bg-[#000000] selection:bg-white selection:text-black cursor-none overflow-x-hidden px-[var(--page-margin)]">
+    <div className="relative min-h-[500vh] text-[#F5F5F0] bg-[#000000] selection:bg-white selection:text-black cursor-none overflow-x-hidden">
       <CustomCursor />
 
       {/* Dynamic Navigation */}
@@ -187,7 +187,8 @@ export default function Home() {
       </AnimatePresence>
 
       {/* Hero Section - Centered Identity */}
-      <section className="relative flex flex-col items-center justify-center text-center min-h-[90vh] pt-32 pb-20">
+      {/* Hero Section */}
+      <section className="relative flex flex-col items-center justify-center text-center min-h-[90vh] pt-32 pb-20 px-[var(--page-margin)]">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -222,8 +223,8 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Gallery Section - Truly Full Width Grid */}
-      <section id="archive" className="relative z-10 w-full py-20 bg-black -mx-[var(--page-margin)] w-[100vw]">
+      {/* Gallery Section - Full Width Transition */}
+      <section id="archive" className="relative z-10 w-full py-20 bg-black overflow-visible">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -265,7 +266,7 @@ export default function Home() {
       </section>
 
       {/* Footer - Minimal & Confident */}
-      <footer className="relative py-40 border-t border-white/5 mt-20">
+      <footer className="relative py-40 border-t border-white/5 mt-20 px-[var(--page-margin)]">
         <div className="flex flex-col md:flex-row justify-between items-start gap-20">
           <div className="flex flex-col gap-6 max-w-sm">
             <h3 className="font-syne font-black text-3xl tracking-tighter uppercase text-white">FOTOMUTENA</h3>
