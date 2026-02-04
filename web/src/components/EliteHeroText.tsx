@@ -67,11 +67,11 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
             <motion.div
                 animate={{
-                    scale: [1, 1.03, 1],
-                    opacity: [0.9, 1, 0.9]
+                    scale: [1, 1.04, 1],
+                    opacity: [0.85, 1, 0.85]
                 }}
                 transition={{
-                    duration: 12,
+                    duration: 8,
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
@@ -88,6 +88,13 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                     className="relative transition-all duration-700 ease-out"
                 >
                     <div className="relative group">
+                        {/* Soft Ambient Glow following the breathing */}
+                        <motion.div
+                            animate={{ opacity: [0.1, 0.25, 0.1], scale: [1, 1.15, 1] }}
+                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute inset-x-[-20%] inset-y-[-50%] bg-white/5 blur-[100px] rounded-full pointer-events-none"
+                        />
+
                         {/* Shadow Layer for Depth */}
                         <motion.h2
                             className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/40 blur-[4px] translate-y-4"
@@ -95,32 +102,38 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             {text}
                         </motion.h2>
 
-                        {/* Continuous Chrome Shine Animation (Sweep) */}
+                        {/* Continuous Chrome Shine Animation (More prominent Liquid Sweep) */}
                         <motion.div
                             animate={{
-                                opacity: [0.2, 0.4, 0.2],
-                                x: ["-100%", "100%"]
+                                opacity: [0, 0.5, 0],
+                                x: ["-120%", "120%"]
                             }}
                             transition={{
-                                x: { duration: 10, repeat: Infinity, ease: "linear" },
-                                opacity: { duration: 10, repeat: Infinity, ease: "linear" }
+                                duration: 6,
+                                repeat: Infinity,
+                                ease: [0.4, 0, 0.2, 1],
+                                repeatDelay: 0.5
                             }}
-                            className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                            className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12"
                         />
 
-                        {/* Main Chrome/Silver Effect - Slightly Animated Fade */}
+                        {/* Main Chrome/Silver Effect - Animated Depth Pulse */}
                         <motion.h2
                             style={{ opacity: textOpacity }}
-                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-zinc-900"
+                            animate={{
+                                filter: ["brightness(1)", "brightness(1.3)", "brightness(1)"],
+                            }}
+                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-zinc-900 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
                         >
                             {text}
                         </motion.h2>
 
-                        {/* High Intensity Reflection (Mouse-Driven) */}
+                        {/* High Intensity Reflection (Mouse-Driven + Pulse) */}
                         <motion.div
                             style={{
                                 opacity: proximity,
-                                x: useTransform(sx, [-1, 1], [-100, 100])
+                                x: useTransform(sx, [-1, 1], [-150, 150])
                             }}
                             className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay"
                         >
