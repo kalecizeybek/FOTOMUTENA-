@@ -35,20 +35,28 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
         return () => window.removeEventListener("mousemove", handleMouseMove);
     }, [mouseX, mouseY]);
 
-    // 3D Tilt Effect
-    const rotateX = useTransform(sy, [-1, 1], [15, -15]);
-    const rotateY = useTransform(sx, [-1, 1], [-15, 15]);
+    const [hasAssembled, setHasAssembled] = useState(false);
 
-    // Focus state based on proximity to center (0,0)
+    useEffect(() => {
+        const timer = setTimeout(() => setHasAssembled(true), 500);
+        return () => clearTimeout(timer);
+    }, []);
+
+    // 3D Tilt Effect
+    const rotateX = useTransform(sy, [-1, 1], [10, -10]);
+    const rotateY = useTransform(sx, [-1, 1], [-10, 10]);
+
+    // Proximity state for subtle reactive effects (WITHOUT constant blur)
     const proximity = useTransform([sx, sy], ([x, y]) => {
         const dist = Math.sqrt((x as number) ** 2 + (y as number) ** 2);
         return Math.max(0, 1 - dist);
     });
 
-    const blurValue = useTransform(proximity, [0, 1], [15, 0]);
-    const letterSpacing = useTransform(proximity, [0, 1], ["0.5em", "-0.02em"]);
-    const textOpacity = useTransform(proximity, [0, 1], [0.3, 1]);
-    const scale = useTransform(proximity, [0, 1], [0.95, 1.05]);
+    // Sharp Entry Animation Logic
+    const entryBlur = hasAssembled ? 0 : 20;
+    const entryLetterSpacing = hasAssembled ? "-0.02em" : "0.5em";
+    const entryOpacity = hasAssembled ? 1 : 0;
+    const entryScale = hasAssembled ? 1 : 0.95;
 
     return (
         <div
@@ -67,25 +75,27 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
             <motion.div
                 animate={{
-                    scale: [1, 1.03, 1],
-                    opacity: [0.8, 1, 0.8],
+                    scale: hasAssembled ? [1, 1.02, 1] : entryScale,
+                    opacity: hasAssembled ? 1 : entryOpacity
                 }}
                 transition={{
-                    duration: 12,
-                    repeat: Infinity,
-                    ease: "easeInOut"
+                    duration: hasAssembled ? 12 : 2.5,
+                    repeat: hasAssembled ? Infinity : 0,
+                    ease: "easeOut"
                 }}
                 className="relative z-10"
             >
                 <motion.div
+                    animate={{
+                        filter: `blur(${entryBlur}px)`,
+                        letterSpacing: entryLetterSpacing,
+                    }}
                     style={{
                         rotateX,
                         rotateY,
-                        scale,
-                        filter: useTransform(blurValue, (v) => `blur(${v}px)`),
-                        letterSpacing
                     }}
-                    className="relative transition-all duration-700 ease-out"
+                    transition={{ duration: 2.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="relative"
                 >
                     <div className="relative group">
                         {/* Soft Ambient Refraction Glow */}
@@ -95,14 +105,14 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             className="absolute inset-x-[-15%] inset-y-[-30%] bg-gradient-to-tr from-white/5 via-zinc-500/5 to-white/5 blur-[90px] rounded-full pointer-events-none z-0"
                         />
 
-                        {/* 3D Floating Shadow */}
+                        {/* 3D Floating Shadow (Subtle) */}
                         <motion.h2
                             style={{
-                                x: useTransform(sx, [-1, 1], [20, -20]),
-                                y: useTransform(sy, [-1, 1], [15, -15]),
-                                opacity: useTransform(proximity, [0, 1], [0.05, 0.3])
+                                x: useTransform(sx, [-1, 1], [15, -15]),
+                                y: useTransform(sy, [-1, 1], [10, -10]),
+                                opacity: 0.2
                             }}
-                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/50 blur-[5px] translate-y-6 pointer-events-none"
+                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none"
                         >
                             {text}
                         </motion.h2>
@@ -113,31 +123,30 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                                 backgroundPosition: ["-200% 0%", "200% 0%"],
                             }}
                             transition={{
-                                duration: 9,
+                                duration: 10,
                                 repeat: Infinity,
                                 ease: "linear"
                             }}
                             className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.4)_50%,transparent_75%)] bg-[length:200%_100%]"
                         />
 
-                        {/* Main Body - Chrome Glass Effect */}
-                        <motion.h2
-                            style={{ opacity: textOpacity }}
+                        {/* Main Body - Crisp Chrome Glass Effect */}
+                        <h2
                             className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                         >
                             {text}
-                        </motion.h2>
+                        </h2>
 
-                        {/* High Fidelity Highlight (Mouse Bound) */}
+                        {/* Specular Highlight (Mouse Bound - Minimal Blur) */}
                         <motion.div
                             style={{
                                 opacity: proximity,
-                                x: useTransform(sx, [-1, 1], [-180, 180]),
-                                y: useTransform(sy, [-1, 1], [-40, 40])
+                                x: useTransform(sx, [-1, 1], [-150, 150]),
+                                y: useTransform(sy, [-1, 1], [-30, 30])
                             }}
                             className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light"
                         >
-                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/40 to-transparent blur-[1px]">
+                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/30 to-transparent">
                                 {text}
                             </h2>
                         </motion.div>
