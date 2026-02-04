@@ -222,14 +222,14 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* Gallery Section */}
-      <section id="archive" className="relative z-10 w-full py-20 bg-black">
+      {/* Gallery Section - Truly Seamless Grid */}
+      <section id="archive" className="relative z-10 w-full py-20 bg-black -mx-[var(--page-margin)] px-0">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mb-16 flex flex-col gap-12 sm:flex-row sm:items-end sm:justify-between border-t border-white/5 pt-12"
+          className="mb-16 flex flex-col gap-12 sm:flex-row sm:items-end sm:justify-between border-t border-white/5 pt-12 px-[var(--page-margin)]"
         >
           <div className="flex flex-col gap-4">
             <h2 className="font-syne text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">
@@ -257,7 +257,7 @@ export default function Home() {
 
         <div className="columns-1 gap-0 space-y-0 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
           {filteredPhotos.map((photo) => (
-            <div key={photo.id} className="break-inside-avoid">
+            <div key={photo.id} className="break-inside-avoid overflow-hidden">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
             </div>
           ))}

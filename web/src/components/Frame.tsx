@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Photo } from "@/data/photos";
-import { AlertCircle } from "lucide-react";
 
 interface FrameProps {
     photo: Photo;
@@ -17,47 +16,48 @@ const Frame = ({ photo, onClick }: FrameProps) => {
     return (
         <motion.div
             layout
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             whileHover={{
-                scale: 1.1,
-                zIndex: 20,
-                transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+                scale: 1.05,
+                zIndex: 40,
             }}
-            viewport={{ once: true, margin: "-50px" }}
+            transition={{
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1],
+                scale: { duration: 0.5 }
+            }}
+            viewport={{ once: true }}
             onClick={() => onClick(photo)}
-            className="group relative w-full cursor-pointer overflow-hidden"
-            style={{
-                aspectRatio: photo.aspectRatio ? `${photo.aspectRatio}` : 'auto',
-                minHeight: !photo.aspectRatio ? '300px' : 'auto'
-            }}
+            className="group relative w-full cursor-pointer overflow-hidden bg-black"
         >
             {/* Skeleton Loading State */}
-            <AnimatePresence>
+            <AnimatePresence mode="wait">
                 {!isLoaded && !hasError && (
                     <motion.div
+                        key="skeleton"
                         initial={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute inset-0 z-10 bg-zinc-900 flex items-center justify-center"
+                        className="absolute inset-0 z-10 bg-zinc-950 flex items-center justify-center min-h-[400px]"
                     >
-                        <div className="w-8 h-px bg-white/10" />
+                        <div className="w-6 h-[1px] bg-white/5 animate-pulse" />
                     </motion.div>
                 )}
             </AnimatePresence>
 
             {hasError && (
-                <div className="absolute inset-0 z-20 bg-zinc-900 flex flex-col items-center justify-center p-4">
-                    <span className="text-[7px] text-zinc-700 uppercase tracking-widest text-center underline underline-offset-4">Error // Source</span>
+                <div className="flex items-center justify-center p-20 bg-zinc-900 border border-white/5">
+                    <span className="text-[8px] text-zinc-700 uppercase tracking-widest">Error // Image Load</span>
                 </div>
             )}
 
             <motion.img
-                initial={{ opacity: 0, scale: 1.1 }}
+                initial={{ opacity: 0, scale: 1.02 }}
                 animate={{
                     opacity: isLoaded ? 1 : 0,
-                    scale: isLoaded ? 1 : 1.1
+                    scale: isLoaded ? 1 : 1.02
                 }}
-                transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
                 src={photo.url}
                 alt={photo.title}
                 onLoad={() => setIsLoaded(true)}
@@ -65,15 +65,18 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                className="w-full h-auto block transition-transform duration-1000 ease-out group-hover:scale-110"
             />
 
-            {/* Museum Label (Invisible/Subtle) */}
-            <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                <span className="bg-black/40 backdrop-blur-md px-3 py-1 text-[8px] text-white/50 uppercase tracking-[0.2em] font-medium">
+            {/* Museum Label */}
+            <div className="absolute top-4 left-4 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0 z-50">
+                <span className="bg-black/60 backdrop-blur-xl px-4 py-1.5 text-[8px] text-white/50 uppercase tracking-[0.4em] font-medium border border-white/5">
                     {photo.id} // Index
                 </span>
             </div>
+
+            {/* Subtle Inner Glow on Hover */}
+            <div className="absolute inset-0 ring-1 ring-inset ring-white/0 group-hover:ring-white/10 transition-all duration-500 pointer-events-none" />
         </motion.div>
     );
 };

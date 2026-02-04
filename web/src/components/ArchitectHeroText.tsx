@@ -35,7 +35,7 @@ const ArchitecturalLetter = ({ letter, index }: { letter: string; index: number 
 
 const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
     return (
-        <div className="relative flex flex-col items-center justify-center py-12 sm:py-24 bg-black select-none overflow-hidden w-full">
+        <div className="relative flex flex-col items-center justify-center py-12 sm:py-24 bg-black select-none w-full">
             {/* Viewfinder Corners (The Professional Edge) */}
             <div className="absolute inset-8 pointer-events-none z-20">
                 <div className="absolute top-0 left-0 w-8 h-8 border-t border-l border-white/20" />
