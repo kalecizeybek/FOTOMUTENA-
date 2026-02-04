@@ -19,13 +19,13 @@ const Frame = ({ photo, onClick }: FrameProps) => {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             whileHover={{
-                scale: 1.1,
+                scale: 1.25,
                 zIndex: 50,
             }}
             transition={{
                 duration: 0.8,
                 ease: [0.16, 1, 0.3, 1],
-                scale: { duration: 0.5 }
+                scale: { duration: 0.4 }
             }}
             viewport={{ once: true }}
             onClick={() => onClick(photo)}
@@ -55,7 +55,7 @@ const Frame = ({ photo, onClick }: FrameProps) => {
                     setHasError(true);
                     setIsLoaded(true);
                 }}
-                className="w-full h-auto block transition-transform duration-1000 ease-out group-hover:scale-125 rounded-sm"
+                className="w-full h-auto block transition-transform duration-1000 ease-out group-hover:scale-150 rounded-sm"
             />
 
             {/* Museum Label */}
