@@ -1,22 +1,20 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import { photos as initialPhotos, Photo } from "@/data/photos";
 import imageCompression from 'browser-image-compression';
+import Link from "next/link";
 import Frame from "@/components/Frame";
 import CustomCursor from "@/components/CustomCursor";
-import DreamyBackground from "@/components/DreamyBackground";
 import PhotoModal from "@/components/PhotoModal";
 import EliteNav from "@/components/EliteNav";
-import Manifesto from "@/components/Manifesto";
 import AdminPanel from "@/components/AdminPanel";
 import AmbientPlayer from "@/components/AmbientPlayer";
 import { ArrowDown } from "lucide-react";
 import { AnimatePresence } from "framer-motion";
 import AboutModal from "@/components/AboutModal";
 import ContactModal from "@/components/ContactModal";
-import InteractiveHeroBg from "@/components/InteractiveHeroBg";
 import ArchitectHeroText from "@/components/ArchitectHeroText";
 
 export default function Home() {
@@ -34,12 +32,6 @@ export default function Home() {
   }, []);
 
   const categories = ["Hepsi", ...Array.from(new Set(initialPhotos.map(p => p.category)))];
-
-  const { scrollYProgress } = useScroll();
-  const smoothProgress = useSpring(scrollYProgress, { damping: 30, stiffness: 200 });
-
-  const heroScrollY = useTransform(smoothProgress, [0, 0.2], [0, -150]);
-  const heroOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0]);
 
   // Fetch Photos from Persistent API
   useEffect(() => {
@@ -143,8 +135,7 @@ export default function Home() {
   if (!mounted) return null; // Prevent hydration mismatch by holding render until mount
 
   return (
-    <div className="relative min-h-[500vh] text-[#F5F5F0] bg-[#000000] selection:bg-white selection:text-black cursor-none overflow-x-hidden">
-      <DreamyBackground />
+    <div className="relative min-h-[500vh] text-[#F5F5F0] bg-[#000000] selection:bg-white selection:text-black cursor-none overflow-x-hidden px-[var(--page-margin)]">
       <CustomCursor />
 
       {/* Dynamic Navigation */}
@@ -181,114 +172,82 @@ export default function Home() {
             onClose={() => setIsAdminOpen(false)}
             onUpload={handleUpload}
             refreshPhotos={() => {
-              // Re-fetch or trigger state update
               fetch("/api/photos").then(res => res.json()).then(data => setPhotos(data));
             }}
           />
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
-      <section className="relative flex h-[75vh] sm:h-screen items-center justify-center px-4 sm:px-10">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-[20%] left-[20%] w-[500px] h-[500px] bg-zinc-800/20 rounded-full blur-[120px] mix-blend-screen animate-pulse hidden sm:block" style={{ animationDuration: '6s' }} />
-          <div className="absolute bottom-[20%] right-[20%] w-[400px] h-[400px] bg-neutral-800/10 rounded-full blur-[100px] mix-blend-screen animate-pulse hidden sm:block" style={{ animationDuration: '9s' }} />
-        </div>
-
+      {/* Hero Section - Confident Editorial Layout */}
+      <section className="relative flex flex-col justify-center min-h-[90vh] pt-32 pb-20">
         <motion.div
-          style={{ y: heroScrollY, opacity: heroOpacity }}
-          className="z-10 flex flex-col items-center text-center mix-blend-difference"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9, filter: "blur(20px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
-            className="relative"
-          >
-            <InteractiveHeroBg />
-            <div className="relative group will-change-transform">
-              <h1 className="sr-only">FOTOMUTENA Portfolio</h1>
-              <ArchitectHeroText text="MUTENA" />
-            </div>
-          </motion.div>
+          <ArchitectHeroText text="MUTENA" />
 
           <motion.p
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.5, duration: 1.5 }}
-            className="mt-12 text-sm text-zinc-500 max-w-md mx-auto font-light tracking-[0.2em] uppercase px-6"
+            animate={{ opacity: 0.6 }}
+            transition={{ delay: 1, duration: 1.5 }}
+            className="mt-8 text-lg sm:text-2xl font-light tracking-tight max-w-xl leading-relaxed"
           >
-            Işığın ve gölgenin ötesinde bir arşiv.
+            Işığın ve gölgenin ötesinde, <br />
+            zamanın sessiz tanıkları için bir arşiv.
           </motion.p>
-        </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: 100 }}
-          transition={{ delay: 2, duration: 1.5 }}
-          className="absolute bottom-0 left-1/2 w-px bg-gradient-to-t from-white/20 to-transparent"
-        />
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.5, duration: 1 }}
+            className="mt-12"
+          >
+            <Link
+              href="#archive"
+              className="inline-block px-10 py-5 bg-white text-black font-bold text-[11px] tracking-[0.3em] uppercase hover:bg-zinc-200 transition-colors"
+            >
+              View Collection
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* Gallery Section */}
-      <section id="archive" className="relative z-10 mx-auto w-full px-0 pb-48 sm:px-16">
+      <section id="archive" className="relative z-10 w-full py-20 bg-black">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mb-16 flex flex-col gap-12 border-b border-white/5 pb-10 sm:flex-row sm:items-end sm:justify-between px-6 sm:px-0"
+          className="mb-16 flex flex-col gap-12 sm:flex-row sm:items-end sm:justify-between border-t border-white/5 pt-12"
         >
-          {/* Enhanced Architectural Header */}
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3">
-              <div className="h-4 w-[2px] bg-emerald-500/50" />
-              <span className="font-mono text-[8px] text-zinc-600 uppercase tracking-[0.6em]">Visual_Inventory</span>
-            </div>
-            <div className="relative">
-              <h2 className="font-syne text-5xl sm:text-7xl font-black uppercase tracking-tighter italic bg-gradient-to-r from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
-                Koleksiyon<span className="text-emerald-500/40 non-italic">_</span>
-              </h2>
-              <div className="absolute -top-4 -right-8 hidden md:block">
-                <span className="font-mono text-[6px] text-zinc-800 uppercase vertical-text tracking-[1em]">SYSTEM_VERSION_2.1</span>
-              </div>
-            </div>
+          <div className="flex flex-col gap-4">
+            <h2 className="font-syne text-4xl sm:text-6xl font-black uppercase tracking-tighter text-white">
+              Archive
+            </h2>
+            <p className="text-[10px] text-zinc-700 font-bold tracking-[0.4em] uppercase">Visual Inventory // {photos.length} Pieces</p>
           </div>
 
-          <div className="flex flex-col gap-8 w-full sm:w-auto">
-            {/* Horizontally Scrolling Categories */}
-            <div className="flex flex-col gap-3">
-              <span className="md:hidden font-mono text-[6px] text-zinc-700 uppercase tracking-[0.4em]">Filter_Protocol</span>
-              <div className="flex overflow-x-auto hide-scrollbar -mx-6 px-6 gap-3 pb-4 sm:pb-0 sm:overflow-visible sm:px-0 sm:mx-0">
-                {categories.map((cat) => (
-                  <motion.button
-                    key={cat}
-                    onClick={() => setActiveFilter(cat)}
-                    whileTap={{ scale: 0.95 }}
-                    className={`whitespace-nowrap transition-all px-6 py-3 rounded-xl border font-sans text-[9px] font-black tracking-[0.2em] uppercase flex items-center gap-2 ${activeFilter === cat
-                      ? "text-white bg-white/10 border-white/20 shadow-lg shadow-white/5"
-                      : "text-zinc-600 border-white/5 hover:text-white hover:bg-white/5"
-                      }`}
-                  >
-                    {activeFilter === cat && <div className="h-1 w-1 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]" />}
-                    {cat}
-                  </motion.button>
-                ))}
-              </div>
-            </div>
-
-            <div className="flex items-center justify-between sm:justify-end gap-6">
-              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl backdrop-blur-md">
-                <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
-                <span className="font-mono text-[9px] text-zinc-400 tracking-[0.5em] uppercase">
-                  Count: <span className="text-white font-black">{filteredPhotos.length}</span>
-                </span>
-              </div>
-            </div>
+          {/* Minimal Text Filters */}
+          <div className="flex flex-wrap gap-4">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveFilter(cat)}
+                className={`text-[10px] font-bold tracking-[0.2em] uppercase transition-all px-5 py-3 border ${activeFilter === cat
+                  ? "bg-white text-black border-white"
+                  : "text-zinc-500 border-white/10 hover:border-white/40"
+                  }`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </motion.div>
 
-        <div className="columns-1 gap-0 space-y-0 sm:columns-2 sm:gap-4 sm:space-y-4 md:columns-3 lg:columns-4 xl:columns-5">
+        <div className="columns-1 gap-4 space-y-4 sm:columns-2 md:columns-3 lg:columns-4 xl:columns-5">
           {filteredPhotos.map((photo) => (
             <div key={photo.id} className="break-inside-avoid">
               <Frame photo={photo} onClick={(p) => setSelectedPhoto(p)} />
@@ -297,35 +256,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Footer */}
-      <section className="relative flex min-h-[60vh] flex-col items-center justify-center py-48 text-center px-10">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="absolute inset-0 bg-radial-[at_50%_50%] from-white/[0.03] to-transparent pointer-events-none"
-        />
-
-        <h2 className="font-serif text-4xl italic tracking-tighter sm:text-[10vw] text-zinc-600 leading-[0.8]">
-          Gelecek Burada <br /> <span className="text-white">Şekilleniyor.</span>
-        </h2>
-
-        <footer className="mt-48 flex w-full flex-col items-center justify-between gap-12 px-10 font-sans text-[8px] font-light tracking-[0.5em] uppercase text-zinc-800 sm:flex-row">
-          <div className="flex flex-col gap-2 items-center sm:items-start text-center sm:text-left text-zinc-500">
-            <span className="font-syne font-black text-white text-xl tracking-normal uppercase">Mutena // ARC_PRO_2.1</span>
-            <span>MUTENA &copy; 2026 // Global Visual Archive</span>
+      {/* Footer - Minimal & Confident */}
+      <footer className="relative py-40 border-t border-white/5 mt-20">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-20">
+          <div className="flex flex-col gap-6 max-w-sm">
+            <h3 className="font-syne font-black text-3xl tracking-tighter uppercase text-white">FOTOMUTENA</h3>
+            <p className="text-[11px] text-zinc-600 leading-relaxed tracking-wider">
+              Sessizliğin içindeki derinlik. <br />
+              Dijital arşivin modern yüzü.
+            </p>
           </div>
-          <div className="flex gap-16 text-zinc-700">
-            <button key="yasal" className="hover:text-white transition-colors uppercase">Yasal Uyarı</button>
-            <button key="kvkk" className="hover:text-white transition-colors uppercase">KVKK</button>
-          </div>
-          <div className="flex items-center gap-4">
-            <div className="h-8 w-8 rounded-full border border-white/5 bg-white/5 flex items-center justify-center">
-              <div className="h-2 w-2 rounded-full bg-white opacity-20" />
+
+          <div className="grid grid-cols-2 gap-20">
+            <div className="flex flex-col gap-4 text-[10px] font-bold tracking-widest uppercase">
+              <span className="text-white mb-2 underline underline-offset-8">Information</span>
+              <button onClick={() => setIsAboutOpen(true)} className="text-zinc-600 hover:text-white transition-colors text-left uppercase">Hakkımda</button>
+              <button onClick={() => setIsContactOpen(true)} className="text-zinc-600 hover:text-white transition-colors text-left uppercase">İletişim</button>
             </div>
-            <span>DESIGNED IN THE VOID</span>
+            <div className="flex flex-col gap-4 text-[10px] font-bold tracking-widest uppercase">
+              <span className="text-white mb-2 underline underline-offset-8">Perspectives</span>
+              <Link href="/designs" className="text-zinc-600 hover:text-white transition-colors uppercase">Tasarım</Link>
+              <span className="text-zinc-800">Archive 2026</span>
+            </div>
           </div>
-        </footer>
-      </section>
+        </div>
+
+        <div className="mt-40 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between gap-6 text-[8px] font-bold text-zinc-800 uppercase tracking-[0.4em]">
+          <span>&copy; 2026 Fotomutena</span>
+          <span>Designed for clarity & character</span>
+          <span className="text-zinc-900">v3.0.0 Museum Archive</span>
+        </div>
+      </footer>
     </div>
   );
 }

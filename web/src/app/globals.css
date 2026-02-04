@@ -5,12 +5,12 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #080808;
+  --background: #000000;
   --foreground: #F5F5F0;
-  --accent: #1A2F23;
+  --accent: #FFFFFF;
   --font-primary: 'Syne', sans-serif;
-  --font-secondary: 'Cormorant Garamond', serif;
   --font-body: 'Inter', sans-serif;
+  --page-margin: 6vw;
 }
 
 @theme inline {
@@ -19,7 +19,6 @@
   --color-accent: var(--accent);
 
   --font-syne: var(--font-primary);
-  --font-serif: var(--font-secondary);
   --font-sans: var(--font-body);
 }
 

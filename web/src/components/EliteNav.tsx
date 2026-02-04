@@ -12,7 +12,6 @@ interface EliteNavProps {
 }
 
 const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps) => {
-    const [currentTime, setCurrentTime] = useState("");
     const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -20,24 +19,6 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
     useMotionValueEvent(scrollY, "change", (latest) => {
         setIsScrolled(latest > 50);
     });
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            const time = new Intl.DateTimeFormat('tr-TR', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit',
-                timeZone: 'Europe/Istanbul'
-            }).format(new Date());
-            setCurrentTime(time);
-        }, 1000);
-        return () => clearInterval(timer);
-    }, []);
-
-    const navLinks = [
-        { name: "KOLEKSİYON", href: "/#archive" },
-        { name: "TASARIMLAR", href: "/designs" },
-    ];
 
     const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
@@ -48,143 +29,108 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                 animate={{
                     y: 0,
                     opacity: 1,
-                    width: isScrolled ? (typeof window !== 'undefined' && window.innerWidth < 640 ? "100%" : "90%") : "100%",
-                    top: isScrolled ? (typeof window !== 'undefined' && window.innerWidth < 640 ? "0rem" : "2rem") : "0rem",
-                    borderRadius: isScrolled ? (typeof window !== 'undefined' && window.innerWidth < 640 ? "0px" : "9999px") : "0px",
-                    background: isScrolled ? "rgba(0,0,0,0.8)" : "transparent",
-                    borderColor: isScrolled ? "rgba(255,255,255,0.1)" : "transparent",
-                    backdropFilter: isScrolled ? "blur(32px)" : "blur(0px)"
+                    background: isScrolled ? "rgba(0,0,0,0.9)" : "transparent",
+                    backdropFilter: isScrolled ? "blur(20px)" : "blur(0px)"
                 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className={`fixed left-1/2 z-[150] -translate-x-1/2 w-full transition-all duration-500 ease-out border border-transparent ${isScrolled ? "px-6 py-4 sm:px-10 sm:py-5" : "px-6 py-6 sm:px-12 sm:py-8"}`}
+                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                className={`fixed top-0 left-0 w-full z-[150] transition-all duration-500 border-b ${isScrolled ? "border-white/5 py-4" : "border-transparent py-8"} px-[var(--page-margin)]`}
             >
                 <div className="flex items-center justify-between w-full">
                     {/* Brand */}
-                    <div className="flex-1 flex justify-start">
-                        <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
-                            <h1 className={`font-syne font-black tracking-tighter uppercase leading-none transition-all duration-500 ${isScrolled ? "text-xl text-white" : "text-2xl sm:text-4xl text-white mix-blend-difference"}`}>
-                                FOTOMUTENA
-                            </h1>
-                        </Link>
-                    </div>
+                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                        <h1 className="font-syne font-black text-2xl tracking-tighter uppercase leading-none text-white">
+                            FOTOMUTENA
+                        </h1>
+                    </Link>
 
-                    {/* Desktop Links */}
-                    <div className={`hidden gap-10 lg:gap-20 font-sans font-bold tracking-[0.6em] uppercase transition-all duration-500 md:flex items-center justify-center ${isScrolled ? "text-[10px] text-zinc-500" : "text-[12px] sm:text-[13px] text-white/80 mix-blend-difference"}`}>
-                        <Link href="/#archive" className="hover:text-white transition-all relative group">
-                            KOLEKSİYON
-                            <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white transition-all group-hover:w-full" />
+                    {/* Desktop Links - Minimal Editorial Style */}
+                    <div className="hidden md:flex items-center gap-12 text-[10px] font-bold tracking-[0.3em] uppercase text-zinc-500">
+                        <Link href="/#archive" className="hover:text-white transition-colors">
+                            Koleksiyon
                         </Link>
-
-                        <button onClick={onAboutClick} className="hover:text-white transition-all relative group uppercase">
+                        <button onClick={onAboutClick} className="hover:text-white transition-colors uppercase">
                             Hakkımda
-                            <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white transition-all group-hover:w-full" />
                         </button>
-
-                        <Link href="/designs" className="hover:text-white transition-all relative group">
-                            TASARIMLAR
-                            <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white transition-all group-hover:w-full" />
+                        <Link href="/designs" className="hover:text-white transition-colors">
+                            Tasarım
                         </Link>
-
-                        <button onClick={onContactClick} className="hover:text-white transition-all relative group uppercase">
-                            İLETİŞİM
-                            <span className="absolute -bottom-2 left-0 h-0.5 w-0 bg-white transition-all group-hover:w-full" />
+                        <button onClick={onContactClick} className="hover:text-white transition-colors uppercase">
+                            İletişim
                         </button>
-                    </div>
 
-                    {/* Right Side: Time & Mobile Toggle */}
-                    <div className="flex-1 flex items-center justify-end gap-4 sm:gap-10">
-                        <div className="hidden flex-col items-end sm:flex text-right">
-                            <div className="flex items-center gap-2">
-                                <div className="h-1 w-1 bg-emerald-500 rounded-full animate-ping" />
-                                <span className={`font-mono uppercase tracking-[0.3em] font-bold leading-none transition-colors ${isScrolled ? "text-[10px] text-zinc-600" : "text-[11px] text-white/70"}`}>{currentTime} IST</span>
-                            </div>
-                            <span className={`font-mono text-[8px] uppercase tracking-widest mt-1 ${isScrolled ? "text-zinc-700" : "text-white/30"}`}>System_OK_v2.1</span>
-                        </div>
-
-                        {/* Admin Toggle */}
+                        {/* Dot for Admin */}
                         <button
                             onClick={onAdminClick}
-                            className={`hidden sm:block rounded-full border p-3 transition-all hover:bg-white hover:text-black ${isScrolled ? "border-white/10 bg-white/5" : "border-white/20 bg-black/20 backdrop-blur-md"}`}
-                        >
-                            <div className="h-4 w-4 rounded-full border-2 border-current" />
-                        </button>
-
-                        {/* Mobile Menu Button */}
-                        <button
-                            onClick={toggleMobileMenu}
-                            className="md:hidden flex flex-col gap-1.5 p-2 z-[200]"
-                        >
-                            <motion.span
-                                animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
-                                className="w-8 h-px bg-white block"
-                            />
-                            <motion.span
-                                animate={isMobileMenuOpen ? { opacity: 0 } : { opacity: 1 }}
-                                className="w-8 h-px bg-white block"
-                            />
-                            <motion.span
-                                animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
-                                className="w-8 h-px bg-white block"
-                            />
-                        </button>
+                            className="w-2 h-2 rounded-full border border-white/20 hover:bg-white transition-all ml-4"
+                        />
                     </div>
+
+                    {/* Mobile Toggle */}
+                    <button
+                        onClick={toggleMobileMenu}
+                        className="md:hidden flex flex-col gap-1.5 p-2 z-[200]"
+                    >
+                        <motion.span
+                            animate={isMobileMenuOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                            className="w-6 h-px bg-white block"
+                        />
+                        <motion.span
+                            animate={isMobileMenuOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                            className="w-6 h-px bg-white block"
+                        />
+                    </button>
                 </div>
             </motion.nav>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu Overlay - Minimalist Editorial */}
             <AnimatePresence>
                 {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, x: "100%" }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: "100%" }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="fixed inset-0 z-[140] bg-black flex flex-col p-12 pt-40 md:hidden"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        className="fixed inset-0 z-[140] bg-black flex flex-col px-[var(--page-margin)] pt-40 md:hidden"
                     >
-                        {/* Background Lines */}
-                        <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-                            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:40px_40px]" />
-                        </div>
-
-                        <nav className="relative z-10 flex flex-col gap-8">
-                            {navLinks.map((link) => (
-                                <Link
-                                    key={link.name}
-                                    href={link.href}
-                                    onClick={() => setIsMobileMenuOpen(false)}
-                                    className="font-syne text-5xl font-black uppercase tracking-tighter text-white hover:italic transition-all"
-                                >
-                                    {link.name}
-                                </Link>
-                            ))}
+                        <nav className="flex flex-col gap-10">
+                            <Link
+                                href="/#archive"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="font-syne text-5xl font-black uppercase tracking-tighter text-zinc-800 hover:text-white transition-colors"
+                            >
+                                Koleksiyon
+                            </Link>
                             <button
                                 onClick={() => { onAboutClick(); setIsMobileMenuOpen(false); }}
-                                className="text-left font-syne text-5xl font-black uppercase tracking-tighter text-white hover:italic transition-all"
+                                className="text-left font-syne text-5xl font-black uppercase tracking-tighter text-zinc-800 hover:text-white transition-colors"
                             >
-                                HAKKIMDA
+                                Hakkımda
                             </button>
+                            <Link
+                                href="/designs"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                className="font-syne text-5xl font-black uppercase tracking-tighter text-zinc-800 hover:text-white transition-colors"
+                            >
+                                Tasarım
+                            </Link>
                             <button
                                 onClick={() => { onContactClick(); setIsMobileMenuOpen(false); }}
-                                className="text-left font-syne text-5xl font-black uppercase tracking-tighter text-white hover:italic transition-all"
+                                className="text-left font-syne text-5xl font-black uppercase tracking-tighter text-zinc-800 hover:text-white transition-colors"
                             >
-                                İLETİŞİM
+                                İletişim
                             </button>
                         </nav>
 
-                        <div className="mt-auto flex flex-col gap-6 border-t border-white/10 pt-10">
+                        <div className="mt-auto pb-12 flex flex-col gap-8">
                             <button
                                 onClick={() => { onAdminClick(); setIsMobileMenuOpen(false); }}
-                                className="w-full bg-white text-black font-black py-6 rounded-2xl text-[10px] tracking-[0.4em] uppercase flex items-center justify-center gap-3 shadow-xl shadow-white/5 active:scale-95 transition-all"
+                                className="text-left font-sans text-[10px] font-bold tracking-[0.4em] uppercase text-zinc-700 hover:text-white transition-colors flex items-center gap-3"
                             >
-                                <span className="h-4 w-4 rounded-full border-2 border-black" />
-                                Arşiv Paneli & Yükle
+                                <span className="w-2 h-2 rounded-full border border-current" />
+                                Erişim Paneli
                             </button>
-                            <div className="flex justify-between items-center px-2">
-                                <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-widest leading-none">{currentTime} IST</span>
-                                <span className="font-mono text-[8px] text-emerald-500 uppercase tracking-widest animate-pulse font-bold">v2.1 // LIVE_MODE</span>
-                            </div>
-                            <p className="font-sans text-[8px] text-zinc-800 uppercase tracking-[0.4em] leading-relaxed text-center">
-                                VISUAL SYNC ACTIVE // 2026.1
+                            <p className="font-sans text-[8px] text-zinc-900 uppercase tracking-[0.2em]">
+                                MUTENA &copy; 2026 // Global Visual Archive
                             </p>
                         </div>
                     </motion.div>
