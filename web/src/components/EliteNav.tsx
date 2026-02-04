@@ -32,60 +32,60 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                     width: isScrolled ? "fit-content" : "100%",
                     x: isScrolled ? "-50%" : "0%",
                     left: isScrolled ? "50%" : "0",
-                    top: isScrolled ? "20px" : "0px",
+                    top: isScrolled ? "32px" : "0px",
                     borderRadius: isScrolled ? "100px" : "0px",
-                    background: isScrolled ? "rgba(0,0,0,0.5)" : "transparent",
-                    backdropFilter: isScrolled ? "blur(32px)" : "blur(0px)",
-                    paddingLeft: isScrolled ? "24px" : "var(--page-margin)",
-                    paddingRight: isScrolled ? "24px" : "var(--page-margin)",
+                    background: isScrolled ? "rgba(0,0,0,0.3)" : "transparent",
+                    backdropFilter: isScrolled ? "blur(24px)" : "blur(0px)",
+                    paddingLeft: isScrolled ? "40px" : "var(--page-margin)",
+                    paddingRight: isScrolled ? "40px" : "var(--page-margin)",
                 }}
                 transition={{
-                    type: "spring",
-                    stiffness: 260,
-                    damping: 20,
-                    mass: 1,
-                    opacity: { duration: 0.8 }
+                    duration: 1.5,
+                    ease: [0.19, 1, 0.22, 1], // Cinematic slow-out
+                    layout: { duration: 1.2, ease: [0.19, 1, 0.22, 1] }
                 }}
-                className={`fixed z-[150] border ${isScrolled ? "border-white/10 py-3.5 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)]" : "border-transparent py-10 w-full"} flex items-center justify-center transition-colors duration-500`}
+                className={`fixed z-[150] border ${isScrolled ? "border-white/5 py-3.5 shadow-[0_30px_100px_rgba(0,0,0,0.6)]" : "border-transparent py-12 w-full"} flex items-center justify-center`}
             >
-                <div className={`flex items-center justify-between ${isScrolled ? "gap-10" : "w-full"}`}>
+                <div className={`flex items-center justify-between ${isScrolled ? "gap-16" : "w-full"}`}>
                     {/* Brand */}
                     <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
                         <motion.h1
-                            layout="position"
-                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-700 ${isScrolled ? "text-base" : "text-2xl"}`}
+                            layout
+                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[1.2s] ${isScrolled ? "text-sm opacity-90" : "text-2xl"}`}
                         >
                             FOTOMUTENA
                         </motion.h1>
                     </Link>
 
-                    {/* Desktop Links - Minimal Editorial Style */}
+                    {/* Desktop Links - Ultra Minimal Elite Style */}
                     <motion.div
-                        layout="position"
-                        className={`hidden md:flex items-center gap-10 text-[9px] font-bold tracking-[0.4em] uppercase ${isScrolled ? "text-zinc-200" : "text-zinc-500"}`}
+                        layout
+                        className={`hidden md:flex items-center gap-12 text-[9px] font-bold tracking-[0.5em] uppercase ${isScrolled ? "text-zinc-300" : "text-zinc-500"}`}
                     >
-                        <Link href="/#archive" className="hover:text-white transition-colors relative group">
+                        <Link href="/#archive" className="hover:text-white transition-all duration-700 relative group">
                             Koleksiyon
-                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all group-hover:w-full opacity-50" />
+                            <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full group-hover:left-0 opacity-30" />
                         </Link>
-                        <button onClick={onAboutClick} className="hover:text-white transition-colors uppercase relative group">
+                        <button onClick={onAboutClick} className="hover:text-white transition-all duration-700 uppercase relative group text-left">
                             Hakkımda
-                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all group-hover:w-full opacity-50" />
+                            <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full group-hover:left-0 opacity-30" />
                         </button>
-                        <Link href="/designs" className="hover:text-white transition-colors relative group">
+                        <Link href="/designs" className="hover:text-white transition-all duration-700 relative group">
                             Tasarım
-                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all group-hover:w-full opacity-50" />
+                            <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full group-hover:left-0 opacity-30" />
                         </Link>
-                        <button onClick={onContactClick} className="hover:text-white transition-colors uppercase relative group">
+                        <button onClick={onContactClick} className="hover:text-white transition-all duration-700 uppercase relative group text-left">
                             İletişim
-                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all group-hover:w-full opacity-50" />
+                            <span className="absolute -bottom-2 left-1/2 w-0 h-[1px] bg-white transition-all duration-700 group-hover:w-full group-hover:left-0 opacity-30" />
                         </button>
 
                         {/* Dot for Admin */}
                         <motion.button
-                            whileHover={{ scale: 1.5 }}
+                            initial={false}
+                            animate={{ scale: isScrolled ? 0.8 : 1 }}
+                            whileHover={{ scale: 1.5, backgroundColor: "#fff" }}
                             onClick={onAdminClick}
-                            className={`w-2 h-2 rounded-full border border-white/20 hover:bg-white transition-all ${isScrolled ? "ml-2" : "ml-4"}`}
+                            className={`w-2 h-2 rounded-full border border-white/20 transition-all duration-1000 ${isScrolled ? "ml-4" : "ml-8"}`}
                         />
                     </motion.div>
 
