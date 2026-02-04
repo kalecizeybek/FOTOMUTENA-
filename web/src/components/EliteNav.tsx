@@ -48,13 +48,29 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
             >
                 <div className={`flex items-center justify-between ${isScrolled ? "gap-16" : "w-full"}`}>
                     {/* Brand */}
-                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex flex-col items-center">
                         <motion.h1
                             layout
-                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[1.2s] ${isScrolled ? "text-sm opacity-90" : "text-2xl"}`}
+                            animate={{
+                                scale: [1, 1.05, 1],
+                                opacity: [0.9, 1, 0.9]
+                            }}
+                            transition={{
+                                duration: 4,
+                                repeat: Infinity,
+                                ease: "easeInOut"
+                            }}
+                            className={`font-syne font-black tracking-tighter uppercase leading-none text-white transition-all duration-[1.2s] ${isScrolled ? "text-sm" : "text-2xl"}`}
                         >
                             FOTOMUTENA
                         </motion.h1>
+                        <motion.span
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 0.4 }}
+                            className={`font-syne text-[8px] tracking-[0.6em] uppercase text-white mt-1 transition-all duration-700 ${isScrolled ? "hidden" : "block"}`}
+                        >
+                            Halil Topal
+                        </motion.span>
                     </Link>
 
                     {/* Desktop Links - Ultra Minimal Elite Style */}
