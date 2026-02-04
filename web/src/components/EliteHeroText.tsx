@@ -67,11 +67,11 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
             <motion.div
                 animate={{
-                    scale: [1, 1.04, 1],
-                    opacity: [0.85, 1, 0.85]
+                    scale: [1, 1.05, 1],
+                    opacity: [0.8, 1, 0.8],
                 }}
                 transition={{
-                    duration: 8,
+                    duration: 15,
                     repeat: Infinity,
                     ease: "easeInOut"
                 }}
@@ -83,64 +83,71 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                         rotateY,
                         scale,
                         filter: useTransform(blurValue, (v) => `blur(${v}px)`),
-                        letterSpacing
                     }}
-                    className="relative transition-all duration-700 ease-out"
+                    className="relative transition-all duration-1000 ease-out"
                 >
                     <div className="relative group">
-                        {/* Soft Ambient Glow following the breathing */}
-                        <motion.div
-                            animate={{ opacity: [0.1, 0.25, 0.1], scale: [1, 1.15, 1] }}
-                            transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute inset-x-[-20%] inset-y-[-50%] bg-white/5 blur-[100px] rounded-full pointer-events-none"
-                        />
-
-                        {/* Shadow Layer for Depth */}
+                        {/* 3D Depth Shadow - Moves opposite to light */}
                         <motion.h2
-                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/40 blur-[4px] translate-y-4"
+                            style={{
+                                x: useTransform(sx, [-1, 1], [15, -15]),
+                                y: useTransform(sy, [-1, 1], [15, -15]),
+                                opacity: useTransform(proximity, [0, 1], [0.1, 0.4])
+                            }}
+                            className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/60 blur-[6px] pointer-events-none"
                         >
                             {text}
                         </motion.h2>
 
-                        {/* Continuous Chrome Shine Animation (More prominent Liquid Sweep) */}
+                        {/* Continuous Liquid Metal Sweep (Cinematic) */}
                         <motion.div
                             animate={{
-                                opacity: [0, 0.5, 0],
-                                x: ["-120%", "120%"]
+                                x: ["-100%", "200%"],
+                                opacity: [0, 0.4, 0]
                             }}
                             transition={{
-                                duration: 6,
+                                duration: 12,
                                 repeat: Infinity,
                                 ease: [0.4, 0, 0.2, 1],
-                                repeatDelay: 0.5
+                                repeatDelay: 2
                             }}
-                            className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-gradient-to-r from-transparent via-white/60 to-transparent skew-x-12"
+                            className="absolute inset-x-0 top-0 bottom-0 z-30 skew-x-[-20deg] bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none mix-blend-overlay"
                         />
 
-                        {/* Main Chrome/Silver Effect - Animated Depth Pulse */}
+                        {/* Primary Text Layer - Chromatic Silver */}
                         <motion.h2
-                            style={{ opacity: textOpacity }}
-                            animate={{
-                                filter: ["brightness(1)", "brightness(1.3)", "brightness(1)"],
+                            style={{
+                                opacity: textOpacity,
+                                letterSpacing
                             }}
-                            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-400 to-zinc-900 drop-shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-[#ffffff] via-[#a1a1aa] to-[#18181b] drop-shadow-[0_0_20px_rgba(255,255,255,0.15)]"
                         >
                             {text}
                         </motion.h2>
 
-                        {/* High Intensity Reflection (Mouse-Driven + Pulse) */}
+                        {/* Mouse Reactive Specular Reflection */}
                         <motion.div
                             style={{
                                 opacity: proximity,
-                                x: useTransform(sx, [-1, 1], [-150, 150])
+                                x: useTransform(sx, [-1, 1], [-200, 200]),
+                                y: useTransform(sy, [-1, 1], [-50, 50]),
+                                scale: 1.1,
                             }}
-                            className="absolute inset-0 z-20 pointer-events-none mix-blend-overlay"
+                            className="absolute inset-0 z-20 pointer-events-none mix-blend-color-dodge"
                         >
-                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-r from-transparent via-white/80 to-transparent">
+                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/30 to-transparent blur-[2px]">
                                 {text}
                             </h2>
                         </motion.div>
+
+                        {/* Internal Prism Glow */}
+                        <motion.div
+                            animate={{
+                                opacity: [0.1, 0.3, 0.1],
+                            }}
+                            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                            className="absolute inset-x-[-10%] inset-y-[-20%] bg-gradient-to-tr from-zinc-500/10 via-white/5 to-zinc-500/10 blur-[80px] rounded-full pointer-events-none z-0"
+                        />
                     </div>
                 </motion.div>
             </motion.div>
