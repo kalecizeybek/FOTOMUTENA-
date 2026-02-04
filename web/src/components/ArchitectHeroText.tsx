@@ -84,21 +84,30 @@ const ArchitectHeroText = ({ text }: ArchitectHeroTextProps) => {
                 className="mt-16 sm:mt-24 flex flex-col items-center gap-8"
             >
                 {/* Mobile Specific Refined Layout (Up to 768px) */}
-                <div className="flex md:hidden flex-col items-center gap-8">
-                    <div className="flex items-center gap-6">
-                        <div className="flex flex-col items-end gap-1">
-                            <span className="text-[8px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Visual</span>
-                            <span className="text-[12px] text-white font-black tracking-[0.2em] uppercase leading-none">Archive</span>
+                <div className="flex md:hidden flex-col items-center gap-10">
+                    <div className="flex flex-col items-center gap-4">
+                        <div className="flex items-center gap-5">
+                            <div className="flex flex-col items-end">
+                                <span className="text-[6px] text-zinc-600 font-mono tracking-[0.3em] uppercase opacity-50">Status</span>
+                                <span className="text-[10px] text-white font-black tracking-[0.1em] uppercase leading-none">Archiving</span>
+                            </div>
+                            <div className="h-6 w-[1px] bg-emerald-500/40 rotate-[30deg]" />
+                            <div className="flex flex-col items-start text-white">
+                                <span className="text-[6px] text-zinc-600 font-mono tracking-[0.3em] uppercase opacity-50">Mode</span>
+                                <span className="text-[10px] font-black tracking-[0.1em] uppercase leading-none">Recon_01</span>
+                            </div>
                         </div>
-                        <div className="h-10 w-[1px] bg-gradient-to-b from-transparent via-emerald-500/50 to-transparent" />
-                        <div className="flex flex-col items-start gap-1">
-                            <span className="text-[8px] text-zinc-600 font-mono tracking-[0.4em] uppercase">Integrated</span>
-                            <span className="text-[12px] text-white font-black tracking-[0.2em] uppercase leading-none">Systems</span>
-                        </div>
+                        <div className="h-px w-24 bg-gradient-to-r from-transparent via-zinc-800 to-transparent" />
                     </div>
-                    <div className="flex flex-col items-center gap-3">
-                        <div className="h-[2px] w-4 bg-emerald-500/60 rounded-full animate-pulse" />
-                        <div className="text-[7px] text-zinc-700 font-mono tracking-[1.5em] font-black uppercase">RECONSTRUCTION_MODE // ACTV_2026</div>
+
+                    <div className="flex items-center gap-4">
+                        <div className="flex flex-col items-center gap-2">
+                            <div className="flex items-center gap-2">
+                                <div className="h-1 w-1 bg-emerald-500/60 rounded-full animate-pulse" />
+                                <span className="text-[6px] text-zinc-500 font-mono tracking-[0.8em] font-normal uppercase">SYSTEM_READY // v2.1.0</span>
+                            </div>
+                            <div className="text-[5px] text-zinc-700 font-mono tracking-[0.4em] uppercase">Core Integrity: 99.8% // [LATENCY_0.4ms]</div>
+                        </div>
                     </div>
                 </div>
 

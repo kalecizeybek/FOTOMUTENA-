@@ -144,9 +144,6 @@ export default function Home() {
 
   return (
     <div className="relative min-h-[500vh] text-[#F5F5F0] bg-[#000000] selection:bg-white selection:text-black cursor-none overflow-x-hidden">
-      <div className="fixed top-0 left-0 w-full z-[9999] bg-emerald-500 text-black text-[8px] font-black uppercase tracking-[0.4em] py-1 text-center">
-        System Sync Active // v2.1 // Build Success
-      </div>
       <DreamyBackground />
       <CustomCursor />
 
@@ -240,37 +237,55 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="mb-24 flex flex-col gap-10 border-b border-white/5 pb-10 sm:flex-row sm:items-end sm:justify-between px-6 sm:px-0"
+          className="mb-16 flex flex-col gap-12 border-b border-white/5 pb-10 sm:flex-row sm:items-end sm:justify-between px-6 sm:px-0"
         >
-          <div className="flex flex-col gap-2">
-            <h2 className="font-syne text-4xl font-black uppercase tracking-tighter italic bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-transparent underline-offset-8 decoration-white/10">Koleksiyon.</h2>
+          {/* Enhanced Architectural Header */}
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3">
+              <div className="h-4 w-[2px] bg-emerald-500/50" />
+              <span className="font-mono text-[8px] text-zinc-600 uppercase tracking-[0.6em]">Visual_Inventory</span>
+            </div>
+            <div className="relative">
+              <h2 className="font-syne text-5xl sm:text-7xl font-black uppercase tracking-tighter italic bg-gradient-to-r from-white via-zinc-200 to-zinc-600 bg-clip-text text-transparent">
+                Koleksiyon<span className="text-emerald-500/40 non-italic">_</span>
+              </h2>
+              <div className="absolute -top-4 -right-8 hidden md:block">
+                <span className="font-mono text-[6px] text-zinc-800 uppercase vertical-text tracking-[1em]">SYSTEM_VERSION_2.1</span>
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-4 font-sans text-[8px] font-bold tracking-[0.4em] uppercase text-zinc-500">
-            {categories.map((cat) => (
-              <motion.button
-                key={cat}
-                onClick={() => setActiveFilter(cat)}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className={`transition-all px-3 py-1.5 rounded-full ${activeFilter === cat
-                  ? "text-white bg-white/10 backdrop-blur-sm border border-white/20"
-                  : "hover:text-white hover:bg-white/5"
-                  }`}
-              >
-                {cat}
-              </motion.button>
-            ))}
-          </div>
+          <div className="flex flex-col gap-8 w-full sm:w-auto">
+            {/* Horizontally Scrolling Categories */}
+            <div className="flex flex-col gap-3">
+              <span className="md:hidden font-mono text-[6px] text-zinc-700 uppercase tracking-[0.4em]">Filter_Protocol</span>
+              <div className="flex overflow-x-auto hide-scrollbar -mx-6 px-6 gap-3 pb-4 sm:pb-0 sm:overflow-visible sm:px-0 sm:mx-0">
+                {categories.map((cat) => (
+                  <motion.button
+                    key={cat}
+                    onClick={() => setActiveFilter(cat)}
+                    whileTap={{ scale: 0.95 }}
+                    className={`whitespace-nowrap transition-all px-6 py-3 rounded-xl border font-sans text-[9px] font-black tracking-[0.2em] uppercase flex items-center gap-2 ${activeFilter === cat
+                      ? "text-white bg-white/10 border-white/20 shadow-lg shadow-white/5"
+                      : "text-zinc-600 border-white/5 hover:text-white hover:bg-white/5"
+                      }`}
+                  >
+                    {activeFilter === cat && <div className="h-1 w-1 bg-emerald-500 rounded-full shadow-[0_0_8px_rgba(16,185,129,0.8)]" />}
+                    {cat}
+                  </motion.button>
+                ))}
+              </div>
+            </div>
 
-          <motion.span
-            key={filteredPhotos.length}
-            initial={{ scale: 1.2, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="font-sans text-[8px] text-zinc-600 tracking-[0.5em] uppercase backdrop-blur-sm bg-white/5 px-4 py-2 rounded-full border border-white/10"
-          >
-            Arşiv: {filteredPhotos.length}
-          </motion.span>
+            <div className="flex items-center justify-between sm:justify-end gap-6">
+              <div className="flex items-center gap-3 bg-white/5 border border-white/10 px-5 py-2.5 rounded-2xl backdrop-blur-md">
+                <div className="w-1.5 h-1.5 rounded-full bg-zinc-800" />
+                <span className="font-mono text-[9px] text-zinc-400 tracking-[0.5em] uppercase">
+                  Count: <span className="text-white font-black">{filteredPhotos.length}</span>
+                </span>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         <div className="columns-1 gap-0 space-y-0 sm:columns-2 sm:gap-4 sm:space-y-4 md:columns-3 lg:columns-4 xl:columns-5">
