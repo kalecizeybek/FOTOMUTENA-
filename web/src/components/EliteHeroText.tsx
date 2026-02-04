@@ -75,12 +75,11 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
 
             <motion.div
                 animate={{
-                    scale: hasAssembled ? [1, 1.02, 1] : entryScale,
-                    opacity: hasAssembled ? 1 : entryOpacity
+                    scale: entryScale,
+                    opacity: entryOpacity
                 }}
                 transition={{
-                    duration: hasAssembled ? 12 : 2.5,
-                    repeat: hasAssembled ? Infinity : 0,
+                    duration: 2.5,
                     ease: "easeOut"
                 }}
                 className="relative z-10"
@@ -98,46 +97,36 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                     className="relative"
                 >
                     <div className="relative group">
-                        {/* Soft Ambient Refraction Glow */}
-                        <motion.div
-                            animate={{ opacity: [0.1, 0.2, 0.1], scale: [1, 1.1, 1] }}
-                            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                            className="absolute inset-x-[-15%] inset-y-[-30%] bg-gradient-to-tr from-white/5 via-zinc-500/5 to-white/5 blur-[90px] rounded-full pointer-events-none z-0"
-                        />
-
                         {/* 3D Floating Shadow (Subtle) */}
                         <motion.h2
                             style={{
                                 x: useTransform(sx, [-1, 1], [15, -15]),
                                 y: useTransform(sy, [-1, 1], [10, -10]),
-                                opacity: 0.2
+                                opacity: 0.15
                             }}
                             className="absolute inset-0 font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-black/50 blur-[4px] translate-y-4 pointer-events-none"
                         >
                             {text}
                         </motion.h2>
 
-                        {/* Continuous Crystal Shine (Diagonal Sweep) */}
-                        <motion.div
-                            animate={{
-                                backgroundPosition: ["-200% 0%", "200% 0%"],
-                            }}
-                            transition={{
-                                duration: 10,
-                                repeat: Infinity,
-                                ease: "linear"
-                            }}
-                            className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.4)_50%,transparent_75%)] bg-[length:200%_100%]"
-                        />
+                        {/* Initial Shine (Opening Only) */}
+                        {!hasAssembled && (
+                            <motion.div
+                                initial={{ x: "-100%", opacity: 0 }}
+                                animate={{ x: "200%", opacity: [0, 0.5, 0] }}
+                                transition={{ duration: 2.5, ease: "easeInOut" }}
+                                className="absolute inset-0 z-30 pointer-events-none mix-blend-overlay bg-[linear-gradient(110deg,transparent_25%,rgba(255,255,255,0.4)_50%,transparent_75%)] bg-[length:200%_100%]"
+                            />
+                        )}
 
-                        {/* Main Body - Crisp Chrome Glass Effect */}
+                        {/* Main Body - Crisp Static Chrome Effect */}
                         <h2
-                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]"
+                            className="relative font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-300 to-zinc-900 drop-shadow-[0_0_15px_rgba(255,255,255,0.05)]"
                         >
                             {text}
                         </h2>
 
-                        {/* Specular Highlight (Mouse Bound - Minimal Blur) */}
+                        {/* Specular Highlight (Mouse Bound Only) */}
                         <motion.div
                             style={{
                                 opacity: proximity,
@@ -146,7 +135,7 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                             }}
                             className="absolute inset-0 z-20 pointer-events-none mix-blend-soft-light"
                         >
-                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/30 to-transparent">
+                            <h2 className="font-syne text-[18vw] font-black leading-[0.8] tracking-tighter sm:text-[14vw] uppercase text-transparent bg-clip-text bg-gradient-to-br from-transparent via-white/20 to-transparent">
                                 {text}
                             </h2>
                         </motion.div>
@@ -154,16 +143,15 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                 </motion.div>
             </motion.div>
 
-            {/* Dynamic Synchronized Subtext */}
+            {/* Subtext container remains interactive */}
             <motion.div
                 style={{
                     letterSpacing: useTransform(proximity, [0, 1], ["1em", "0.4em"]),
-                    opacity: useTransform(proximity, [0, 1], [0.2, 0.8]),
+                    opacity: useTransform(proximity, [0, 1], [0.1, 0.6]),
                     y: useTransform(proximity, [0, 1], [20, 0])
                 }}
                 className="mt-16 flex flex-col items-center gap-6"
             >
-
                 {/* Custom Subtitle */}
                 <motion.div
                     style={{
@@ -175,35 +163,10 @@ const EliteHeroText = ({ text }: EliteHeroTextProps) => {
                     Halil Topal
                 </motion.div>
 
-                {/* Desktop Layout - Secondary */}
                 <div className="hidden md:block text-[8px] text-zinc-500 font-mono font-light uppercase tracking-[0.5em] text-center mt-12">
                     ARCHIVING THE SUBLIME // STUDIO MUTENA &copy; 2026
                 </div>
             </motion.div>
-
-            {/* Silver Dust Particles (CSS Animation handled in global if needed, here via motion) */}
-            <div className="absolute inset-0 pointer-events-none opacity-20 overflow-hidden">
-                {[...Array(6)].map((_, i) => (
-                    <motion.div
-                        key={i}
-                        animate={{
-                            y: [0, -20, 0],
-                            opacity: [0, 1, 0],
-                            x: [Math.random() * 100 - 50, Math.random() * 100 - 50]
-                        }}
-                        transition={{
-                            duration: 3 + Math.random() * 3,
-                            repeat: Infinity,
-                            delay: Math.random() * 2
-                        }}
-                        className="absolute w-px h-px bg-white rounded-full"
-                        style={{
-                            left: `${Math.random() * 100}%`,
-                            top: `${Math.random() * 100}%`
-                        }}
-                    />
-                ))}
-            </div>
         </div>
     );
 };
