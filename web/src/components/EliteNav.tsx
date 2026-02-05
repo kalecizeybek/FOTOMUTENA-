@@ -145,7 +145,7 @@ const EliteNav = ({ onAdminClick, onAboutClick, onContactClick }: EliteNavProps)
                                     {item === "Yönetim" && (
                                         <>
                                             <span className="text-[10px] bg-red-500 text-white px-2 py-0.5 rounded font-mono tracking-widest animate-pulse">LIVE</span>
-                                            <span className="text-[8px] text-white/40 font-mono tracking-tighter">v3.4</span>
+                                            <span className="text-[8px] text-white/40 font-mono tracking-tighter">v3.5 (SECURED)</span>
                                         </>
                                     )}
                                 </button>
